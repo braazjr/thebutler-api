@@ -3,7 +3,9 @@ package br.com.onsmarttech.thebutler.services
 import br.com.onsmarttech.thebutler.documents.Usuario
 import br.com.onsmarttech.thebutler.enums.Permissao
 import br.com.onsmarttech.thebutler.exception.BadRequestException
+import br.com.onsmarttech.thebutler.exception.NotFoundException
 import br.com.onsmarttech.thebutler.repositories.UsuarioRepository
+import org.springframework.data.crossstore.ChangeSetPersister
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.util.StringUtils
@@ -47,5 +49,8 @@ class UsuarioService(val usuarioRepository: UsuarioRepository) {
         } else usuarioRepository.findAllByOrderByNomeAsc()
 
     }
+
+    fun getUsuario(principal: Principal) = usuarioRepository.findByEmail(principal.name)
+            .orElseThrow { NotFoundException("Usuário não encontrado") }
 
 }
