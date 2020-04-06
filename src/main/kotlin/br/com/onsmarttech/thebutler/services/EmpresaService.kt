@@ -7,7 +7,6 @@ import br.com.onsmarttech.thebutler.exception.BadRequestException
 import br.com.onsmarttech.thebutler.repositories.EmpresaRepository
 import br.com.onsmarttech.thebutler.util.onlyAlphanumerics
 import org.springframework.stereotype.Service
-import java.security.Principal
 
 @Service
 class EmpresaService(
@@ -15,16 +14,16 @@ class EmpresaService(
         private val empresaRepository: EmpresaRepository
 ) {
 
-    fun listar(principal: Principal): List<Empresa> {
-        if (!usuarioService.getUsuario(principal).isAdmin()) {
+    fun listar(): List<Empresa> {
+        if (!usuarioService.getUsuario().isAdmin()) {
             throw BadRequestException("Você não tem permissão para esse conteúdo")
         }
 
         return empresaRepository.findAll()
     }
 
-    fun salvar(principal: Principal, empresaDto: EmpresaDto): Any {
-        val usuarioLogado = usuarioService.getUsuario(principal)
+    fun salvar(empresaDto: EmpresaDto): Any {
+        val usuarioLogado = usuarioService.getUsuario()
 
         if (empresaRepository.findByCnpj(onlyAlphanumerics(empresaDto.cnpj!!)).isPresent) {
             throw BadRequestException("Já possui uma empresa cadastrada com o CNPJ informado")
@@ -36,7 +35,7 @@ class EmpresaService(
     }
 
     fun deletar(id: String) {
-        if(!empresaRepository.findById(id).isPresent) {
+        if (!empresaRepository.findById(id).isPresent) {
             throw BadRequestException("Empresa não encontrada")
         }
 

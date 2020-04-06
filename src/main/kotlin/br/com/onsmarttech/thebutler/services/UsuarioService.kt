@@ -8,6 +8,7 @@ import br.com.onsmarttech.thebutler.exception.BadRequestException
 import br.com.onsmarttech.thebutler.exception.NotFoundException
 import br.com.onsmarttech.thebutler.repositories.UsuarioRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.util.StringUtils
@@ -60,7 +61,7 @@ class UsuarioService {
 
     }
 
-    fun getUsuario(principal: Principal) = usuarioRepository.findByEmail(principal.name)
+    fun getUsuario() = usuarioRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().name)
             .orElseThrow { NotFoundException("Usuário não encontrado") }
 
     fun deletar(id: String) {
