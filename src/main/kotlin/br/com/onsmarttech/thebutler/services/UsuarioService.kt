@@ -29,7 +29,7 @@ class UsuarioService(val usuarioRepository: UsuarioRepository) {
             }
         }
 
-        if (usuarioRepository.findByEmail(usuario.email).isPresent()) {
+        if (usuarioRepository.findByEmail(usuario.email!!).isPresent()) {
             throw BadRequestException("O login já existe em um usuário")
         }
 
@@ -45,7 +45,7 @@ class UsuarioService(val usuarioRepository: UsuarioRepository) {
         val usuarioOptional: Optional<Usuario> = usuarioRepository.findByEmail(principal!!.name)
 
         return if (!usuarioOptional.get().isAdmin()) {
-            usuarioRepository.findByEmpresaAndOrderByNomeAsc(usuarioOptional.get().empresa!!.id)
+            usuarioRepository.findByEmpresaAndOrderByNomeAsc(usuarioOptional.get().empresa!!.id!!)
         } else usuarioRepository.findAllByOrderByNomeAsc()
 
     }

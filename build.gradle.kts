@@ -35,11 +35,11 @@ dependencies {
 	testImplementation("org.springframework.security:spring-security-test")
 }
 
-//dependencyManagement {
-//	imports {
-//		mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
-//	}
-//}
+dependencyManagement {
+	imports {
+		mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+	}
+}
 
 tasks.withType<Test> {
 	useJUnitPlatform()
