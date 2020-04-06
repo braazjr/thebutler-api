@@ -1,36 +1,46 @@
 package br.com.onsmarttech.thebutler.services
 
 import br.com.onsmarttech.thebutler.documents.Usuario
-import br.com.onsmarttech.thebutler.enums.Permissao
+import br.com.onsmarttech.thebutler.documents.convertToSub
+import br.com.onsmarttech.thebutler.dtos.UsuarioDto
+import br.com.onsmarttech.thebutler.dtos.convertDtoToUsuario
 import br.com.onsmarttech.thebutler.exception.BadRequestException
 import br.com.onsmarttech.thebutler.exception.NotFoundException
 import br.com.onsmarttech.thebutler.repositories.UsuarioRepository
-import org.springframework.data.crossstore.ChangeSetPersister
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.util.StringUtils
 import java.security.Principal
 import java.util.*
-import java.util.stream.Collectors
 
 @Service
-class UsuarioService(val usuarioRepository: UsuarioRepository) {
+class UsuarioService {
 
-    fun salvar(principal: Principal?, usuario: Usuario): Any {
-        if (principal != null) {
-            val usuarioOptional: Optional<Usuario> = usuarioRepository.findByEmail(principal.getName())
+    @Autowired
+    private lateinit var usuarioRepository: UsuarioRepository
 
-            if (!usuarioOptional.get().isAdmin()) {
-                usuario.empresa = usuarioOptional.get().empresa
-            }
+    @Autowired
+    private lateinit var empresaService: EmpresaService
 
-            if (usuario.empresa == null) {
-                throw BadRequestException("A empresa é obrigatória")
-            }
+    fun salvar(principal: Principal?, usuarioDto: UsuarioDto): Any {
+        var usuario: Usuario = convertDtoToUsuario(usuarioDto)
+
+        if (usuarioRepository.findByEmail(usuario.email!!).isPresent) {
+            throw BadRequestException("O login já existe em um usuário")
         }
 
-        if (usuarioRepository.findByEmail(usuario.email!!).isPresent()) {
-            throw BadRequestException("O login já existe em um usuário")
+        if (principal != null) {
+            val usuarioLogado: Optional<Usuario> = usuarioRepository.findByEmail(principal.name)
+
+            if (usuarioLogado.get().isAdmin() && !usuarioDto.idEmpresa.isNullOrBlank()) {
+                val empresa = empresaService.getById(usuarioDto.idEmpresa!!)
+                        .orElseThrow { BadRequestException("Empresa não encontrada") }
+
+                usuario.empresa = convertToSub(empresa)
+            } else {
+                usuario.empresa = usuarioLogado.get().empresa
+            }
         }
 
         if (!StringUtils.hasText(usuario.senha)) {
@@ -52,5 +62,13 @@ class UsuarioService(val usuarioRepository: UsuarioRepository) {
 
     fun getUsuario(principal: Principal) = usuarioRepository.findByEmail(principal.name)
             .orElseThrow { NotFoundException("Usuário não encontrado") }
+
+    fun deletar(id: String) {
+        if (!usuarioRepository.findById(id).isPresent) {
+            throw BadRequestException("Usuário não encontrada")
+        }
+
+        usuarioRepository.deleteById(id)
+    }
 
 }

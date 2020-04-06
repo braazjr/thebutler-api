@@ -11,8 +11,8 @@ import java.security.Principal
 
 @Service
 class EmpresaService(
-        val usuarioService: UsuarioService,
-        val empresaRepository: EmpresaRepository
+        private val usuarioService: UsuarioService,
+        private val empresaRepository: EmpresaRepository
 ) {
 
     fun listar(principal: Principal): List<Empresa> {
@@ -42,5 +42,7 @@ class EmpresaService(
 
         empresaRepository.deleteById(id)
     }
+
+    fun getById(idEmpresa: String) = empresaRepository.findById(idEmpresa)
 
 }

@@ -21,14 +21,8 @@ data class Empresa(
         val numero: Int?,
         @get:NotNull val rua: String?,
         @get:NotNull val telefone: String?,
-        @get:NotNull var registradoPor: EmpresaUsuario?,
+        @get:NotNull var registradoPor: UsuarioSub?,
         val empresaConfig: EmpresaConfig?
-)
-
-data class EmpresaUsuario(
-        val id: String?,
-        val email: String?,
-        val nome: String?
 )
 
 data class EmpresaConfig(

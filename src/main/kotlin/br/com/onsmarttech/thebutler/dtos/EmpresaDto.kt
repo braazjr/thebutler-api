@@ -1,9 +1,6 @@
 package br.com.onsmarttech.thebutler.dtos
 
-import br.com.onsmarttech.thebutler.documents.Empresa
-import br.com.onsmarttech.thebutler.documents.EmpresaConfig
-import br.com.onsmarttech.thebutler.documents.EmpresaUsuario
-import br.com.onsmarttech.thebutler.documents.Usuario
+import br.com.onsmarttech.thebutler.documents.*
 import br.com.onsmarttech.thebutler.util.onlyAlphanumerics
 import javax.validation.constraints.NotNull
 
@@ -34,6 +31,6 @@ fun convertDtoToEmpresa(dto: EmpresaDto, usuario: Usuario): Empresa {
             dto.cidade,
             dto.complemento, dto.email, dto.estado, dto.numero, dto.rua,
             onlyAlphanumerics(dto.telefone!!),
-            EmpresaUsuario(usuario.id, usuario.email, usuario.nome),
+            convertToSub(usuario),
             EmpresaConfig(dto.qtyApartamentos))
 }

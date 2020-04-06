@@ -1,6 +1,6 @@
 package br.com.onsmarttech.thebutler.controllers
 
-import br.com.onsmarttech.thebutler.documents.Usuario
+import br.com.onsmarttech.thebutler.dtos.UsuarioDto
 import br.com.onsmarttech.thebutler.services.UsuarioService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -13,9 +13,12 @@ import javax.validation.Valid
 class UsuarioController(val usuarioService: UsuarioService) {
 
     @PostMapping
-    fun salvar(principal: Principal?, @RequestBody @Valid usuario: Usuario) =
-            ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.salvar(principal, usuario))
+    fun salvar(principal: Principal?, @RequestBody @Valid usuarioDto: UsuarioDto) =
+            ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.salvar(principal, usuarioDto))
 
     @GetMapping
     fun listar(principal: Principal?) = ResponseEntity.ok(usuarioService.listar(principal))
+
+    @DeleteMapping("/{id}")
+    fun deletar(@PathVariable("id") id: String) = usuarioService.deletar(id)
 }
