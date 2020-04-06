@@ -18,4 +18,7 @@ class EmpresaController(val empresaService: EmpresaService) {
     @PostMapping
     fun salvar(principal: Principal, @Valid @RequestBody empresaDto: EmpresaDto) =
             ResponseEntity.status(HttpStatus.CREATED).body(empresaService.salvar(principal, empresaDto))
+
+    @DeleteMapping("/{id}")
+    fun deletar(@PathVariable("id") id: String) = empresaService.deletar(id)
 }

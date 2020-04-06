@@ -5,6 +5,7 @@ import br.com.onsmarttech.thebutler.dtos.EmpresaDto
 import br.com.onsmarttech.thebutler.dtos.convertDtoToEmpresa
 import br.com.onsmarttech.thebutler.exception.BadRequestException
 import br.com.onsmarttech.thebutler.repositories.EmpresaRepository
+import br.com.onsmarttech.thebutler.util.onlyAlphanumerics
 import org.springframework.stereotype.Service
 import java.security.Principal
 
@@ -24,9 +25,22 @@ class EmpresaService(
 
     fun salvar(principal: Principal, empresaDto: EmpresaDto): Any {
         val usuarioLogado = usuarioService.getUsuario(principal)
+
+        if (empresaRepository.findByCnpj(onlyAlphanumerics(empresaDto.cnpj!!)).isPresent) {
+            throw BadRequestException("Já possui uma empresa cadastrada com o CNPJ informado")
+        }
+
         val empresa = convertDtoToEmpresa(empresaDto, usuarioLogado)
 
         return empresaRepository.save(empresa)
+    }
+
+    fun deletar(id: String) {
+        if(!empresaRepository.findById(id).isPresent) {
+            throw BadRequestException("Empresa não encontrada")
+        }
+
+        empresaRepository.deleteById(id)
     }
 
 }
