@@ -27,4 +27,13 @@ class BlocoService {
         return blocoRepository.save(bloco)
     }
 
+    fun listar(): List<Bloco> {
+        val usuarioLogado = usuarioService.getUsuario()
+        if (!usuarioLogado.isAdmin()) {
+            return blocoRepository.findByEmpresa(usuarioLogado.empresa!!.id)
+        }
+
+        return blocoRepository.findAll()
+    }
+
 }
