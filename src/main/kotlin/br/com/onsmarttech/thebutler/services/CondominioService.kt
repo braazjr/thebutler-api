@@ -3,6 +3,7 @@ package br.com.onsmarttech.thebutler.services
 import br.com.onsmarttech.thebutler.documents.Condominio
 import br.com.onsmarttech.thebutler.dtos.CondominioDto
 import br.com.onsmarttech.thebutler.dtos.convertDtoToCondominio
+import br.com.onsmarttech.thebutler.exception.BadRequestException
 import br.com.onsmarttech.thebutler.repositories.CondominioRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -32,5 +33,8 @@ class CondominioService {
 
         return condominioRepository.findAll()
     }
+
+    fun getById(idCondominio: String?) = condominioRepository.findById(idCondominio!!)
+            .orElseThrow { BadRequestException("Condominínio não encontrado") }
 
 }

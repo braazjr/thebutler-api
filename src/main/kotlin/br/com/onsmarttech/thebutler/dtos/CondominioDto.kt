@@ -2,7 +2,7 @@ package br.com.onsmarttech.thebutler.dtos
 
 import br.com.onsmarttech.thebutler.documents.Condominio
 import br.com.onsmarttech.thebutler.documents.Usuario
-import br.com.onsmarttech.thebutler.documents.convertToSub
+import br.com.onsmarttech.thebutler.documents.convertUsuarioToSub
 import br.com.onsmarttech.thebutler.util.onlyAlphanumerics
 import javax.validation.constraints.NotNull
 
@@ -24,4 +24,4 @@ fun convertDtoToCondominio(dto: CondominioDto, usuario: Usuario) = Condominio(nu
         onlyAlphanumerics(dto.cep!!),
         dto.cidade, dto.complemento, dto.email, dto.estado, dto.numero, dto.rua,
         onlyAlphanumerics(dto.telefone!!),
-        usuario.empresa, convertToSub(usuario))
+        usuario.empresa, convertUsuarioToSub(usuario))

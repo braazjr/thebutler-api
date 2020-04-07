@@ -8,5 +8,5 @@ data class EmpresaSub(
         val email: String?
 )
 
-fun convertToSub(empresa: Empresa) = EmpresaSub(empresa.id, empresa.cnpj, empresa.nomeFantasia, empresa.razaoSocial,
+fun convertEmpresaToSub(empresa: Empresa) = EmpresaSub(empresa.id, empresa.cnpj, empresa.nomeFantasia, empresa.razaoSocial,
         empresa.email)

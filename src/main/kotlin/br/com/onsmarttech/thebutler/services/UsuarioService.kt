@@ -1,7 +1,7 @@
 package br.com.onsmarttech.thebutler.services
 
 import br.com.onsmarttech.thebutler.documents.Usuario
-import br.com.onsmarttech.thebutler.documents.convertToSub
+import br.com.onsmarttech.thebutler.documents.convertEmpresaToSub
 import br.com.onsmarttech.thebutler.dtos.UsuarioDto
 import br.com.onsmarttech.thebutler.dtos.convertDtoToUsuario
 import br.com.onsmarttech.thebutler.exception.BadRequestException
@@ -38,7 +38,7 @@ class UsuarioService {
                 val empresa = empresaService.getById(usuarioDto.idEmpresa!!)
                         .orElseThrow { BadRequestException("Empresa não encontrada") }
 
-                usuario.empresa = convertToSub(empresa)
+                usuario.empresa = convertEmpresaToSub(empresa)
             } else {
                 usuario.empresa = usuarioLogado.get().empresa
             }
