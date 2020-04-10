@@ -2,6 +2,7 @@ package br.com.onsmarttech.thebutler.controllers
 
 import br.com.onsmarttech.thebutler.dtos.BlocoDto
 import br.com.onsmarttech.thebutler.services.BlocoService
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
@@ -10,8 +11,11 @@ import javax.validation.Valid
 class BlocoController(val blocoService: BlocoService) {
 
     @PostMapping
-    fun salvar(@Valid @RequestBody blocoDto: BlocoDto) = blocoService.salvar(blocoDto)
+    fun save(@Valid @RequestBody blocoDto: BlocoDto) = blocoService.save(blocoDto)
 
     @GetMapping
-    fun listar() = blocoService.listar()
+    fun list() = blocoService.list()
+
+    @GetMapping("/{id}")
+    fun getById(@PathVariable("id") id: String) = ResponseEntity.ok(blocoService.findById(id))
 }

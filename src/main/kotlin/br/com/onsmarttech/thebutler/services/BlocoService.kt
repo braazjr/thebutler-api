@@ -20,7 +20,7 @@ class BlocoService {
     @Autowired
     private lateinit var blocoRepository: BlocoRepository
 
-    fun salvar(blocoDto: BlocoDto): Bloco {
+    fun save(blocoDto: BlocoDto): Bloco {
         val condominio = condominioService.getById(blocoDto.idCondominio)
         val usuarioLogado = usuarioService.getUsuario()
         val bloco = convertDtoToBloco(blocoDto, condominio, usuarioLogado)
@@ -28,7 +28,7 @@ class BlocoService {
         return blocoRepository.save(bloco)
     }
 
-    fun listar(): List<Bloco> {
+    fun list(): List<Bloco> {
         val usuarioLogado = usuarioService.getUsuario()
         if (!usuarioLogado.isAdmin()) {
             return blocoRepository.findByEmpresa(usuarioLogado.empresa!!.id)
