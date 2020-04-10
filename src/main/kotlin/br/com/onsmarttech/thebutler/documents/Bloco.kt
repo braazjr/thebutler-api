@@ -6,7 +6,6 @@ import javax.validation.constraints.NotNull
 
 @Document
 data class Bloco(
-
         @Id var id: String?,
         val ativo: Boolean = true,
         @get:NotNull val nome: String?,

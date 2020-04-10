@@ -3,6 +3,7 @@ package br.com.onsmarttech.thebutler.services
 import br.com.onsmarttech.thebutler.documents.Bloco
 import br.com.onsmarttech.thebutler.dtos.BlocoDto
 import br.com.onsmarttech.thebutler.dtos.convertDtoToBloco
+import br.com.onsmarttech.thebutler.exception.BadRequestException
 import br.com.onsmarttech.thebutler.repositories.BlocoRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -35,5 +36,8 @@ class BlocoService {
 
         return blocoRepository.findAll()
     }
+
+    fun findById(idBloco: String?) = blocoRepository.findById(idBloco!!)
+            .orElseThrow { BadRequestException("Bloco não encontrado") }
 
 }
