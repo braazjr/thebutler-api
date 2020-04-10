@@ -17,5 +17,6 @@ data class Apartamento(
 data class BlocoSub(
         var id: String?,
         val nome: String?,
-        val numero: Int?
+        val numero: Int?,
+        val condominio: CondominioSub
 )
