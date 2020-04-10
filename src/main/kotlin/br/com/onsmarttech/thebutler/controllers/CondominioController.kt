@@ -13,9 +13,12 @@ import javax.validation.Valid
 class CondominioController(val condominioService: CondominioService) {
 
     @PostMapping
-    fun salvar(principal: Principal, @Valid @RequestBody condominioDto: CondominioDto) =
-            ResponseEntity.status(HttpStatus.CREATED).body(condominioService.salvar(principal, condominioDto))
+    fun save(principal: Principal, @Valid @RequestBody condominioDto: CondominioDto) =
+            ResponseEntity.status(HttpStatus.CREATED).body(condominioService.save(principal, condominioDto))
 
     @GetMapping
-    fun listar() = ResponseEntity.ok(condominioService.listar())
+    fun list() = ResponseEntity.ok(condominioService.list())
+
+    @GetMapping("/{id}")
+    fun getById(@PathVariable("id") id: String) = ResponseEntity.ok(condominioService.getById(id))
 }

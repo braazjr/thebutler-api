@@ -18,14 +18,14 @@ class CondominioService {
     @Autowired
     private lateinit var condominioRepository: CondominioRepository
 
-    fun salvar(principal: Principal, condominioDto: CondominioDto): Any {
+    fun save(principal: Principal, condominioDto: CondominioDto): Any {
         val usuarioLogado = usuarioService.getUsuario()
         val condominio = convertDtoToCondominio(condominioDto, usuarioLogado)
 
         return condominioRepository.save(condominio)
     }
 
-    fun listar(): List<Condominio> {
+    fun list(): List<Condominio> {
         val usuarioLogado = usuarioService.getUsuario()
         if (!usuarioLogado.isAdmin()) {
             return condominioRepository.findByEmpresa(usuarioLogado.empresa!!.id)
