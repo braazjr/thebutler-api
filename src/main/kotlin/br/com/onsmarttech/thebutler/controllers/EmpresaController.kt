@@ -20,4 +20,7 @@ class EmpresaController(val empresaService: EmpresaService) {
 
     @DeleteMapping("/{id}")
     fun deletar(@PathVariable("id") id: String) = empresaService.deletar(id)
+
+    @GetMapping("/{id}")
+    fun buscarPorId(@PathVariable("id") id: String) = ResponseEntity.ok(empresaService.getById(id))
 }
