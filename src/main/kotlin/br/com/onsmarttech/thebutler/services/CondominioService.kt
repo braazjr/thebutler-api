@@ -37,4 +37,11 @@ class CondominioService {
     fun getById(idCondominio: String?) = condominioRepository.findById(idCondominio!!)
             .orElseThrow { BadRequestException("Condominínio não encontrado") }
 
+    fun delete(id: String) {
+        condominioRepository.findById(id)
+                .orElseThrow { BadRequestException("Condomínio não encontrado") }
+
+        condominioRepository.deleteById(id)
+    }
+
 }

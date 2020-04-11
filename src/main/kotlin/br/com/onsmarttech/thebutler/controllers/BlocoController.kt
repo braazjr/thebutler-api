@@ -18,4 +18,7 @@ class BlocoController(val blocoService: BlocoService) {
 
     @GetMapping("/{id}")
     fun getById(@PathVariable("id") id: String) = ResponseEntity.ok(blocoService.findById(id))
+
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable("id") id: String) = blocoService.delete(id)
 }

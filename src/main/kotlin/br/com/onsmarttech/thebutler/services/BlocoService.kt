@@ -40,4 +40,11 @@ class BlocoService {
     fun findById(idBloco: String?) = blocoRepository.findById(idBloco!!)
             .orElseThrow { BadRequestException("Bloco não encontrado") }
 
+    fun delete(id: String) {
+        blocoRepository.findById(id)
+                .orElseThrow { BadRequestException("Bloco não encontrado") }
+
+        blocoRepository.deleteById(id)
+    }
+
 }

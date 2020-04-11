@@ -21,4 +21,7 @@ class CondominioController(val condominioService: CondominioService) {
 
     @GetMapping("/{id}")
     fun getById(@PathVariable("id") id: String) = ResponseEntity.ok(condominioService.getById(id))
+
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable("id") id: String) = condominioService.delete(id)
 }

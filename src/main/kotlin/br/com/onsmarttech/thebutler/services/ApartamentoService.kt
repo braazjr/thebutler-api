@@ -43,11 +43,9 @@ class ApartamentoService {
             .orElseThrow { BadRequestException("Apartamento não encontrado") }
 
     fun delete(id: String) {
-        if (!apartamentoRepository.findById(id).isPresent) {
-            throw BadRequestException("Apartamento não encontrada")
-        }
+        apartamentoRepository.findById(id)
+                .orElseThrow { BadRequestException("Apartamento não encontrada") }
 
         apartamentoRepository.deleteById(id)
     }
-
 }
