@@ -20,16 +20,15 @@ class FichaService {
     @Autowired
     private lateinit var moradorRepository: MoradorRepository
 
-    //    fun getByApartamentoId(apartamentoId: String): Any {
-//        val apartamento = apartamentoService.findById(apartamentoId)
-//
-//        return
-//    }
-
     fun save(dto: FichaDto): Ficha {
         val apartamento = apartamentoService.findById(dto.idApartamento)
         val moradoresSalvos = moradorRepository.saveAll(dto.moradores)
         return fichaRepository.save(Ficha(apartamento, convertMoradoresToSub(moradoresSalvos)))
+    }
+
+    fun getByApartamentoId(apartamentoId: String): Any {
+        apartamentoService.findById(apartamentoId)
+        return fichaRepository.findByApartamentoId(apartamentoId)
     }
 
 }
