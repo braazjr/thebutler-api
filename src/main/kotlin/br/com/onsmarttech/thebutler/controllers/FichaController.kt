@@ -16,4 +16,7 @@ class FichaController(val fichaService: FichaService) {
 
     @GetMapping("/apartamento/{id}")
     fun getByApartamentoId(@PathVariable("id") id: String) = ResponseEntity.ok(fichaService.getByApartamentoId(id))
+
+    @GetMapping("/morador/{id}")
+    fun getByMoradorId(@PathVariable("id") id: String) = ResponseEntity.ok(fichaService.getByMoradorId(id))
 }

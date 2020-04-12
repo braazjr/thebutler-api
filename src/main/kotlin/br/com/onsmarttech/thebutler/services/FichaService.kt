@@ -18,17 +18,22 @@ class FichaService {
     private lateinit var fichaRepository: FichaRepository
 
     @Autowired
-    private lateinit var moradorRepository: MoradorRepository
+    private lateinit var moradorService: MoradorService
 
     fun save(dto: FichaDto): Ficha {
         val apartamento = apartamentoService.findById(dto.idApartamento)
-        val moradoresSalvos = moradorRepository.saveAll(dto.moradores)
+        val moradoresSalvos = moradorService.saveAll(dto.moradores)
         return fichaRepository.save(Ficha(apartamento, convertMoradoresToSub(moradoresSalvos)))
     }
 
-    fun getByApartamentoId(apartamentoId: String): Any {
+    fun getByApartamentoId(apartamentoId: String): List<Ficha> {
         apartamentoService.findById(apartamentoId)
         return fichaRepository.findByApartamentoId(apartamentoId)
+    }
+
+    fun getByMoradorId(moradorId: String): Any {
+        moradorService.findById(moradorId)
+        return fichaRepository.findByMoradorId(moradorId)
     }
 
 }

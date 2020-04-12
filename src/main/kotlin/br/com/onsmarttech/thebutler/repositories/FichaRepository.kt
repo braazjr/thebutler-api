@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository
 interface FichaRepository : MongoRepository<Ficha, String> {
 
     @Query("{'apartamento.id': ?0}")
-    fun findByApartamentoId(apartamentoId: String): Any
+    fun findByApartamentoId(apartamentoId: String): List<Ficha>
+
+    @Query("{'moradores': {'\$elemMatch': {'id': ?0} } }")
+    fun findByMoradorId(moradorId: String): List<Ficha>
 
 }
