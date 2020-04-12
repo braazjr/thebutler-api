@@ -1,6 +1,7 @@
 package br.com.onsmarttech.thebutler.services
 
 import br.com.onsmarttech.thebutler.documents.Ficha
+import br.com.onsmarttech.thebutler.documents.convertMoradoresToSub
 import br.com.onsmarttech.thebutler.dtos.FichaDto
 import br.com.onsmarttech.thebutler.repositories.FichaRepository
 import br.com.onsmarttech.thebutler.repositories.MoradorRepository
@@ -27,9 +28,8 @@ class FichaService {
 
     fun save(dto: FichaDto): Ficha {
         val apartamento = apartamentoService.findById(dto.idApartamento)
-        val ficha = Ficha(apartamento, dto.moradores)
-        ficha.moradores = moradorRepository.saveAll(ficha.moradores)
-        return fichaRepository.save(ficha)
+        val moradoresSalvos = moradorRepository.saveAll(dto.moradores)
+        return fichaRepository.save(Ficha(apartamento, convertMoradoresToSub(moradoresSalvos)))
     }
 
 }

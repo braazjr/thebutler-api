@@ -20,7 +20,6 @@ data class Morador(
         @get:NotNull val tipoDocumento: TipoDocumento?,
         @get:NotNull val tipoMorador: TipoMorador?,
         val foto64: String?,
-//        val apartamentos: List<ApartamentoSub>?,
         val registradoPor: UsuarioSub?
 )
 

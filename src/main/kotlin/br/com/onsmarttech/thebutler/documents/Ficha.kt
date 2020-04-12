@@ -1,9 +1,22 @@
 package br.com.onsmarttech.thebutler.documents
 
 import org.springframework.data.mongodb.core.mapping.Document
+import java.util.stream.Collectors
+import javax.validation.constraints.NotBlank
 
 @Document
 data class Ficha(
-        val apartamento: Apartamento,
-        var moradores: List<Morador>
+        var apartamento: Apartamento?,
+        var moradores: List<MoradorSub>?
 )
+
+data class MoradorSub(
+        val id: String?,
+        @get:NotBlank val email: String?,
+        @get:NotBlank val nome: String?
+)
+
+fun convertMoradorToSub(morador: Morador) = MoradorSub(morador.id, morador.email, morador.nome)
+
+fun convertMoradoresToSub(moradores: List<Morador>) =
+        moradores.stream().map { convertMoradorToSub(it) }.collect(Collectors.toList())
