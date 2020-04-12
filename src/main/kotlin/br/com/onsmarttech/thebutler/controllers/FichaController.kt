@@ -22,4 +22,10 @@ class FichaController(val fichaService: FichaService) {
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable("id") id: String) = fichaService.delete(id)
+
+    @GetMapping("/{id}")
+    fun getById(@PathVariable("id") id: String) = fichaService.getById(id)
+
+    @GetMapping("/{id}/full")
+    fun getFullById(@PathVariable("id") id: String) = fichaService.getFullById(id)
 }
