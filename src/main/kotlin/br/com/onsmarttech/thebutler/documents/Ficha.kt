@@ -12,7 +12,8 @@ data class Ficha(
         var apartamento: Apartamento?,
         var moradores: List<MoradorSub>?,
         val dataInicio: LocalDate? = LocalDate.now(),
-        val dataFim: LocalDate?
+        val dataFim: LocalDate?,
+        var documentos: List<Documento>?
 )
 
 data class MoradorSub(

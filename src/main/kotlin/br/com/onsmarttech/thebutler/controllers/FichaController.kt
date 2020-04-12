@@ -2,6 +2,7 @@ package br.com.onsmarttech.thebutler.controllers
 
 import br.com.onsmarttech.thebutler.dtos.FichaDto
 import br.com.onsmarttech.thebutler.services.FichaService
+import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -28,4 +29,10 @@ class FichaController(val fichaService: FichaService) {
 
     @GetMapping("/{id}/full")
     fun getFullById(@PathVariable("id") id: String) = fichaService.getFullById(id)
+
+    @GetMapping
+    fun getAll(pageable: Pageable) = fichaService.getAll(pageable)
+
+    @DeleteMapping("/documento/{documentoId}")
+    fun deleteDocumento(@PathVariable("documentoId") documentoId: String) = fichaService.deleteDocumento(documentoId)
 }
