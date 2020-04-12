@@ -19,4 +19,7 @@ class FichaController(val fichaService: FichaService) {
 
     @GetMapping("/morador/{id}")
     fun getByMoradorId(@PathVariable("id") id: String) = ResponseEntity.ok(fichaService.getByMoradorId(id))
+
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable("id") id: String) = fichaService.delete(id)
 }

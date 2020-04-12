@@ -1,5 +1,6 @@
 package br.com.onsmarttech.thebutler.documents
 
+import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDate
 import java.util.stream.Collectors
@@ -7,6 +8,7 @@ import javax.validation.constraints.NotBlank
 
 @Document
 data class Ficha(
+        @Id val id: String?,
         var apartamento: Apartamento?,
         var moradores: List<MoradorSub>?,
         val dataInicio: LocalDate?,
