@@ -4,7 +4,6 @@ import br.com.onsmarttech.thebutler.documents.Ficha
 import br.com.onsmarttech.thebutler.documents.convertMoradoresToSub
 import br.com.onsmarttech.thebutler.dtos.FichaDto
 import br.com.onsmarttech.thebutler.repositories.FichaRepository
-import br.com.onsmarttech.thebutler.repositories.MoradorRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -23,7 +22,7 @@ class FichaService {
     fun save(dto: FichaDto): Ficha {
         val apartamento = apartamentoService.findById(dto.idApartamento)
         val moradoresSalvos = moradorService.saveAll(dto.moradores)
-        return fichaRepository.save(Ficha(apartamento, convertMoradoresToSub(moradoresSalvos)))
+        return fichaRepository.save(Ficha(apartamento, convertMoradoresToSub(moradoresSalvos), dto.dataInicio, null))
     }
 
     fun getByApartamentoId(apartamentoId: String): List<Ficha> {
