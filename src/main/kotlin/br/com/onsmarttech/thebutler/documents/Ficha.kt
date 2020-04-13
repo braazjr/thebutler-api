@@ -13,7 +13,7 @@ data class Ficha(
         var moradores: List<MoradorSub>?,
         val dataInicio: LocalDate? = LocalDate.now(),
         val dataFim: LocalDate?,
-        var documentos: List<Documento>?
+        var documentos: MutableList<Documento>?
 )
 
 data class MoradorSub(

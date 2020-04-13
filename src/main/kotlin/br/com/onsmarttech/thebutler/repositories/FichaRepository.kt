@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.data.mongodb.repository.Query
 import org.springframework.stereotype.Repository
+import java.util.*
 
 @Repository
 interface FichaRepository : MongoRepository<Ficha, String> {
@@ -21,5 +22,8 @@ interface FichaRepository : MongoRepository<Ficha, String> {
 
     @Query("{'documentos': {'\$elemMatch': {'id': ?0} } }")
     fun findByDocumentoId(documentoId: String): Ficha
+
+    @Query("{'id': ?0, 'documentos': {'\$elemMatch': {'id': ?1} } }")
+    fun findByIdAndDocumentoId(id: String, documentoId: String): Optional<Ficha>
 
 }

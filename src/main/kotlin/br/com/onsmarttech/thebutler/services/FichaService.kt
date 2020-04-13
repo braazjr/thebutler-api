@@ -76,12 +76,11 @@ class FichaService {
         return fichaRepository.findByEmpresa(userLogged.empresa!!.id, pageable)
     }
 
-    fun deleteDocumento(documentoId: String) {
-        val ficha = fichaRepository.findByDocumentoId(documentoId)
-        ficha.documentos = ficha.documentos!!.stream()
-                .filter { it.id != documentoId }
-                .collect(Collectors.toList())
+    fun deleteDocumento(id: String, documentoId: String) {
+        val ficha = fichaRepository.findByIdAndDocumentoId(id, documentoId)
+                .orElseThrow { BadRequestException("Documento não encontrado") }
 
+        ficha.documentos!!.removeIf { it.id == documentoId }
         fichaRepository.save(ficha)
     }
 
@@ -98,9 +97,9 @@ class FichaService {
             val documentoSaved = documentoRepository.save(Documento(null, uuid, url, convertUsuarioToSub(userLogged)))
 
             if (ficha.documentos.isNullOrEmpty()) {
-                ficha.documentos = listOf()
+                ficha.documentos = mutableListOf()
             }
-            ficha.documentos = ficha.documentos!!.plus(documentoSaved)
+            ficha.documentos!!.add(documentoSaved)
 
             fichaRepository.save(ficha)
         }

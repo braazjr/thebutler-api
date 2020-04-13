@@ -35,8 +35,9 @@ class FichaController(val fichaService: FichaService) {
     @GetMapping
     fun getAll(pageable: Pageable) = fichaService.getAll(pageable)
 
-    @DeleteMapping("/documento/{documentoId}")
-    fun deleteDocumento(@PathVariable("documentoId") documentoId: String) = fichaService.deleteDocumento(documentoId)
+    @DeleteMapping("/{id}/documento/{documentoId}")
+    fun deleteDocumento(@PathVariable("id") id: String, @PathVariable("documentoId") documentoId: String)
+            = fichaService.deleteDocumento(id, documentoId)
 
     @PostMapping("/{id}/documento/upload-documento")
     fun uploadDocumento(@PathVariable("id") id: String, @Valid @NotNull @RequestParam("file") file: MultipartFile) =
