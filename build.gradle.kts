@@ -11,6 +11,10 @@ group = "br.com.onsmarttech"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
+springBoot {
+	mainClassName = "br.com.onsmarttech.thebutler.ThebutlerApplication"
+}
+
 repositories {
 	mavenCentral()
 }
