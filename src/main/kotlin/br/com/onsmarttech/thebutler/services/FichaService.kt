@@ -67,7 +67,7 @@ class FichaService {
                 ?.map { moradorService.findById(it.id!!) }
                 ?.collect(Collectors.toList()) as List<Morador>
 
-        return FichaFullResponse(ficha.id!!, ficha.apartamento, moradores, ficha.dataInicio, ficha.dataFim)
+        return FichaFullResponse(ficha.id!!, ficha.apartamento, moradores, ficha.dataInicio, ficha.dataFim, ficha.documentos)
     }
 
     fun getAll(pageable: Pageable): Page<Ficha> {
