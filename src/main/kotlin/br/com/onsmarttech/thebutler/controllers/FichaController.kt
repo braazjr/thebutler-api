@@ -6,7 +6,9 @@ import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 import javax.validation.Valid
+import javax.validation.constraints.NotNull
 
 @RestController
 @RequestMapping("/fichas")
@@ -35,4 +37,8 @@ class FichaController(val fichaService: FichaService) {
 
     @DeleteMapping("/documento/{documentoId}")
     fun deleteDocumento(@PathVariable("documentoId") documentoId: String) = fichaService.deleteDocumento(documentoId)
+
+    @PostMapping("/{id}/documento/upload-documento")
+    fun uploadDocumento(@PathVariable("id") id: String, @Valid @NotNull @RequestParam("file") file: MultipartFile) =
+            fichaService.uploadDocumento(id, file)
 }

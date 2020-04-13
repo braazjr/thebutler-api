@@ -1,5 +1,7 @@
 package br.com.onsmarttech.thebutler.security
 
+import br.com.onsmarttech.thebutler.config.TheButlerProperties
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -13,11 +15,13 @@ import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecur
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import org.springframework.web.filter.CorsFilter
-import java.util.*
 
 @Configuration
 @EnableResourceServer
 class ResourceServerConfig : ResourceServerConfigurerAdapter() {
+
+    @Autowired
+    private lateinit var theButlerProperties: TheButlerProperties
 
     override fun configure(http: HttpSecurity?) {
         http!!
@@ -51,7 +55,7 @@ class ResourceServerConfig : ResourceServerConfigurerAdapter() {
         configuration.addAllowedHeader("*")
         configuration.addAllowedMethod("*")
         configuration.maxAge = 3600L
-        configuration.allowedOrigins = listOf("http://localhost:4200")
+        configuration.allowedOrigins = theButlerProperties.originsPermitidas
         val source = UrlBasedCorsConfigurationSource()
         source.registerCorsConfiguration("/**", configuration)
         return CorsFilter(source)
