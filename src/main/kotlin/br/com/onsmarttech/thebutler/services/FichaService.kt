@@ -2,6 +2,7 @@ package br.com.onsmarttech.thebutler.services
 
 import br.com.onsmarttech.thebutler.documents.*
 import br.com.onsmarttech.thebutler.dtos.FichaDto
+import br.com.onsmarttech.thebutler.dtos.FichaFilter
 import br.com.onsmarttech.thebutler.dtos.FichaFullResponse
 import br.com.onsmarttech.thebutler.exception.BadRequestException
 import br.com.onsmarttech.thebutler.repositories.DocumentRepository
@@ -70,10 +71,11 @@ class FichaService {
         return FichaFullResponse(ficha.id!!, ficha.apartamento, moradores, ficha.dataInicio, ficha.dataFim, ficha.documentos)
     }
 
-    fun getAll(pageable: Pageable): Page<Ficha> {
+    fun getAll(filter: FichaFilter, pageable: Pageable): Page<Ficha> {
         val userLogged = usuarioService.getUsuario()
+        filter.idEmpresa = userLogged.empresa!!.id!!
 
-        return fichaRepository.findByEmpresa(userLogged.empresa!!.id, pageable)
+        return fichaRepository.find(filter, pageable)
     }
 
     fun deleteDocumento(id: String, documentoId: String) {
