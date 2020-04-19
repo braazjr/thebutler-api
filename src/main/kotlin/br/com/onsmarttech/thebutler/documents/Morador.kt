@@ -18,7 +18,7 @@ data class Morador(
         val observacao: String?,
         val parentesco: String?,
         @get:NotNull val tipoDocumento: TipoDocumento?,
-        @get:NotNull val tipoMorador: TipoMorador?,
+        val tipoMorador: TipoMorador?,
         val foto64: String?,
         val registradoPor: UsuarioSub?
 )

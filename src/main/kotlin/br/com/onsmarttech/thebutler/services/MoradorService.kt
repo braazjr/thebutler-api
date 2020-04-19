@@ -17,4 +17,6 @@ class MoradorService {
     fun findById(moradorId: String) = moradorRepository.findById(moradorId)
             .orElseThrow { BadRequestException("Morador não encontrado") }
 
+    fun findInIds(ids: List<String?>) = moradorRepository.findInIds(ids)
+
 }

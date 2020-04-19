@@ -28,7 +28,7 @@ class ResourceServerConfig : ResourceServerConfigurerAdapter() {
                 .cors()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**")
+                .antMatchers("/fichas/**/for-jasper")
                 .permitAll()
                 .antMatchers(HttpMethod.POST, "/usuarios")
                 .permitAll()

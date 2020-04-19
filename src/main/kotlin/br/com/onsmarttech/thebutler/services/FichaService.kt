@@ -1,9 +1,7 @@
 package br.com.onsmarttech.thebutler.services
 
 import br.com.onsmarttech.thebutler.documents.*
-import br.com.onsmarttech.thebutler.dtos.FichaDto
-import br.com.onsmarttech.thebutler.dtos.FichaFilter
-import br.com.onsmarttech.thebutler.dtos.FichaFullResponse
+import br.com.onsmarttech.thebutler.dtos.*
 import br.com.onsmarttech.thebutler.exception.BadRequestException
 import br.com.onsmarttech.thebutler.repositories.DocumentRepository
 import br.com.onsmarttech.thebutler.repositories.FichaRepository
@@ -13,6 +11,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
+import java.io.ByteArrayInputStream
 import java.util.*
 import java.util.stream.Collectors
 
@@ -36,6 +35,9 @@ class FichaService {
 
     @Autowired
     private lateinit var s3Util: S3Util
+
+    @Autowired
+    private lateinit var jasperReportsService: JasperReportsService
 
     fun save(dto: FichaDto): Ficha {
         val apartamento = apartamentoService.findById(dto.idApartamento)
@@ -105,6 +107,25 @@ class FichaService {
 
             fichaRepository.save(ficha)
         }
+    }
+
+    fun downloadPdf(id: String): ByteArrayInputStream {
+        val fichaByteArray = jasperReportsService.fichaGenerate(getForJasper(id))
+        return ByteArrayInputStream(fichaByteArray)
+    }
+
+    fun getForJasper(id: String): FichaJasperDto {
+        val ficha = fichaRepository.findById(id)
+                .orElseThrow { BadRequestException("Ficha não encontrada") }
+
+        val moradores = moradorService.findInIds(ficha.moradores!!.map { it.id })
+        val responsavel = moradores.filter { !it.tipoMorador.toString().isNullOrBlank() }.firstOrNull()
+
+        return FichaJasperDto(
+                convertApartamentoToApartamentoJasperDto(ficha.apartamento!!),
+                convertMoradorToResponsavelJasperDto(responsavel!!),
+                convertMoradorToMoradorJasperDto(moradores.filter { it.id != responsavel.id })
+        )
     }
 
 }

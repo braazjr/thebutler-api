@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaApartamento" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a55fddcc-a8f1-4006-b89b-3b794fcc7fae">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="FIcha Full Por Id"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="471"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="516"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="SUBREPORT_PATH" class="java.lang.String">
+		<defaultValueExpression><![CDATA["./Ficha_Moradores.jasper"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="JSON">
+		<![CDATA[]]>
+	</queryString>
+	<field name="condominio.nome" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="apartamento.nomeCondominio"/>
+		<fieldDescription><![CDATA[apartamento.nomeCondominio]]></fieldDescription>
+	</field>
+	<field name="bloco.nome" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="apartamento.nomeBloco"/>
+		<fieldDescription><![CDATA[apartamento.nomeBloco]]></fieldDescription>
+	</field>
+	<field name="apartamento.numero" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="apartamento.numeroApartamento"/>
+		<fieldDescription><![CDATA[apartamento.numeroApartamento]]></fieldDescription>
+	</field>
+	<field name="apartamento.numeroQuartos" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="apartamento.numeroQuartosSociais"/>
+		<fieldDescription><![CDATA[apartamento.numeroQuartosSociais]]></fieldDescription>
+	</field>
+	<field name="responsavel.nome" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="responsavel.nome"/>
+		<fieldDescription><![CDATA[responsavel.nome]]></fieldDescription>
+	</field>
+	<field name="responsavel.codigo" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="responsavel.codigo"/>
+		<fieldDescription><![CDATA[responsavel.codigo]]></fieldDescription>
+	</field>
+	<field name="responsavel.telefone" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="responsavel.telefone"/>
+		<fieldDescription><![CDATA[responsavel.telefone]]></fieldDescription>
+	</field>
+	<field name="responsavel.celular" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="responsavel.celular"/>
+		<fieldDescription><![CDATA[responsavel.celular]]></fieldDescription>
+	</field>
+	<field name="responsavel.documento" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="responsavel.documento"/>
+		<fieldDescription><![CDATA[responsavel.documento]]></fieldDescription>
+	</field>
+	<field name="responsavel.email" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="responsavel.email"/>
+		<fieldDescription><![CDATA[responsavel.email]]></fieldDescription>
+	</field>
+	<field name="responsavel.placaCarro" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="responsavel.placaCarro"/>
+		<fieldDescription><![CDATA[responsavel.placaCarro]]></fieldDescription>
+	</field>
+	<field name="responsavel.observacao" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="responsavel.observacao"/>
+		<fieldDescription><![CDATA[responsavel.observacao]]></fieldDescription>
+	</field>
+	<field name="morador.nome" class="java.lang.String">
+		<property name="net.sf.jasperreports.json.field.expression" value="moradores.nome"/>
+		<fieldDescription><![CDATA[moradores.nome]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="325" splitType="Stretch">
+			<staticText>
+				<reportElement x="343" y="0" width="206" height="20" uuid="0be4213b-f013-4724-9030-16d6c71fe253"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DOCUMENTO DE CADASTRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="27" width="550" height="33" uuid="aaf52a00-9d9c-4a7b-8ece-7f22cdca49d6"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Apresentar documento de identificação original com foto e comprovante de titularidade do imóvel - Escritura ou Promessa Compra e Venda ou RGI (válido até 30 dias após a data de emissão) ou Contrato de Locação e Entrega de Chaves (no caso de compra direta com as Incorporadoras).
+Favor preencher os dados solicitados abaixo sem abreviações, e em letra de forma/legível.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="66" width="278" height="20" uuid="8426f353-8d43-49bc-ae46-6b1051b0ce7d"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[DADOS DO IMÓVEL]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="86" width="180" height="30" uuid="cd99a37c-157c-484a-b8bb-76edd2ad2919"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="180" y="86" width="180" height="30" uuid="593e9441-a5b7-4cb0-9b9d-aab533815ed8"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="360" y="86" width="100" height="30" uuid="f822bb83-b1a5-4280-8521-f39afdd50e35"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="460" y="86" width="89" height="30" uuid="8c600bca-d423-42b9-a605-bd44567afaef"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="86" width="170" height="19" uuid="5bad4100-a15c-4303-aa57-bc523621ab75"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Condomínio]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="97" width="170" height="19" uuid="62aa05cf-5021-4473-84ed-562a15410d01"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{condominio.nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="180" y="86" width="180" height="19" uuid="30bb723b-b86a-4603-8764-3019c60d2544"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Bloco/Nome do bloco]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="86" width="91" height="19" uuid="027695e0-d0e8-4c93-90fa-f50f312fb7f5"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Apartamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="86" width="88" height="19" uuid="81ff3a1c-a412-4892-b061-8c2b3b82287f"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Nº quartos sociais]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="190" y="97" width="170" height="19" uuid="3ff2b36b-744d-4579-b980-7970e9a02270"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{bloco.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="97" width="90" height="19" uuid="a78c02b8-f983-4df7-9182-63a3bb84ac0f"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{apartamento.numero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="471" y="97" width="78" height="19" uuid="d6836a6b-deef-4ec8-b100-d9e42bd5afc6"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{apartamento.numeroQuartos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="124" width="549" height="20" uuid="ef834000-be2a-474f-9d7d-4320e1792399"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[DADOS DO RESPONSÁVEL PELO IMÓVEL]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="144" width="360" height="30" uuid="628f043f-e209-46b2-8dc2-c336601aabcf"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="360" y="144" width="189" height="30" uuid="9b7361e9-bacb-4cf6-b582-4ddd7060ed04"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="144" width="359" height="19" uuid="2c40ad12-5c74-4f31-8878-1ab1ae01cb78"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Responsável da Unidade: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="10" y="155" width="350" height="19" uuid="1cf5f162-bdb4-409d-b802-8b3b885f968f"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{responsavel.nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="144" width="70" height="19" uuid="c35398bc-1e08-4ee2-9636-b14c42249243"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Nº Registro]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="371" y="155" width="178" height="19" uuid="c6f4813e-f291-44c5-a482-8b16d623735e"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{responsavel.codigo}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="174" width="179" height="30" uuid="4070bfa0-c5e0-4fb1-9f56-4029e8223853"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="174" width="99" height="19" uuid="18be2e26-d717-4b3f-b6d4-47e45d1d0395"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Telefone Residencial]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="11" y="185" width="168" height="19" uuid="ce6739ac-06b4-454d-9a3d-2a86e3a1a08c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{responsavel.telefone}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="360" y="174" width="189" height="30" uuid="f7361f26-6f33-4817-8da8-bdab1747ce03"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="179" y="174" width="181" height="30" uuid="33a9ee8e-bfcb-4518-8207-7e55725a6e69"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="179" y="174" width="99" height="19" uuid="fb264acb-7c12-4f4a-ad51-941c418332c7"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Telefone Celular]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="192" y="185" width="168" height="19" uuid="855deceb-55a3-4b75-a929-bf1a0a4c8274"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{responsavel.celular}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="174" width="99" height="19" uuid="29b001d2-f664-46a6-b8ec-c3508be8e666"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[CPF: CNPJ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="370" y="185" width="179" height="19" uuid="eff1d1ec-1e65-40f2-8f16-18abf484b908"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{responsavel.documento}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="204" width="360" height="30" uuid="f461d97f-5019-43b6-8a42-9f09aeef9da2"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="204" width="99" height="19" uuid="be2bc040-0c3e-467e-a0aa-8bfe75b77f1a"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[E-mail]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="11" y="215" width="349" height="19" uuid="bfa624ad-ace1-47e4-b477-7b8e58b16716"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{responsavel.email}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="360" y="204" width="189" height="30" uuid="b0b02d42-de09-47af-b73f-0ed08ae02a08"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="360" y="204" width="99" height="19" uuid="e938369e-9173-4373-9059-f52713de016d"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Placa de Carro]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="370" y="215" width="179" height="19" uuid="d49c3e9b-3943-473f-a244-ad36c2bc0ff5"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{responsavel.placaCarro}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="234" width="549" height="30" uuid="e3f62729-cac3-4917-a59c-6cb7cf9e304b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="234" width="99" height="19" uuid="2825a679-9ad2-4f4a-8774-1abc089860d9"/>
+				<textElement>
+					<font size="8"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<text><![CDATA[Preenchimento AAPO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="268" width="549" height="40" uuid="ed7d6d36-060c-453c-b091-11a0bacfb7ab"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Declaração: Tendo como finalidade não prejudicar os direitos exclusivos de moradores previstos no Estatudo da Associação dos Amigos do Pontal Oceânico, eu, responsável pelo imóvel acim,a declaro sob as penas da lei (Artigo 299 do Código Penal) que as pessoas abaixos qualificadas por mim, residem habitualmente na unidade especificada.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="302" width="549" height="20" uuid="05a6342c-172e-41fa-b5f0-1a2af8fd9173"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[DECLARAÇÃO DOS DEMAIS MORADORES RESIDENTES]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="0" width="339" height="20" uuid="a4d17ca9-1f18-4fde-8ba5-f2f4ee4783ea"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Rio de Janeiro " + new SimpleDateFormat("dd 'de' MMMM 'de' yyyy").format(new Date())]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="245" width="538" height="19" uuid="bc84b9a8-189b-4efd-bbcf-385c8c1a6c00">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{responsavel.observacao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="292">
+			<subreport>
+				<reportElement x="0" y="0" width="547" height="291" uuid="4378e999-f0a3-40a9-9f16-3e8a877cd784"/>
+				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("moradores")]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_PATH}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>
