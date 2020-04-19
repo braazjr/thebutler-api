@@ -1,6 +1,8 @@
 package br.com.onsmarttech.thebutler.repositories
 
 import br.com.onsmarttech.thebutler.documents.Usuario
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.data.mongodb.repository.Query
 import org.springframework.stereotype.Repository
@@ -13,8 +15,8 @@ interface UsuarioRepository : MongoRepository<Usuario, String> {
     fun findByEmail(username: String): Optional<Usuario>
 
     @Query(value = "{'empresa._id': ?0}", sort = "{'nome': 1}")
-    fun findByEmpresaAndOrderByNomeAsc(idEmpresa: String): List<Usuario>
+    fun findByEmpresaAndOrderByNomeAsc(idEmpresa: String, pageable: Pageable): Page<Usuario>
 
     @Query(sort = "{'nome': 1}")
-    fun findAllByOrderByNomeAsc(): List<Usuario>
+    fun findAllByOrderByNomeAsc(pageable: Pageable): Page<Usuario>
 }

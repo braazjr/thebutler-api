@@ -2,6 +2,7 @@ package br.com.onsmarttech.thebutler.controllers
 
 import br.com.onsmarttech.thebutler.dtos.UsuarioDto
 import br.com.onsmarttech.thebutler.services.UsuarioService
+import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -17,8 +18,11 @@ class UsuarioController(val usuarioService: UsuarioService) {
             ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.salvar(principal, usuarioDto))
 
     @GetMapping
-    fun listar(principal: Principal?) = ResponseEntity.ok(usuarioService.listar(principal))
+    fun list(pageable: Pageable) = ResponseEntity.ok(usuarioService.list(pageable))
 
     @DeleteMapping("/{id}")
     fun deletar(@PathVariable("id") id: String) = usuarioService.deletar(id)
+
+    @GetMapping("/{id}")
+    fun getById(@PathVariable("id") id: String) = usuarioService.getById(id)
 }

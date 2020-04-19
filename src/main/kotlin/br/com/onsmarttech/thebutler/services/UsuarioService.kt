@@ -8,6 +8,8 @@ import br.com.onsmarttech.thebutler.exception.BadRequestException
 import br.com.onsmarttech.thebutler.exception.NotFoundException
 import br.com.onsmarttech.thebutler.repositories.UsuarioRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
@@ -52,24 +54,23 @@ class UsuarioService {
         return usuarioRepository.save(usuario)
     }
 
-    fun listar(principal: Principal?): List<Usuario> {
-        val usuarioOptional: Optional<Usuario> = usuarioRepository.findByEmail(principal!!.name)
+    fun list(pageable: Pageable): Page<Usuario> {
+        val usuarioOptional: Optional<Usuario> = usuarioRepository.findByEmail(getUsuario().email!!)
 
         return if (!usuarioOptional.get().isAdmin()) {
-            usuarioRepository.findByEmpresaAndOrderByNomeAsc(usuarioOptional.get().empresa!!.id!!)
-        } else usuarioRepository.findAllByOrderByNomeAsc()
-
+            usuarioRepository.findByEmpresaAndOrderByNomeAsc(usuarioOptional.get().empresa!!.id!!, pageable)
+        } else usuarioRepository.findAllByOrderByNomeAsc(pageable)
     }
 
     fun getUsuario() = usuarioRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().name)
             .orElseThrow { NotFoundException("Usuário não encontrado") }
 
     fun deletar(id: String) {
-        if (!usuarioRepository.findById(id).isPresent) {
-            throw BadRequestException("Usuário não encontrada")
-        }
-
+        getById(id)
         usuarioRepository.deleteById(id)
     }
+
+    fun getById(id: String) = usuarioRepository.findById(id)
+            .orElseThrow { BadRequestException("Usuário não encontrado") }
 
 }
