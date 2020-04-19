@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import javax.validation.constraints.NotNull
 
-@Document
+@Document("/condominios")
 data class Condominio(
         @Id var id: String?,
         @get:NotNull val nome: String?,

@@ -6,7 +6,7 @@ import java.time.LocalDate
 import java.util.stream.Collectors
 import javax.validation.constraints.NotBlank
 
-@Document
+@Document("fichas")
 data class Ficha(
         @Id val id: String?,
         var apartamento: Apartamento?,

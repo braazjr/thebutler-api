@@ -5,7 +5,7 @@ import br.com.onsmarttech.thebutler.documents.Documento
 import br.com.onsmarttech.thebutler.documents.Morador
 import java.time.LocalDate
 
-data class FichaFullResponse(
+data class FichaFullResponseDto(
         val id: String,
         val apartamento: Apartamento?,
         val moradores: List<Morador>?,

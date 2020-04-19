@@ -3,7 +3,7 @@ package br.com.onsmarttech.thebutler.documents
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
-@Document
+@Document("apartamentos")
 data class Apartamento(
         @Id var id: String?,
         val numero: String?,

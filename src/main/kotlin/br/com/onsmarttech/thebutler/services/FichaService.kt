@@ -63,14 +63,14 @@ class FichaService {
     fun getById(id: String) = fichaRepository.findById(id)
             .orElseThrow { BadRequestException("Ficha não encontrada") }
 
-    fun getFullById(id: String): FichaFullResponse {
+    fun getFullById(id: String): FichaFullResponseDto {
         val ficha = getById(id)
         val moradores = ficha.moradores
                 ?.stream()
                 ?.map { moradorService.findById(it.id!!) }
                 ?.collect(Collectors.toList()) as List<Morador>
 
-        return FichaFullResponse(ficha.id!!, ficha.apartamento, moradores, ficha.dataInicio, ficha.dataFim, ficha.documentos)
+        return FichaFullResponseDto(ficha.id!!, ficha.apartamento, moradores, ficha.dataInicio, ficha.dataFim, ficha.documentos)
     }
 
     fun getAll(filter: FichaFilter, pageable: Pageable): Page<Ficha> {

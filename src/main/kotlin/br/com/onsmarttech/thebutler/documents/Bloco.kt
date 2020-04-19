@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import javax.validation.constraints.NotNull
 
-@Document
+@Document("blocos")
 data class Bloco(
         @Id var id: String?,
         val ativo: Boolean = true,

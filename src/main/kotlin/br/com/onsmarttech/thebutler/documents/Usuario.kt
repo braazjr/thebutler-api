@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotEmpty
 
-@Document
+@Document("usuarios")
 data class Usuario(
         @Id
         val id: String?,
