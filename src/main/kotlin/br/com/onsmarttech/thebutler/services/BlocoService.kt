@@ -47,4 +47,13 @@ class BlocoService {
         blocoRepository.deleteById(id)
     }
 
+    fun update(id: String, blocoDto: BlocoDto): Bloco {
+        if (id != blocoDto.id) {
+            throw BadRequestException("Id do path e body não conferem")
+        }
+        findById(id)
+
+        return save(blocoDto)
+    }
+
 }

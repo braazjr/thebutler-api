@@ -21,4 +21,8 @@ class BlocoController(val blocoService: BlocoService) {
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable("id") id: String) = blocoService.delete(id)
+
+    @PutMapping("/{id}")
+    fun update(@PathVariable("id") id: String, @Valid @RequestBody blocoDto: BlocoDto) =
+            ResponseEntity.ok(blocoService.update(id, blocoDto))
 }
