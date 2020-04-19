@@ -5,7 +5,6 @@ import br.com.onsmarttech.thebutler.services.CondominioService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import java.security.Principal
 import javax.validation.Valid
 
 @RestController
@@ -13,8 +12,8 @@ import javax.validation.Valid
 class CondominioController(val condominioService: CondominioService) {
 
     @PostMapping
-    fun save(principal: Principal, @Valid @RequestBody condominioDto: CondominioDto) =
-            ResponseEntity.status(HttpStatus.CREATED).body(condominioService.save(principal, condominioDto))
+    fun save(@Valid @RequestBody condominioDto: CondominioDto) =
+            ResponseEntity.status(HttpStatus.CREATED).body(condominioService.save(condominioDto))
 
     @GetMapping
     fun list() = ResponseEntity.ok(condominioService.list())
@@ -24,4 +23,8 @@ class CondominioController(val condominioService: CondominioService) {
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable("id") id: String) = condominioService.delete(id)
+
+    @PutMapping("/{id}")
+    fun update(@PathVariable("id") id: String, @Valid @RequestBody condominioDto: CondominioDto) =
+            ResponseEntity.ok(condominioService.update(id, condominioDto))
 }

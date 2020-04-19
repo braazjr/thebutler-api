@@ -18,7 +18,7 @@ class CondominioService {
     @Autowired
     private lateinit var condominioRepository: CondominioRepository
 
-    fun save(principal: Principal, condominioDto: CondominioDto): Any {
+    fun save(condominioDto: CondominioDto): Condominio {
         val usuarioLogado = usuarioService.getUsuario()
         val condominio = convertDtoToCondominio(condominioDto, usuarioLogado)
 
@@ -42,6 +42,15 @@ class CondominioService {
                 .orElseThrow { BadRequestException("Condomínio não encontrado") }
 
         condominioRepository.deleteById(id)
+    }
+
+    fun update(id: String, condominioDto: CondominioDto): Condominio {
+        if (id != condominioDto.id) {
+            throw BadRequestException("Id do path e body não conferem")
+        }
+        getById(id)
+
+        return save(condominioDto)
     }
 
 }

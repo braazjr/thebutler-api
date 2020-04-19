@@ -7,6 +7,7 @@ import br.com.onsmarttech.thebutler.util.onlyAlphanumerics
 import javax.validation.constraints.NotNull
 
 data class CondominioDto(
+        val id: String?,
         @get:NotNull val nome: String?,
         val ativo: Boolean = true,
         @get:NotNull val bairro: String?,
@@ -20,7 +21,8 @@ data class CondominioDto(
         @get:NotNull val telefone: String?
 )
 
-fun convertDtoToCondominio(dto: CondominioDto, usuario: Usuario) = Condominio(null, dto.nome, dto.ativo, dto.bairro,
+fun convertDtoToCondominio(dto: CondominioDto, usuario: Usuario) = Condominio(dto.id?: null, dto.nome, dto.ativo,
+        dto.bairro,
         onlyAlphanumerics(dto.cep!!),
         dto.cidade, dto.complemento, dto.email, dto.estado, dto.numero, dto.rua,
         onlyAlphanumerics(dto.telefone!!),
