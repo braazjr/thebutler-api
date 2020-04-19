@@ -49,4 +49,13 @@ class ApartamentoService {
 
         apartamentoRepository.deleteById(id)
     }
+
+    fun update(id: String, apartamentoDto: ApartamentoDto): Apartamento {
+        if (id != apartamentoDto.id) {
+            throw BadRequestException("Id do path e body não conferem")
+        }
+        findById(id)
+
+        return save(apartamentoDto)
+    }
 }

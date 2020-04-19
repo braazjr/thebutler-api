@@ -4,6 +4,7 @@ import br.com.onsmarttech.thebutler.documents.*
 import javax.validation.constraints.NotNull
 
 data class ApartamentoDto(
+        val id: String?,
         @get:NotNull val numero: String?,
         val ativo: Boolean = false,
         val numeroQuartos: Int?,

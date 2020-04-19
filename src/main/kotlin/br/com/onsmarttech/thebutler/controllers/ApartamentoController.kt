@@ -25,4 +25,8 @@ class ApartamentoController(val apartamentoService: ApartamentoService) {
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable("id") id: String) = apartamentoService.delete(id)
+
+    @PutMapping("/{id}")
+    fun update(@PathVariable("id") id: String, @Valid @RequestBody apartamentoDto: ApartamentoDto) =
+            ResponseEntity.ok(apartamentoService.update(id, apartamentoDto))
 }
