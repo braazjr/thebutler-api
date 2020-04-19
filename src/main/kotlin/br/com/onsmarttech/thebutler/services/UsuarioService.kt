@@ -38,8 +38,6 @@ class UsuarioService {
 
             if (usuarioLogado.get().isAdmin() && !usuarioDto.idEmpresa.isNullOrBlank()) {
                 val empresa = empresaService.getById(usuarioDto.idEmpresa!!)
-                        .orElseThrow { BadRequestException("Empresa não encontrada") }
-
                 usuario.empresa = convertEmpresaToSub(empresa)
             } else {
                 usuario.empresa = usuarioLogado.get().empresa

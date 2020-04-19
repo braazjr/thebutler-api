@@ -22,10 +22,14 @@ class EmpresaService(
         return empresaRepository.findAll()
     }
 
-    fun salvar(empresaDto: EmpresaDto): Any {
+    fun save(empresaDto: EmpresaDto): Empresa {
         val usuarioLogado = usuarioService.getUsuario()
 
-        if (empresaRepository.findByCnpj(onlyAlphanumerics(empresaDto.cnpj!!)).isPresent) {
+        if (
+                (empresaDto.id.isNullOrBlank() && empresaRepository.findByCnpj(onlyAlphanumerics(empresaDto.cnpj!!)).isPresent)
+                ||
+                (!empresaDto.id.isNullOrBlank() && empresaRepository.findByCnpjAndIdNot(onlyAlphanumerics(empresaDto.cnpj!!), empresaDto.id).isPresent)
+        ) {
             throw BadRequestException("Já possui uma empresa cadastrada com o CNPJ informado")
         }
 
@@ -43,5 +47,15 @@ class EmpresaService(
     }
 
     fun getById(idEmpresa: String) = empresaRepository.findById(idEmpresa)
+            .orElseThrow { BadRequestException("Empresa não encontrada") }
+
+    fun update(id: String, empresaDto: EmpresaDto): Empresa {
+        if (id != empresaDto.id) {
+            throw BadRequestException("Id do path e body não conferem")
+        }
+        getById(id)
+
+        return save(empresaDto)
+    }
 
 }

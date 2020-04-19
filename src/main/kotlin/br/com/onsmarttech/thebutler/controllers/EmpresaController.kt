@@ -16,11 +16,15 @@ class EmpresaController(val empresaService: EmpresaService) {
 
     @PostMapping
     fun salvar(@Valid @RequestBody empresaDto: EmpresaDto) =
-            ResponseEntity.status(HttpStatus.CREATED).body(empresaService.salvar(empresaDto))
+            ResponseEntity.status(HttpStatus.CREATED).body(empresaService.save(empresaDto))
 
     @DeleteMapping("/{id}")
     fun deletar(@PathVariable("id") id: String) = empresaService.deletar(id)
 
     @GetMapping("/{id}")
     fun buscarPorId(@PathVariable("id") id: String) = ResponseEntity.ok(empresaService.getById(id))
+
+    @PutMapping("/{id}")
+    fun update(@PathVariable("id") id: String, @Valid @RequestBody empresaDto: EmpresaDto) =
+            ResponseEntity.ok(empresaService.update(id, empresaDto))
 }

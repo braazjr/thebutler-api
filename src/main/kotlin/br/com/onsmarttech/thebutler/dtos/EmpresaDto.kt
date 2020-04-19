@@ -8,7 +8,7 @@ import br.com.onsmarttech.thebutler.util.onlyAlphanumerics
 import javax.validation.constraints.NotNull
 
 data class EmpresaDto(
-
+        val id: String?,
         @get:NotNull val cnpj: String?,
         @get:NotNull val nomeFantasia: String?,
         @get:NotNull val razaoSocial: String?,
@@ -27,7 +27,7 @@ data class EmpresaDto(
 
 fun convertDtoToEmpresa(dto: EmpresaDto, usuario: Usuario): Empresa {
 
-    return Empresa(null,
+    return Empresa(dto.id?: null,
             onlyAlphanumerics(dto.cnpj!!),
             dto.nomeFantasia, dto.razaoSocial, dto.ativo, dto.bairro,
             onlyAlphanumerics(dto.cep!!),

@@ -12,4 +12,7 @@ interface EmpresaRepository : MongoRepository<Empresa, String> {
     @Query("{'cnpj': ?0}")
     fun findByCnpj(cnpj: String?): Optional<Empresa>
 
+    @Query("{'cnpj': ?0, 'id': { \$ne: ?1}}")
+    fun findByCnpjAndIdNot(onlyAlphanumerics: String, id: String): Optional<Empresa>
+
 }
