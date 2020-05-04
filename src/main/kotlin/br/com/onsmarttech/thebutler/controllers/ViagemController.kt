@@ -15,5 +15,10 @@ import javax.validation.Valid
 class ViagemController(val viagemService: ViagemService) {
 
     @PostMapping
-    fun save(@Valid @RequestBody viagemDto: ViagemDto) = ResponseEntity.status(HttpStatus.CREATED).body(viagemService.save(viagemDto))
+    fun save(@Valid @RequestBody viagemDto: ViagemDto) =
+            ResponseEntity.status(HttpStatus.CREATED).body(viagemService.save(viagemDto))
+
+    @PostMapping("/multiple")
+    fun saveMultiple(@Valid @RequestBody viagensDto: List<ViagemDto>) =
+            ResponseEntity.status(HttpStatus.CREATED).body(viagemService.saveMultiples(viagensDto))
 }

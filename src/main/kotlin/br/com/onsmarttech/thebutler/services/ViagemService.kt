@@ -9,6 +9,7 @@ import br.com.onsmarttech.thebutler.dtos.convertDtoToViagem
 import br.com.onsmarttech.thebutler.repositories.ViagemRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.stream.Collectors
 
 @Service
 class ViagemService {
@@ -26,14 +27,22 @@ class ViagemService {
     private lateinit var moradorService: MoradorService
 
     fun save(dto: ViagemDto): Viagem {
-        println(dto)
+        val viagem = convertViagemForSave(dto)
+        return viagemRepository.save(viagem)
+    }
 
+    fun saveMultiples(dtos: List<ViagemDto>): MutableList<Viagem> {
+        val viagens = convertViagensForSave(dtos)
+        return viagemRepository.saveAll(viagens)
+    }
+
+    private fun convertViagensForSave(dtos: List<ViagemDto>) = dtos.map { convertViagemForSave(it) }
+
+    private fun convertViagemForSave(dto: ViagemDto): Viagem {
         val rota = rotaService.findById(dto.rotaId!!)
         val motorista = usuarioService.getMotoristaById(dto.motoristaId)
-        val passageiros = getPassageiros(dto.passageiros?: mutableListOf())
-        val viagem = convertDtoToViagem(dto, rota, motorista, passageiros)
-
-        return viagemRepository.save(viagem)
+        val passageiros = getPassageiros(dto.passageiros ?: mutableListOf())
+        return convertDtoToViagem(dto, rota, motorista, passageiros)
     }
 
     private fun getPassageiros(passageiros: MutableList<ViagemUsuarioDto>) =
