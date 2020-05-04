@@ -19,4 +19,7 @@ interface UsuarioRepository : MongoRepository<Usuario, String> {
 
     @Query(sort = "{'nome': 1}")
     fun findAllByOrderByNomeAsc(pageable: Pageable): Page<Usuario>
+
+    @Query("{'id': ?0, 'permissoes': {\$in: ['MOTORISTA']}}")
+    fun findMotoristaById(motoristaId: String?): Optional<Usuario>
 }

@@ -71,4 +71,7 @@ class UsuarioService {
     fun getById(id: String) = usuarioRepository.findById(id)
             .orElseThrow { BadRequestException("Usuário não encontrado") }
 
+    fun getMotoristaById(motoristaId: String?) = usuarioRepository.findMotoristaById(motoristaId)
+            .orElseThrow { BadRequestException("Motorista não encontrado") }
+
 }
