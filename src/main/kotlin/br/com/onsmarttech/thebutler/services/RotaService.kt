@@ -17,11 +17,11 @@ class RotaService {
     private lateinit var usuarioService: UsuarioService
 
     fun save(rota: Rota): Rota {
-        rota.registradoPor = convertUsuarioToSub(usuarioService.getUsuario())
+        rota.registradoPor = convertUsuarioToSub(usuarioService.getUsuarioLogado())
         return rotaRepository.save(rota)
     }
 
-    fun list() = rotaRepository.findByEmpresaId(usuarioService.getUsuario().empresa!!.id)
+    fun list() = rotaRepository.findByEmpresaId(usuarioService.getUsuarioLogado().empresa!!.id)
 
     fun findById(id: String) = rotaRepository.findById(id)
             .orElseThrow { BadRequestException("Rota não encontrada") }

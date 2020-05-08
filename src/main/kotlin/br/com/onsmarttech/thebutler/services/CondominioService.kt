@@ -7,7 +7,6 @@ import br.com.onsmarttech.thebutler.exception.BadRequestException
 import br.com.onsmarttech.thebutler.repositories.CondominioRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.security.Principal
 
 @Service
 class CondominioService {
@@ -19,14 +18,14 @@ class CondominioService {
     private lateinit var condominioRepository: CondominioRepository
 
     fun save(condominioDto: CondominioDto): Condominio {
-        val usuarioLogado = usuarioService.getUsuario()
+        val usuarioLogado = usuarioService.getUsuarioLogado()
         val condominio = convertDtoToCondominio(condominioDto, usuarioLogado)
 
         return condominioRepository.save(condominio)
     }
 
     fun list(): List<Condominio> {
-        val usuarioLogado = usuarioService.getUsuario()
+        val usuarioLogado = usuarioService.getUsuarioLogado()
         if (!usuarioLogado.isAdmin()) {
             return condominioRepository.findByEmpresa(usuarioLogado.empresa!!.id)
         }

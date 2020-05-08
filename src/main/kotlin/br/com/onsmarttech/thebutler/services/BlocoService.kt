@@ -22,14 +22,14 @@ class BlocoService {
 
     fun save(blocoDto: BlocoDto): Bloco {
         val condominio = condominioService.getById(blocoDto.idCondominio)
-        val usuarioLogado = usuarioService.getUsuario()
+        val usuarioLogado = usuarioService.getUsuarioLogado()
         val bloco = convertDtoToBloco(blocoDto, condominio, usuarioLogado)
 
         return blocoRepository.save(bloco)
     }
 
     fun list(): List<Bloco> {
-        val usuarioLogado = usuarioService.getUsuario()
+        val usuarioLogado = usuarioService.getUsuarioLogado()
         if (!usuarioLogado.isAdmin()) {
             return blocoRepository.findByEmpresa(usuarioLogado.empresa!!.id)
         }

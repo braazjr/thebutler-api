@@ -74,7 +74,7 @@ class FichaService {
     }
 
     fun getAll(filter: FichaFilter, pageable: Pageable): Page<Ficha> {
-        val userLogged = usuarioService.getUsuario()
+        val userLogged = usuarioService.getUsuarioLogado()
         filter.idEmpresa = userLogged.empresa!!.id!!
 
         return fichaRepository.find(filter, pageable)
@@ -89,7 +89,7 @@ class FichaService {
     }
 
     fun uploadDocumento(fichaId: String, file: MultipartFile) {
-        val userLogged = usuarioService.getUsuario()
+        val userLogged = usuarioService.getUsuarioLogado()
         val fichaOptional = fichaRepository.findById(fichaId)
 
         if (fichaOptional.isPresent) {

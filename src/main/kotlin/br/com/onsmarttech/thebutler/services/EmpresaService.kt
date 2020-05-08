@@ -15,7 +15,7 @@ class EmpresaService(
 ) {
 
     fun listar(): List<Empresa> {
-        if (!usuarioService.getUsuario().isAdmin()) {
+        if (!usuarioService.getUsuarioLogado().isAdmin()) {
             throw BadRequestException("Você não tem permissão para esse conteúdo")
         }
 
@@ -23,7 +23,7 @@ class EmpresaService(
     }
 
     fun save(empresaDto: EmpresaDto): Empresa {
-        val usuarioLogado = usuarioService.getUsuario()
+        val usuarioLogado = usuarioService.getUsuarioLogado()
 
         if (
                 (empresaDto.id.isNullOrBlank() && empresaRepository.findByCnpj(onlyAlphanumerics(empresaDto.cnpj!!)).isPresent)

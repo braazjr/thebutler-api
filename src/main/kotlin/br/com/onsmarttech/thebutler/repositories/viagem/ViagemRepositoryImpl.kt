@@ -28,16 +28,16 @@ class ViagemRepositoryImpl : ViagemRepositoryQuery {
     }
 
     private fun filterCheck(query: Query, filter: ViagemFilter) {
-        if (!filter.empresaId.isNullOrBlank()) {
+        if (!filter.empresaId.isNullOrBlank() && filter.empresaId != "0") {
             query.addCriteria(Criteria.where("motorista.empresaId").`is`(filter.empresaId))
         }
-        if (!filter.motoristaId.isNullOrBlank()) {
+        if (!filter.motoristaId.isNullOrBlank() && filter.motoristaId != "0") {
             query.addCriteria(Criteria.where("motorista.id").`is`(filter.motoristaId))
         }
-        if (!filter.rotaId.isNullOrBlank()) {
+        if (!filter.rotaId.isNullOrBlank() && filter.rotaId != "0") {
             query.addCriteria(Criteria.where("rota.id").`is`(filter.rotaId))
         }
-        if (!filter.moradorId.isNullOrBlank()) {
+        if (!filter.moradorId.isNullOrBlank() && filter.moradorId != "0") {
             query.addCriteria(Criteria.where("moradores").elemMatch(Criteria.where("morador.id").`is`(filter.moradorId)))
         }
         if (filter.dataHoraInicioDe != null && filter.dataHoraInicioPara != null) {
@@ -57,6 +57,12 @@ class ViagemRepositoryImpl : ViagemRepositoryQuery {
             query.addCriteria(Criteria.where("dataHoraFim").gte(filter.dataHoraFimDe))
         } else if (filter.dataHoraFimPara != null) {
             query.addCriteria(Criteria.where("dataHoraFim").lte(filter.dataHoraFimPara))
+        }
+        if (!filter.moradorNome.isNullOrBlank()) {
+            query.addCriteria(Criteria.where("moradores").elemMatch(Criteria.where("morador.nome").regex(filter.moradorNome, "i")))
+        }
+        if (!filter.moradorEmail.isNullOrBlank()) {
+            query.addCriteria(Criteria.where("moradores").elemMatch(Criteria.where("morador.email").regex(filter.moradorEmail, "i")))
         }
     }
 }

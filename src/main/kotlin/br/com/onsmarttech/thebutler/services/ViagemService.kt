@@ -54,7 +54,7 @@ class ViagemService {
                     }
 
     fun getAll(filter: ViagemFilter, pageable: Pageable): Any {
-        val userLogged = usuarioService.getUsuario()
+        val userLogged = usuarioService.getUsuarioLogado()
         filter.empresaId = userLogged.empresa!!.id!!
 
         return viagemRepository.find(filter, pageable)

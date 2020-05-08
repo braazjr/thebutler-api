@@ -24,7 +24,7 @@ class ApartamentoService {
     private lateinit var apartamentoRepository: ApartamentoRepository
 
     fun save(apartamentoDto: ApartamentoDto): Apartamento {
-        val usuarioLogado = usuarioService.getUsuario()
+        val usuarioLogado = usuarioService.getUsuarioLogado()
         val bloco = blocoService.findById(apartamentoDto.idBloco)
         val apartamento = convertDtoToApartamento(apartamentoDto, bloco, usuarioLogado)
 
@@ -32,7 +32,7 @@ class ApartamentoService {
     }
 
     fun list(filter: ApartamentoFilter, pageable: Pageable): PageImpl<Apartamento> {
-        val usuarioLogado = usuarioService.getUsuario()
+        val usuarioLogado = usuarioService.getUsuarioLogado()
         if (!usuarioLogado.isAdmin()) {
             filter.idEmpresa = usuarioLogado.empresa!!.id!!
         }

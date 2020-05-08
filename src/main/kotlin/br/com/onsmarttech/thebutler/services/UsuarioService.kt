@@ -53,14 +53,14 @@ class UsuarioService {
     }
 
     fun list(pageable: Pageable): Page<Usuario> {
-        val usuarioOptional: Optional<Usuario> = usuarioRepository.findByEmail(getUsuario().email!!)
+        val usuarioOptional: Optional<Usuario> = usuarioRepository.findByEmail(getUsuarioLogado().email!!)
 
         return if (!usuarioOptional.get().isAdmin()) {
             usuarioRepository.findByEmpresaAndOrderByNomeAsc(usuarioOptional.get().empresa!!.id!!, pageable)
         } else usuarioRepository.findAllByOrderByNomeAsc(pageable)
     }
 
-    fun getUsuario() = usuarioRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().name)
+    fun getUsuarioLogado() = usuarioRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().name)
             .orElseThrow { NotFoundException("Usuário não encontrado") }
 
     fun deletar(id: String) {
@@ -73,5 +73,10 @@ class UsuarioService {
 
     fun getMotoristaById(motoristaId: String?) = usuarioRepository.findMotoristaById(motoristaId)
             .orElseThrow { BadRequestException("Motorista não encontrado") }
+
+    fun getMotoristas(): Any {
+        val usuarioLogado = getUsuarioLogado()
+        return usuarioRepository.findByMotoristas(usuarioLogado.empresa!!.id)
+    }
 
 }

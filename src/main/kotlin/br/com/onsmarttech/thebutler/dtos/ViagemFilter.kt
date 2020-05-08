@@ -12,4 +12,6 @@ data class ViagemFilter(
         @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") val dataHoraFimPara: LocalDateTime?,
         var empresaId: String?,
         var moradorId: String?
+        val moradorNome: String?,
+        val moradorEmail: String?
 )

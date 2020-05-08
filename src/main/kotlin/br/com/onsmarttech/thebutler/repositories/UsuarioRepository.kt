@@ -22,4 +22,7 @@ interface UsuarioRepository : MongoRepository<Usuario, String> {
 
     @Query("{'id': ?0, 'permissoes': {\$in: ['MOTORISTA']}}")
     fun findMotoristaById(motoristaId: String?): Optional<Usuario>
+
+    @Query("{'permissoes': {\$in: ['MOTORISTA']}, 'empresa._id': ?0}")
+    fun findByMotoristas(empresaId: String?): List<Usuario>
 }

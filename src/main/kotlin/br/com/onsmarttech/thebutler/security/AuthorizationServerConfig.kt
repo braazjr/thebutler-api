@@ -30,7 +30,7 @@ class AuthorizationServerConfig(
                 .secret("\$2a\$10\$mQxQYmbTt21A96F30RIGperg/ZsDfF3jAxI2HGtolssBG8sOAppBi")
                 .scopes("read", "write")
                 .authorizedGrantTypes("password", "refresh_token")
-                .accessTokenValiditySeconds(3600)
+                .accessTokenValiditySeconds(36000)
                 .refreshTokenValiditySeconds(3600 * 24)
     }
 
