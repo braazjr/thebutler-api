@@ -4,12 +4,13 @@ import br.com.onsmarttech.thebutler.documents.Viagem
 import br.com.onsmarttech.thebutler.documents.ViagemMorador
 import br.com.onsmarttech.thebutler.documents.convertMoradorToSub
 import br.com.onsmarttech.thebutler.dtos.ViagemDto
+import br.com.onsmarttech.thebutler.dtos.ViagemFilter
 import br.com.onsmarttech.thebutler.dtos.ViagemUsuarioDto
 import br.com.onsmarttech.thebutler.dtos.convertDtoToViagem
 import br.com.onsmarttech.thebutler.repositories.ViagemRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
-import java.util.stream.Collectors
 
 @Service
 class ViagemService {
@@ -51,5 +52,12 @@ class ViagemService {
                         val morador = moradorService.findById(it.passageiroId!!)
                         ViagemMorador(convertMoradorToSub(morador), it.horario!!)
                     }
+
+    fun getAll(filter: ViagemFilter, pageable: Pageable): Any {
+        val userLogged = usuarioService.getUsuario()
+        filter.empresaId = userLogged.empresa!!.id!!
+
+        return viagemRepository.find(filter, pageable)
+    }
 }
 
