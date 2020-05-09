@@ -1,6 +1,7 @@
 package br.com.onsmarttech.thebutler
 
 import br.com.onsmarttech.thebutler.config.TheButlerProperties
+import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
@@ -10,5 +11,5 @@ import org.springframework.boot.runApplication
 class ThebutlerApplication
 
 fun main(args: Array<String>) {
-    runApplication<ThebutlerApplication>(*args)
+    SpringApplication.run(ThebutlerApplication::class.java, *args)
 }
