@@ -62,12 +62,3 @@ tasks.withType<KotlinCompile> {
 		jvmTarget = "1.8"
 	}
 }
-
-val port = System.getenv("PORT")
-val mongoUri = System.getenv("MONGODB_URI")
-
-tasks.withType<org.springframework.boot.gradle.tasks.run.BootRun> {
-	args("--spring.profiles.active=dev")
-//	args("--server.port=${port}")
-//	args("--spring.data.mongodb.uri=${mongoUri}")
-}
