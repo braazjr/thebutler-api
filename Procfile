@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar build/libs/*.jar --spring.profiles.active=dev --server.port=$PORT --spring.data.mongodb.uri=$MONGODB_URI
+web: java $JAVA_OPTS -jar build/libs/*.jar --spring.profiles.active=dev --server.port=$PORT
