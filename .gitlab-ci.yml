@@ -5,6 +5,7 @@ deploy-develop:
   stage: deploy
   variables:
     HEROKU_API_KEY: $HEROKU_PRODUCTION_API_KEY
+    HEROKU_APP: $HEROKU_APP
   before_script:
     - echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
     - wget -O- https://toolbelt.heroku.com/apt/release.key | apt-key add -
