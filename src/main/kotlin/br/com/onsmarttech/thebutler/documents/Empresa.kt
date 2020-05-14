@@ -26,5 +26,6 @@ data class Empresa(
 )
 
 data class EmpresaConfig(
-        @get:NotNull val qtyApartamentos: Int?
+        @get:NotNull val qtyApartamentos: Int?,
+        val temCracha: Boolean = false
 )
