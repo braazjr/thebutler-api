@@ -6,13 +6,17 @@ import br.com.onsmarttech.thebutler.dtos.convertDtoToEmpresa
 import br.com.onsmarttech.thebutler.exception.BadRequestException
 import br.com.onsmarttech.thebutler.repositories.EmpresaRepository
 import br.com.onsmarttech.thebutler.util.onlyAlphanumerics
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class EmpresaService(
-        private val usuarioService: UsuarioService,
-        private val empresaRepository: EmpresaRepository
-) {
+class EmpresaService {
+
+    @Autowired
+    private lateinit var usuarioService: UsuarioService
+
+    @Autowired
+    private lateinit var empresaRepository: EmpresaRepository
 
     fun listar(): List<Empresa> {
         if (!usuarioService.getUsuarioLogado().isAdmin()) {
