@@ -13,7 +13,7 @@ data class ApartamentoDto(
 )
 
 fun convertDtoToApartamento(dto: ApartamentoDto, bloco: Bloco, usuario: Usuario) =
-        Apartamento(null, dto.numero, dto.ativo, dto.numeroQuartos,
+        Apartamento(dto.id, dto.numero, dto.ativo, dto.numeroQuartos,
                 BlocoSub(bloco.id, bloco.nome, bloco.numero,
                         CondominioSub(bloco.condominio!!.id, bloco.condominio.nome, bloco.condominio.email,
                                 bloco.condominio.empresa)),

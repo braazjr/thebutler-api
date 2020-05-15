@@ -42,7 +42,7 @@ class FichaService {
     fun save(dto: FichaDto): Ficha {
         val apartamento = apartamentoService.findById(dto.idApartamento)
         val moradoresSalvos = moradorService.saveAll(dto.moradores)
-        return fichaRepository.save(Ficha(null, apartamento, convertMoradoresToSub(moradoresSalvos), dto.dataInicio, null, null))
+        return fichaRepository.save(Ficha(dto.id, apartamento, convertMoradoresToSub(moradoresSalvos), dto.dataInicio, null, null))
     }
 
     fun getByApartamentoId(apartamentoId: String): List<Ficha> {
