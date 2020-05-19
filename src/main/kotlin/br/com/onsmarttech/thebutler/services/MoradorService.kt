@@ -19,4 +19,6 @@ class MoradorService {
 
     fun findInIds(ids: List<String?>) = moradorRepository.findInIds(ids)
 
+    fun removeMoradores(ids: List<String?>) = moradorRepository.deleteByIdIn(ids)
+
 }

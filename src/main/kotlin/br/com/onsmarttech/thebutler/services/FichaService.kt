@@ -41,8 +41,14 @@ class FichaService {
 
     fun save(dto: FichaDto): Ficha {
         val apartamento = apartamentoService.findById(dto.idApartamento)
+        addRegistrador(dto.moradores)
         val moradoresSalvos = moradorService.saveAll(dto.moradores)
         return fichaRepository.save(Ficha(dto.id, apartamento, convertMoradoresToSub(moradoresSalvos), dto.dataInicio, null, null))
+    }
+
+    private fun addRegistrador(moradores: List<Morador>) {
+        val usuarioLogado = usuarioService.getUsuarioLogado()
+        moradores.forEach { it.registradoPor = convertUsuarioToSub(usuarioLogado) }
     }
 
     fun getByApartamentoId(apartamentoId: String): List<Ficha> {
@@ -56,12 +62,14 @@ class FichaService {
     }
 
     fun delete(id: String) {
-        getById(id)
+        val ficha = getById(id)
         fichaRepository.deleteById(id)
+
+        moradorService.removeMoradores(ficha.moradores!!.map { it.id })
     }
 
     fun getById(id: String) = fichaRepository.findById(id)
-            .orElseThrow { BadRequestException("Ficha não encontrada") }
+            .orElseThrow { BadRequestException("Ficha não encontrada") }!!
 
     fun getFullById(id: String): FichaFullResponseDto {
         val ficha = getById(id)

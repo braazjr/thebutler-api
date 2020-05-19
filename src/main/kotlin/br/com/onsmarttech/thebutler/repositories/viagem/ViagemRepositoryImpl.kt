@@ -1,6 +1,7 @@
 package br.com.onsmarttech.thebutler.repositories.viagem
 
 import br.com.onsmarttech.thebutler.documents.Viagem
+import br.com.onsmarttech.thebutler.documents.ViagemMorador
 import br.com.onsmarttech.thebutler.dtos.ViagemFilter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
@@ -25,6 +26,10 @@ class ViagemRepositoryImpl : ViagemRepositoryQuery {
         val count = mongoTemplate.count(query, Viagem::class.java)
 
         return PageImpl<Viagem>(viagens, pageable, count)
+    }
+
+    override fun mes(): List<ViagemMorador> {
+        TODO("Not yet implemented")
     }
 
     private fun filterCheck(query: Query, filter: ViagemFilter) {

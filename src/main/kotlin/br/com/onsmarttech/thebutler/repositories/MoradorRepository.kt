@@ -11,4 +11,11 @@ interface MoradorRepository : MongoRepository<Morador, String> {
     @Query("{'id': {\$in: ?0}}")
     fun findInIds(map: List<String?>): List<Morador>
 
+    @Query(value = "{\$or: [{'foto64': {\$exists: false}}, {'foto64': ''}]}")
+    fun moradoresSemFoto(): List<Morador>
+
+    fun deleteByIdIn(ids: List<String?>)
+
+    @Query(value = "{'documento': ''}")
+    fun moradoresSemDocumento(): List<Morador>
 }
