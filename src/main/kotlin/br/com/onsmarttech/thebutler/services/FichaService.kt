@@ -136,4 +136,12 @@ class FichaService {
         )
     }
 
+    fun removeMorador(id: String, moradorId: String) {
+        val ficha = getById(id)
+        moradorService.removeMoradores(listOf(moradorId))
+
+        ficha.moradores!!.removeIf { it.id == moradorId }
+        fichaRepository.save(ficha)
+    }
+
 }

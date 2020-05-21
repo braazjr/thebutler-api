@@ -57,4 +57,8 @@ class FichaController(val fichaService: FichaService) {
 
     @GetMapping("/{id}/for-jasper")
     fun getForJasper(@PathVariable("id") id: String) = fichaService.getForJasper(id)
+
+    @PatchMapping("/{id}/remove-morador/{moradorId}")
+    fun removeMorador(@PathVariable("id") id: String, @PathVariable("moradorId") moradorId: String) =
+            fichaService.removeMorador(id, moradorId)
 }

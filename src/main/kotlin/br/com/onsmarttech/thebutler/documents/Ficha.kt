@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank
 data class Ficha(
         @Id val id: String?,
         var apartamento: Apartamento?,
-        var moradores: List<MoradorSub>?,
+        var moradores: MutableList<MoradorSub>?,
         val dataInicio: LocalDate? = LocalDate.now(),
         val dataFim: LocalDate?,
         var documentos: MutableList<Documento>?
