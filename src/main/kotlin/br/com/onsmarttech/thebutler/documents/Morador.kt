@@ -11,7 +11,7 @@ data class Morador(
         @get:NotBlank val documento: String?,
         val ativo: Boolean?,
         @get:NotBlank val celular: String?,
-        @get:NotBlank val email: String?,
+        val email: String?,
         @get:NotBlank val nome: String?,
         val telefone: String?,
         val placaCarro: String?,

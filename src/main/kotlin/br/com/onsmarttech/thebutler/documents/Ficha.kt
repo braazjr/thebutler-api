@@ -24,5 +24,5 @@ data class MoradorSub(
 
 fun convertMoradorToSub(morador: Morador) = MoradorSub(morador.id, morador.email, morador.nome)
 
-fun convertMoradoresToSub(moradores: List<Morador>) =
+fun convertMoradoresToSub(moradores: List<Morador>): MutableList<MoradorSub>? =
         moradores.stream().map { convertMoradorToSub(it) }.collect(Collectors.toList())
