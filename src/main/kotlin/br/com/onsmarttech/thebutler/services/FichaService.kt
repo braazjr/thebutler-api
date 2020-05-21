@@ -127,7 +127,7 @@ class FichaService {
                 .orElseThrow { BadRequestException("Ficha não encontrada") }
 
         val moradores = moradorService.findInIds(ficha.moradores!!.map { it.id })
-        val responsavel = moradores.filter { !it.tipoMorador.toString().isNullOrBlank() }.firstOrNull()
+        val responsavel = moradores.firstOrNull { it.tipoMorador != null }
 
         return FichaJasperDto(
                 convertApartamentoToApartamentoJasperDto(ficha.apartamento!!),
