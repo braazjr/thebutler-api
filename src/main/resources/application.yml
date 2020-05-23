@@ -12,4 +12,4 @@ thebutler:
     secret-access-key: hsVDz5TPaGK57SLvRUKl/0IPpZq4Y/dae7UKc0vx
     bucket-fotos: butler-fotos
     bucket-documentos: butler-documentos
-  originsPermitidas: http://localhost:4200,http://localhost:3000,https://thebutler-web.herokuapp.com,file://
+  originsPermitidas: http://localhost:4200,http://localhost:3000,http://localhost:8100,https://thebutler-web.herokuapp.com,file://
