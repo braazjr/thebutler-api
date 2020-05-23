@@ -5,6 +5,7 @@ import br.com.onsmarttech.thebutler.exception.BadRequestException
 import br.com.onsmarttech.thebutler.repositories.MoradorRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 
 @Service
 class MoradorService {
@@ -12,7 +13,17 @@ class MoradorService {
     @Autowired
     private lateinit var moradorRepository: MoradorRepository
 
-    fun saveAll(moradores: List<Morador>) = moradorRepository.saveAll(moradores)
+    fun saveAll(moradores: List<Morador>): MutableList<Morador> {
+        moradores.forEach {
+            it.dataAlteracao = LocalDate.now()
+            if (!it.id.isNullOrBlank()) {
+                val morador = findById(it.id)
+                it.dataCriacao = morador.dataCriacao
+            }
+        }
+
+        return moradorRepository.saveAll(moradores)
+    }
 
     fun findById(moradorId: String) = moradorRepository.findById(moradorId)
             .orElseThrow { BadRequestException("Morador não encontrado") }

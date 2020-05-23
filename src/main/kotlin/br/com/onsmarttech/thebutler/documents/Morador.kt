@@ -2,6 +2,7 @@ package br.com.onsmarttech.thebutler.documents
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
+import java.time.LocalDate
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 
@@ -20,7 +21,9 @@ data class Morador(
         @get:NotNull val tipoDocumento: TipoDocumento?,
         val tipoMorador: TipoMorador?,
         val foto64: String?,
-        var registradoPor: UsuarioSub?
+        var registradoPor: UsuarioSub?,
+        var dataCriacao: LocalDate?,
+        var dataAlteracao: LocalDate?
 )
 
 data class ApartamentoSub(

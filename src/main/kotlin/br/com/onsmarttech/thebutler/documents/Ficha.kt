@@ -1,6 +1,8 @@
 package br.com.onsmarttech.thebutler.documents
 
+import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
+import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDate
 import java.util.stream.Collectors
@@ -13,7 +15,9 @@ data class Ficha(
         var moradores: MutableList<MoradorSub>?,
         val dataInicio: LocalDate? = LocalDate.now(),
         val dataFim: LocalDate?,
-        var documentos: MutableList<Documento>?
+        var documentos: MutableList<Documento>?,
+        val dataCriacao: LocalDate?,
+        val dataAlteracao: LocalDate?
 )
 
 data class MoradorSub(

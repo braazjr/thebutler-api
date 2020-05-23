@@ -12,9 +12,9 @@ import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.io.ByteArrayInputStream
+import java.time.LocalDate
 import java.util.*
 import java.util.stream.Collectors
-
 @Service
 class FichaService {
 
@@ -40,15 +40,24 @@ class FichaService {
     private lateinit var jasperReportsService: JasperReportsService
 
     fun save(dto: FichaDto): Ficha {
-        val apartamento = apartamentoService.findById(dto.idApartamento)
-        addRegistrador(dto.moradores)
-        val moradoresSalvos = moradorService.saveAll(dto.moradores)
-        return fichaRepository.save(Ficha(dto.id, apartamento, convertMoradoresToSub(moradoresSalvos), dto.dataInicio, null, null))
+        if (!dto.id.isNullOrBlank()) {
+            val ficha = getById(dto.id)
+            return fichaRepository.save(fillFicha(dto, ficha.dataCriacao!!, LocalDate.now()))
+        }
+
+        return fichaRepository.save(fillFicha(dto, LocalDate.now(),  LocalDate.now()))
     }
 
     private fun addRegistrador(moradores: List<Morador>) {
         val usuarioLogado = usuarioService.getUsuarioLogado()
         moradores.forEach { it.registradoPor = convertUsuarioToSub(usuarioLogado) }
+    }
+
+    private fun fillFicha(dto: FichaDto, dataCriacao: LocalDate, dataAlteracao: LocalDate): Ficha {
+        val apartamento = apartamentoService.findById(dto.idApartamento)
+        addRegistrador(dto.moradores)
+        val moradoresSalvos = moradorService.saveAll(dto.moradores)
+        return Ficha(dto.id, apartamento, convertMoradoresToSub(moradoresSalvos), dto.dataInicio, null, null, dataCriacao, dataAlteracao)
     }
 
     fun getByApartamentoId(apartamentoId: String): List<Ficha> {
@@ -145,3 +154,4 @@ class FichaService {
     }
 
 }
+
