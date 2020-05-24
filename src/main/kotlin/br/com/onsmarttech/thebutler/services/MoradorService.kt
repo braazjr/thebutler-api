@@ -15,9 +15,12 @@ class MoradorService {
     @Autowired
     private lateinit var moradorRepository: MoradorRepository
 
+    @Autowired
+    private lateinit var usuarioService: UsuarioService
+
     fun saveAll(apartamento: Apartamento, moradores: List<Morador>): MutableList<Morador> {
         moradores.forEach {
-            it.apartamentoSub = convertApartamentoToSub(apartamento)
+            it.apartamento = convertApartamentoToSub(apartamento)
             it.dataAlteracao = LocalDate.now()
 
             if (!it.id.isNullOrBlank()) {
@@ -35,5 +38,10 @@ class MoradorService {
     fun findInIds(ids: List<String?>) = moradorRepository.findInIds(ids)
 
     fun removeMoradores(ids: List<String?>) = moradorRepository.deleteByIdIn(ids)
+
+    fun find(): List<Morador> {
+        val usuarioLogado = usuarioService.getUsuarioLogado()
+        return moradorRepository.findAll(usuarioLogado.empresa!!.id)
+    }
 
 }

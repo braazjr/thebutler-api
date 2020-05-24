@@ -18,4 +18,7 @@ interface MoradorRepository : MongoRepository<Morador, String> {
 
     @Query(value = "{'documento': ''}")
     fun moradoresSemDocumento(): List<Morador>
+
+    @Query("{'apartamento.bloco.condominio.empresa.id': ?0}")
+    fun findAll(empresaId: String?): List<Morador>
 }
