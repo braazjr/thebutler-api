@@ -28,4 +28,8 @@ class UsuarioController(val usuarioService: UsuarioService) {
 
     @GetMapping("/motoristas")
     fun getMotoristas() = ResponseEntity.ok(usuarioService.getMotoristas())
+
+    @GetMapping("/motorista/{id}")
+    fun getMotoristaByID(@PathVariable("id") id: String) =
+            ResponseEntity.ok(usuarioService.getMotoristaById(id))
 }
