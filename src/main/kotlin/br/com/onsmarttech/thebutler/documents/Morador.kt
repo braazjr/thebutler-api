@@ -23,14 +23,18 @@ data class Morador(
         val foto64: String?,
         var registradoPor: UsuarioSub?,
         var dataCriacao: LocalDate?,
-        var dataAlteracao: LocalDate?
+        var dataAlteracao: LocalDate?,
+        var apartamentoSub: ApartamentoSub?
 )
 
 data class ApartamentoSub(
-        var id: String?,
+        @Id var id: String?,
         val numero: String?,
         val bloco: BlocoSub?
 )
+
+fun convertApartamentoToSub(apartamento: Apartamento) = ApartamentoSub(apartamento.id, apartamento.numero,
+        apartamento.bloco)
 
 enum class TipoMorador {
     JURIDICO, PROPRIETARIO, LOCATARIO, DEPENDENTE, TEMPORADA, EMPREGO, OUTROS

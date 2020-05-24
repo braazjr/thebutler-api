@@ -56,7 +56,7 @@ class FichaService {
     private fun fillFicha(dto: FichaDto, dataCriacao: LocalDate, dataAlteracao: LocalDate): Ficha {
         val apartamento = apartamentoService.findById(dto.idApartamento)
         addRegistrador(dto.moradores)
-        val moradoresSalvos = moradorService.saveAll(dto.moradores)
+        val moradoresSalvos = moradorService.saveAll(apartamento, dto.moradores)
         return Ficha(dto.id, apartamento, convertMoradoresToSub(moradoresSalvos), dto.dataInicio, null, null, dataCriacao, dataAlteracao)
     }
 

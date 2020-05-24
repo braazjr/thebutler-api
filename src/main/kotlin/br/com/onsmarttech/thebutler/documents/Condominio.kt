@@ -21,4 +21,3 @@ data class Condominio(
         val empresa: EmpresaSub?,
         @get:NotNull val registradoPor: UsuarioSub?
 )
-

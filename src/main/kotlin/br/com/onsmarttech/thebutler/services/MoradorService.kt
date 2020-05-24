@@ -1,6 +1,8 @@
 package br.com.onsmarttech.thebutler.services
 
+import br.com.onsmarttech.thebutler.documents.Apartamento
 import br.com.onsmarttech.thebutler.documents.Morador
+import br.com.onsmarttech.thebutler.documents.convertApartamentoToSub
 import br.com.onsmarttech.thebutler.exception.BadRequestException
 import br.com.onsmarttech.thebutler.repositories.MoradorRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -13,9 +15,11 @@ class MoradorService {
     @Autowired
     private lateinit var moradorRepository: MoradorRepository
 
-    fun saveAll(moradores: List<Morador>): MutableList<Morador> {
+    fun saveAll(apartamento: Apartamento, moradores: List<Morador>): MutableList<Morador> {
         moradores.forEach {
+            it.apartamentoSub = convertApartamentoToSub(apartamento)
             it.dataAlteracao = LocalDate.now()
+
             if (!it.id.isNullOrBlank()) {
                 val morador = findById(it.id)
                 it.dataCriacao = morador.dataCriacao
