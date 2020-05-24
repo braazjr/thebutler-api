@@ -24,7 +24,7 @@ data class Morador(
         var registradoPor: UsuarioSub?,
         var dataCriacao: LocalDate?,
         var dataAlteracao: LocalDate?,
-        var apartamentoSub: ApartamentoSub?
+        var apartamento: ApartamentoSub?
 )
 
 data class ApartamentoSub(
