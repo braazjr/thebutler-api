@@ -21,6 +21,7 @@ class MoradorService {
     fun saveAll(apartamento: Apartamento, moradores: List<Morador>): MutableList<Morador> {
         moradores.forEach {
             it.apartamento = convertApartamentoToSub(apartamento)
+            it.dataCriacao = LocalDate.now()
             it.dataAlteracao = LocalDate.now()
 
             if (!it.id.isNullOrBlank()) {
