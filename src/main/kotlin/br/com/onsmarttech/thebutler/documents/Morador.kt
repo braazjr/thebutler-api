@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull
 
 @Document("moradores")
 data class Morador(
-        @Id val id: String?,
+        @Id var id: String?,
         @get:NotBlank val documento: String?,
         val ativo: Boolean?,
         @get:NotBlank val celular: String?,

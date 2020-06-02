@@ -18,22 +18,24 @@ class MoradorService {
     @Autowired
     private lateinit var usuarioService: UsuarioService
 
-    fun saveAll(apartamento: Apartamento, moradores: List<Morador>): MutableList<Morador> {
-        moradores.forEach {
-            it.apartamento = convertApartamentoToSub(apartamento)
-            it.dataCriacao = LocalDate.now()
-            it.dataAlteracao = LocalDate.now()
+    fun saveAll(apartamento: Apartamento, moradores: List<Morador>): MutableList<Morador> =
+            moradores
+                    .forEach {
+                        if (it.id != null && it.id!!.isBlank()) {
+                            it.id = null
+                        }
+                        it.apartamento = convertApartamentoToSub(apartamento)
+                        it.dataCriacao = LocalDate.now()
+                        it.dataAlteracao = LocalDate.now()
 
-            if (!it.id.isNullOrBlank()) {
-                val morador = findById(it.id)
-                it.dataCriacao = morador.dataCriacao
-            }
-        }
+                        if (!it.id.isNullOrBlank()) {
+                            val morador = findById(it.id!!)
+                            it.dataCriacao = morador.dataCriacao
+                        }
+                    }
+                    .run { return moradorRepository.saveAll(moradores) }
 
-        return moradorRepository.saveAll(moradores)
-    }
-
-    fun findById(moradorId: String) = moradorRepository.findById(moradorId)
+    fun findById(moradorId: String): Morador = moradorRepository.findById(moradorId)
             .orElseThrow { BadRequestException("Morador não encontrado") }
 
     fun findInIds(ids: List<String?>) = moradorRepository.findInIds(ids)
