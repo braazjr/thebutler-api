@@ -27,8 +27,7 @@ class S3Util {
 
     fun saveDocument(name: String, file: MultipartFile): String {
         val nameSplit = name.split("/")
-        val documentName = nameSplit[nameSplit.size - 1] + "." + file.contentType!!.split("/").toTypedArray()[1]
-        val targetFile = File(javaClass.getResource("/uploads").path + "/$documentName")
+        val targetFile = File.createTempFile(nameSplit[nameSplit.size - 1], "." + file.contentType!!.split("/").toTypedArray()[1])
         convertInputStreamToFile(file.inputStream, targetFile)
         logger.info("---> AQUIVO TEMP SALVO!")
 
