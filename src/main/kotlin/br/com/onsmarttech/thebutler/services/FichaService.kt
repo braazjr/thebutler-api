@@ -15,6 +15,7 @@ import java.io.ByteArrayInputStream
 import java.time.LocalDate
 import java.util.*
 import java.util.stream.Collectors
+
 @Service
 class FichaService {
 
@@ -45,7 +46,7 @@ class FichaService {
             return fichaRepository.save(fillFicha(dto, ficha.dataCriacao!!, LocalDate.now()))
         }
 
-        return fichaRepository.save(fillFicha(dto, LocalDate.now(),  LocalDate.now()))
+        return fichaRepository.save(fillFicha(dto, LocalDate.now(), LocalDate.now()))
     }
 
     private fun addRegistrador(moradores: List<Morador>) {
@@ -105,25 +106,25 @@ class FichaService {
         fichaRepository.save(ficha)
     }
 
-    fun uploadDocumento(fichaId: String, file: MultipartFile) {
+    fun uploadDocumento(fichaId: String, file: MultipartFile): String {
         val userLogged = usuarioService.getUsuarioLogado()
-        val fichaOptional = fichaRepository.findById(fichaId)
+        val ficha = fichaRepository.findById(fichaId)
+                .orElseThrow { BadRequestException("Ficha não encontrada") }
 
-        if (fichaOptional.isPresent) {
-            val uuid = UUID.randomUUID().toString()
-            val ficha = fichaOptional.get()
+        val uuid = UUID.randomUUID().toString()
 
-            val url: String = s3Util.saveDocument("${fichaOptional.get().apartamento!!.bloco!!.condominio.empresa!!.id}/fichas/$fichaId/documents/$uuid", file)
+        val url: String = s3Util.saveDocument("${ficha.apartamento!!.bloco!!.condominio.empresa!!.id}/fichas/$fichaId/documents/$uuid", file)
 
-            val documentoSaved = documentoRepository.save(Documento(null, uuid, url, convertUsuarioToSub(userLogged)))
+        val documentoSaved = documentoRepository.save(Documento(null, uuid, url, convertUsuarioToSub(userLogged)))
 
-            if (ficha.documentos.isNullOrEmpty()) {
-                ficha.documentos = mutableListOf()
-            }
-            ficha.documentos!!.add(documentoSaved)
-
-            fichaRepository.save(ficha)
+        if (ficha.documentos.isNullOrEmpty()) {
+            ficha.documentos = mutableListOf()
         }
+        ficha.documentos!!.add(documentoSaved)
+
+        fichaRepository.save(ficha)
+
+        return url
     }
 
     fun downloadPdf(id: String): ByteArrayInputStream {
