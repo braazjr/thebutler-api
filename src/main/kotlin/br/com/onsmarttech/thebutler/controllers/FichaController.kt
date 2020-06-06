@@ -44,7 +44,7 @@ class FichaController(val fichaService: FichaService) {
 
     @PostMapping("/{id}/documento/upload-documento")
     fun uploadDocumento(@PathVariable("id") id: String, @Valid @NotNull @RequestParam("file") file: MultipartFile) =
-            fichaService.uploadDocumento(id, file)
+            ResponseEntity.ok(fichaService.uploadDocumento(id, file))
 
     @GetMapping("/{id}/download-pdf")
     fun downloadPdf(@PathVariable("id") id: String, response: HttpServletResponse) {
