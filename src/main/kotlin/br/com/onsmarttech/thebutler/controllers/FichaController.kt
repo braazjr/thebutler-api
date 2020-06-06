@@ -61,4 +61,8 @@ class FichaController(val fichaService: FichaService) {
     @PatchMapping("/{id}/remove-morador/{moradorId}")
     fun removeMorador(@PathVariable("id") id: String, @PathVariable("moradorId") moradorId: String) =
             fichaService.removeMorador(id, moradorId)
+
+    @GetMapping("/{id}/documentos")
+    fun getDocumentosByFichaId(@PathVariable("id") fichaId: String) =
+            ResponseEntity.ok(fichaService.getDocumentosByFichaId(fichaId))
 }

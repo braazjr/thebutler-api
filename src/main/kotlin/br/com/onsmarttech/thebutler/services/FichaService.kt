@@ -154,5 +154,6 @@ class FichaService {
         fichaRepository.save(ficha)
     }
 
+    fun getDocumentosByFichaId(fichaId: String) = getById(fichaId).documentos!!.distinct()
 }
 
