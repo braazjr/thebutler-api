@@ -155,5 +155,16 @@ class FichaService {
     }
 
     fun getDocumentosByFichaId(fichaId: String) = getById(fichaId).documentos!!.distinct()
+
+    fun getFullByMoradorId(moradorId: String): List<FichaFullResponseDto> {
+        moradorService.findById(moradorId)
+        return fichaRepository.findByMoradorId(moradorId)
+                .map { it: Ficha ->
+                    val moradores = it.moradores
+                            ?.map { morador -> moradorService.findById(morador.id!!) }
+
+                    FichaFullResponseDto(it.id!!, it.apartamento, moradores, it.dataInicio, it.dataFim, it.documentos)
+                }
+    }
 }
 
