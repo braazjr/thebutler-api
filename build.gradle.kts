@@ -25,6 +25,7 @@ val springSecurityOauth2Version = "2.4.0.RELEASE"
 val springSecurityJwtVersion = "1.1.0.RELEASE"
 val jasperReportsVersion = "6.12.2"
 val gsonVersion = "2.7"
+val springSwaggerVersion = "2.9.2"
 
 dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -39,6 +40,8 @@ dependencies {
 	implementation("com.amazonaws:aws-java-sdk:1.11.762")
 	implementation("net.sf.jasperreports:jasperreports:${jasperReportsVersion}")
 	implementation("com.google.code.gson:gson:$gsonVersion")
+	implementation("io.springfox:springfox-swagger-ui:$springSwaggerVersion")
+	implementation("io.springfox:springfox-swagger2:$springSwaggerVersion")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
