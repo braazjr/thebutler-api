@@ -7,4 +7,4 @@ data class UsuarioSub(
         val empresaId: String?
 )
 
-fun convertUsuarioToSub(usuario: Usuario) = UsuarioSub(usuario.id, usuario.email, usuario.nome, usuario.empresa!!.id)
+fun convertUsuarioToSub(usuario: Usuario) = UsuarioSub(usuario.id, usuario.email, usuario.nome, usuario.empresa?.id)
