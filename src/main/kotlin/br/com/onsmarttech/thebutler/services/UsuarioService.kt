@@ -36,7 +36,7 @@ class UsuarioService {
         if (principal != null) {
             val usuarioLogado: Optional<Usuario> = usuarioRepository.findByEmail(principal.name)
 
-            if (usuarioLogado.get().isAdmin() && !usuarioDto.idEmpresa.isNullOrBlank()) {
+            if (usuarioLogado.get().isAdmin()) {
                 val empresa = empresaService.getById(usuarioDto.idEmpresa!!)
                 usuario.empresa = convertEmpresaToSub(empresa)
             } else {
