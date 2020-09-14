@@ -20,7 +20,7 @@
 		<property name="net.sf.jasperreports.json.field.expression" value="telefone"/>
 		<fieldDescription><![CDATA[telefone]]></fieldDescription>
 	</field>
-	<field name="documento" class="java.lang.Integer">
+	<field name="documento" class="java.lang.String">
 		<property name="net.sf.jasperreports.json.field.expression" value="documento"/>
 		<fieldDescription><![CDATA[documento]]></fieldDescription>
 	</field>
@@ -90,18 +90,30 @@
 				<text><![CDATA[Assinatura Morador]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="-10" y="12" width="210" height="18" uuid="6fca1bde-fcac-4f8e-9456-16a71d73beb6"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="-20" y="12" width="220" height="18" uuid="6fca1bde-fcac-4f8e-9456-16a71d73beb6">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="210" y="12" width="98" height="19" uuid="10e7ac82-9b52-4e90-a1c4-def38daf598b"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="200" y="12" width="108" height="19" uuid="10e7ac82-9b52-4e90-a1c4-def38daf598b">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{parentesco}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="318" y="12" width="102" height="19" uuid="d3323cc1-4388-436d-8a67-15df4a83d485"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="308" y="12" width="112" height="19" uuid="d3323cc1-4388-436d-8a67-15df4a83d485">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[""]]></textFieldExpression>
 			</textField>
 			<rectangle>
@@ -120,7 +132,7 @@
 				<reportElement x="420" y="30" width="109" height="30" uuid="f26576c4-b15d-4219-9cc4-2738aa7bdf10"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="-20" y="31" width="99" height="19" uuid="b90e2348-a9a9-44e9-b43b-8f3238445a95"/>
+				<reportElement x="-20" y="32" width="99" height="19" uuid="b90e2348-a9a9-44e9-b43b-8f3238445a95"/>
 				<textElement>
 					<font size="8"/>
 					<paragraph leftIndent="5"/>
@@ -128,7 +140,7 @@
 				<text><![CDATA[Email]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="89" y="31" width="99" height="19" uuid="b1ff5458-ed9b-407b-a44a-7e01390df792"/>
+				<reportElement x="89" y="32" width="99" height="19" uuid="b1ff5458-ed9b-407b-a44a-7e01390df792"/>
 				<textElement>
 					<font size="8"/>
 					<paragraph leftIndent="5"/>
@@ -136,7 +148,7 @@
 				<text><![CDATA[Telefone]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="200" y="31" width="99" height="19" uuid="3bba7f26-4891-4649-9c4a-8eb9b94f99b3"/>
+				<reportElement x="200" y="32" width="99" height="19" uuid="3bba7f26-4891-4649-9c4a-8eb9b94f99b3"/>
 				<textElement>
 					<font size="8"/>
 					<paragraph leftIndent="5"/>
@@ -144,7 +156,7 @@
 				<text><![CDATA[Documento]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="308" y="31" width="99" height="19" uuid="15ca5204-05f0-444d-bfe6-b90b71ffb8c4"/>
+				<reportElement x="308" y="32" width="99" height="19" uuid="15ca5204-05f0-444d-bfe6-b90b71ffb8c4"/>
 				<textElement>
 					<font size="8"/>
 					<paragraph leftIndent="5"/>
@@ -152,32 +164,52 @@
 				<text><![CDATA[Nº Registro]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="-9" y="41" width="98" height="19" uuid="b2082bba-a163-49c6-8cbf-ae2dffa36522"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="-20" y="41" width="109" height="19" uuid="b2082bba-a163-49c6-8cbf-ae2dffa36522">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="102" y="41" width="98" height="19" uuid="0402752e-61f5-42e3-ba1f-f9ae0c1f905d"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="89" y="41" width="111" height="19" uuid="0402752e-61f5-42e3-ba1f-f9ae0c1f905d">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="210" y="41" width="98" height="19" uuid="e80583af-e048-4812-91db-1ffef4370395"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="200" y="41" width="108" height="19" uuid="e80583af-e048-4812-91db-1ffef4370395">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{documento}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="322" y="41" width="98" height="19" uuid="7c82cf08-0ca6-497d-89c4-68872b5d79ec"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="308" y="41" width="112" height="19" uuid="7c82cf08-0ca6-497d-89c4-68872b5d79ec">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="430" y="41" width="99" height="19" uuid="6ef26ac1-b15e-401e-9203-dced84713ee7"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="420" y="41" width="109" height="19" uuid="6ef26ac1-b15e-401e-9203-dced84713ee7">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{placaCarro}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="420" y="31" width="95" height="19" uuid="557bfdb4-baf3-489c-aaa6-ac1ee692b6f7"/>
+				<reportElement x="420" y="32" width="95" height="19" uuid="557bfdb4-baf3-489c-aaa6-ac1ee692b6f7"/>
 				<textElement>
 					<font size="8"/>
 					<paragraph leftIndent="5"/>

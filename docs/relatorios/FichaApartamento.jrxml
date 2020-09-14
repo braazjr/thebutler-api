@@ -146,8 +146,12 @@ Favor preencher os dados solicitados abaixo sem abreviações, e em letra de for
 				<text><![CDATA[Condomínio]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="10" y="97" width="170" height="19" uuid="62aa05cf-5021-4473-84ed-562a15410d01"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="1" y="97" width="179" height="19" uuid="62aa05cf-5021-4473-84ed-562a15410d01">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{condominio.nome}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -175,18 +179,30 @@ Favor preencher os dados solicitados abaixo sem abreviações, e em letra de for
 				<text><![CDATA[Nº quartos sociais]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="190" y="97" width="170" height="19" uuid="3ff2b36b-744d-4579-b980-7970e9a02270"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="180" y="97" width="180" height="19" uuid="3ff2b36b-744d-4579-b980-7970e9a02270">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{bloco.nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="370" y="97" width="90" height="19" uuid="a78c02b8-f983-4df7-9182-63a3bb84ac0f"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="360" y="97" width="100" height="19" uuid="a78c02b8-f983-4df7-9182-63a3bb84ac0f">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{apartamento.numero}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="471" y="97" width="78" height="19" uuid="d6836a6b-deef-4ec8-b100-d9e42bd5afc6"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="460" y="97" width="89" height="19" uuid="d6836a6b-deef-4ec8-b100-d9e42bd5afc6">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{apartamento.numeroQuartos}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -211,8 +227,12 @@ Favor preencher os dados solicitados abaixo sem abreviações, e em letra de for
 				<text><![CDATA[Responsável da Unidade: ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="10" y="155" width="350" height="19" uuid="1cf5f162-bdb4-409d-b802-8b3b885f968f"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="1" y="155" width="359" height="19" uuid="1cf5f162-bdb4-409d-b802-8b3b885f968f">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{responsavel.nome}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -224,8 +244,12 @@ Favor preencher os dados solicitados abaixo sem abreviações, e em letra de for
 				<text><![CDATA[Nº Registro]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="371" y="155" width="178" height="19" uuid="c6f4813e-f291-44c5-a482-8b16d623735e"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement style="Table_TH" x="360" y="155" width="189" height="19" uuid="c6f4813e-f291-44c5-a482-8b16d623735e">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{responsavel.codigo}]]></textFieldExpression>
 			</textField>
 			<rectangle>
@@ -240,8 +264,12 @@ Favor preencher os dados solicitados abaixo sem abreviações, e em letra de for
 				<text><![CDATA[Telefone Residencial]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="11" y="185" width="168" height="19" uuid="ce6739ac-06b4-454d-9a3d-2a86e3a1a08c"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="1" y="185" width="178" height="19" uuid="ce6739ac-06b4-454d-9a3d-2a86e3a1a08c">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{responsavel.telefone}]]></textFieldExpression>
 			</textField>
 			<rectangle>
@@ -259,8 +287,12 @@ Favor preencher os dados solicitados abaixo sem abreviações, e em letra de for
 				<text><![CDATA[Telefone Celular]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="192" y="185" width="168" height="19" uuid="855deceb-55a3-4b75-a929-bf1a0a4c8274"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="180" y="185" width="180" height="19" uuid="855deceb-55a3-4b75-a929-bf1a0a4c8274">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{responsavel.celular}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -272,8 +304,12 @@ Favor preencher os dados solicitados abaixo sem abreviações, e em letra de for
 				<text><![CDATA[CPF: CNPJ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="370" y="185" width="179" height="19" uuid="eff1d1ec-1e65-40f2-8f16-18abf484b908"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="360" y="185" width="189" height="19" uuid="eff1d1ec-1e65-40f2-8f16-18abf484b908">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{responsavel.documento}]]></textFieldExpression>
 			</textField>
 			<rectangle>
@@ -288,8 +324,12 @@ Favor preencher os dados solicitados abaixo sem abreviações, e em letra de for
 				<text><![CDATA[E-mail]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="11" y="215" width="349" height="19" uuid="bfa624ad-ace1-47e4-b477-7b8e58b16716"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="1" y="215" width="359" height="19" uuid="bfa624ad-ace1-47e4-b477-7b8e58b16716">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{responsavel.email}]]></textFieldExpression>
 			</textField>
 			<rectangle>
@@ -304,8 +344,12 @@ Favor preencher os dados solicitados abaixo sem abreviações, e em letra de for
 				<text><![CDATA[Placa de Carro]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="370" y="215" width="179" height="19" uuid="d49c3e9b-3943-473f-a244-ad36c2bc0ff5"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="360" y="215" width="189" height="19" uuid="d49c3e9b-3943-473f-a244-ad36c2bc0ff5">
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{responsavel.placaCarro}]]></textFieldExpression>
 			</textField>
 			<rectangle>
@@ -339,10 +383,13 @@ Favor preencher os dados solicitados abaixo sem abreviações, e em letra de for
 				<textFieldExpression><![CDATA["Rio de Janeiro " + new SimpleDateFormat("dd 'de' MMMM 'de' yyyy").format(new Date())]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="11" y="245" width="538" height="19" uuid="bc84b9a8-189b-4efd-bbcf-385c8c1a6c00">
+				<reportElement x="1" y="245" width="548" height="19" uuid="bc84b9a8-189b-4efd-bbcf-385c8c1a6c00">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<paragraph leftIndent="2"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{responsavel.observacao}]]></textFieldExpression>
 			</textField>
 		</band>
