@@ -10,5 +10,6 @@ data class Documento(
         @Id val id: String?,
         @get:NotBlank val nome:  String?,
         @get:NotBlank val url:  String?,
+        val originalName: String?,
         @get:NotNull val registradoPor:  UsuarioSub?
 )

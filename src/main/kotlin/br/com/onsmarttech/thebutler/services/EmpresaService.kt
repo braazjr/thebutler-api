@@ -4,6 +4,7 @@ import br.com.onsmarttech.thebutler.documents.Empresa
 import br.com.onsmarttech.thebutler.dtos.EmpresaDto
 import br.com.onsmarttech.thebutler.dtos.convertDtoToEmpresa
 import br.com.onsmarttech.thebutler.exception.BadRequestException
+import br.com.onsmarttech.thebutler.repositories.ApartamentoRepository
 import br.com.onsmarttech.thebutler.repositories.EmpresaRepository
 import br.com.onsmarttech.thebutler.util.onlyAlphanumerics
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,6 +18,9 @@ class EmpresaService {
 
     @Autowired
     private lateinit var empresaRepository: EmpresaRepository
+
+    @Autowired
+    private lateinit var apartamentoRepository: ApartamentoRepository
 
     fun listar(): List<Empresa> {
         if (!usuarioService.getUsuarioLogado().isAdmin()) {
@@ -50,8 +54,15 @@ class EmpresaService {
         empresaRepository.deleteById(id)
     }
 
-    fun getById(idEmpresa: String) = empresaRepository.findById(idEmpresa)
-            .orElseThrow { BadRequestException("Empresa não encontrada") }
+    fun getById(idEmpresa: String): Empresa? {
+        var empresa = empresaRepository.findById(idEmpresa)
+                .orElseThrow { BadRequestException("Empresa não encontrada") }
+
+        val countApartamentos = apartamentoRepository.count()
+        empresa.empresaConfig!!.apartamentosCadastrados = countApartamentos
+
+        return empresa
+    }
 
     fun update(id: String, empresaDto: EmpresaDto): Empresa {
         if (id != empresaDto.id) {

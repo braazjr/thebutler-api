@@ -33,16 +33,7 @@ class UsuarioService {
             throw BadRequestException("O login já existe em um usuário")
         }
 
-        if (principal != null) {
-            val usuarioLogado: Optional<Usuario> = usuarioRepository.findByEmail(principal.name)
-
-            if (usuarioLogado.get().isAdmin()) {
-                val empresa = empresaService.getById(usuarioDto.idEmpresa!!)
-                usuario.empresa = convertEmpresaToSub(empresa)
-            } else {
-                usuario.empresa = usuarioLogado.get().empresa
-            }
-        }
+        preencheEmpresa(principal, usuarioDto, usuario)
 
         if (!StringUtils.hasText(usuario.senha)) {
             val encoder = BCryptPasswordEncoder()
@@ -50,6 +41,19 @@ class UsuarioService {
         }
 
         return usuarioRepository.save(usuario)
+    }
+
+    private fun preencheEmpresa(principal: Principal?, usuarioDto: UsuarioDto, usuario: Usuario) {
+        if (principal != null) {
+            val usuarioLogado: Optional<Usuario> = usuarioRepository.findByEmail(principal.name)
+
+            if (usuarioLogado.get().isAdmin()) {
+                val empresa = empresaService.getById(usuarioDto.idEmpresa!!)
+                usuario.empresa = empresa?.let { convertEmpresaToSub(it) }
+            } else {
+                usuario.empresa = usuarioLogado.get().empresa
+            }
+        }
     }
 
     fun list(pageable: Pageable): Page<Usuario> {
@@ -77,6 +81,13 @@ class UsuarioService {
     fun getMotoristas(): Any {
         val usuarioLogado = getUsuarioLogado()
         return usuarioRepository.findByMotoristas(usuarioLogado.empresa!!.id)
+    }
+
+    fun atualizar(principal: Principal?, id: String, usuarioDto: UsuarioDto): Any {
+        getById(id)
+        val usuario: Usuario = convertDtoToUsuario(usuarioDto)
+        preencheEmpresa(principal, usuarioDto, usuario)
+        return usuarioRepository.save(usuario)
     }
 
 }

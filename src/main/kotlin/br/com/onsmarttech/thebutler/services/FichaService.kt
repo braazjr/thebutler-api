@@ -115,7 +115,7 @@ class FichaService {
 
         val url: String = s3Util.saveDocument("${ficha.apartamento!!.bloco!!.condominio.empresa!!.id}/fichas/$fichaId/documents/$uuid", file)
 
-        val documentoSaved = documentoRepository.save(Documento(null, uuid, url, convertUsuarioToSub(userLogged)))
+        val documentoSaved = documentoRepository.save(Documento(null, uuid, url, file.originalFilename, convertUsuarioToSub(userLogged)))
 
         if (ficha.documentos.isNullOrEmpty()) {
             ficha.documentos = mutableListOf()

@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotEmpty
 
 data class UsuarioDto(
+        val id: String?,
         @get:NotBlank val email: String?,
         @get:NotBlank val nome: String?,
         @JsonIgnore var senha: String?,
@@ -15,5 +16,5 @@ data class UsuarioDto(
         var idEmpresa: String?
 )
 
-fun convertDtoToUsuario(dto: UsuarioDto) = Usuario(null, dto.email, dto.nome, dto.senha,
+fun convertDtoToUsuario(dto: UsuarioDto) = Usuario(dto.id, dto.email, dto.nome, dto.senha,
         dto.ativo, dto.permissoes, null)

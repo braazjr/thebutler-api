@@ -22,11 +22,11 @@ data class EmpresaDto(
         val numero: Int?,
         @get:NotNull val rua: String?,
         @get:NotNull val telefone: String?,
-        @get:NotNull val qtyApartamentos: Int
+//        @get:NotNull val qtyApartamentos: Int,
+        val empresaConfig: EmpresaConfig?
 )
 
 fun convertDtoToEmpresa(dto: EmpresaDto, usuario: Usuario): Empresa {
-
     return Empresa(dto.id?: null,
             onlyAlphanumerics(dto.cnpj!!),
             dto.nomeFantasia, dto.razaoSocial, dto.ativo, dto.bairro,
@@ -35,5 +35,5 @@ fun convertDtoToEmpresa(dto: EmpresaDto, usuario: Usuario): Empresa {
             dto.complemento, dto.email, dto.estado, dto.numero, dto.rua,
             onlyAlphanumerics(dto.telefone!!),
             convertUsuarioToSub(usuario),
-            EmpresaConfig(dto.qtyApartamentos))
+            dto.empresaConfig)
 }

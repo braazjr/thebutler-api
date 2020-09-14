@@ -22,7 +22,7 @@ class EmpresaController(val empresaService: EmpresaService) {
     fun deletar(@PathVariable("id") id: String) = empresaService.deletar(id)
 
     @GetMapping("/{id}")
-    fun buscarPorId(@PathVariable("id") id: String) = ResponseEntity.ok(empresaService.getById(id))
+    fun buscarPorId(@PathVariable("id") id: String) = empresaService.getById(id)?.let { ResponseEntity.ok(it) }
 
     @PutMapping("/{id}")
     fun update(@PathVariable("id") id: String, @Valid @RequestBody empresaDto: EmpresaDto) =
