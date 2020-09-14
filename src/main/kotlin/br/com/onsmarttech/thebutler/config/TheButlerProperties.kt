@@ -11,7 +11,7 @@ class TheButlerProperties {
         lateinit var profile: String
         lateinit var accessKeyId: String
         lateinit var secretAccessKey: String
-        lateinit var bucketFotos: String
-        lateinit var bucketDocumentos: String
+        lateinit var bucketPhotos: String
+        lateinit var bucketDocuments: String
     }
 }

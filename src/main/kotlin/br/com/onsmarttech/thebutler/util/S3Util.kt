@@ -31,7 +31,7 @@ class S3Util {
         convertInputStreamToFile(file.inputStream, targetFile)
         logger.info("---> AQUIVO TEMP SALVO!")
 
-        saveFileOnS3(property.s3.bucketDocumentos, name, targetFile)
+        saveFileOnS3(property.s3.bucketDocuments, name, targetFile)
 
         try {
             deleteTempFile(targetFile)
@@ -40,7 +40,7 @@ class S3Util {
             throw Exception("Ocorreu um erro ao salvar o documento no S3!")
         }
 
-        return urlConfigure(property.s3.bucketDocumentos, name)
+        return urlConfigure(property.s3.bucketDocuments, name)
     }
 
     fun saveFileOnS3(bucket: String?, nomeArquivoFoto: String, arquivo: File?) {

@@ -26,11 +26,11 @@ class S3Config {
         val credentials: AWSCredentials = BasicAWSCredentials(property.s3.accessKeyId, property.s3.secretAccessKey)
         val amazonS3 = AmazonS3ClientBuilder.standard()
                 .withCredentials(AWSStaticCredentialsProvider(credentials))
-                .withRegion(Regions.SA_EAST_1)
+                .withRegion(Regions.US_EAST_1)
                 .build()
 
-        if (!amazonS3.doesBucketExistV2(property.s3.bucketFotos)) {
-            amazonS3.createBucket(CreateBucketRequest(property.s3.bucketFotos))
+        if (!amazonS3.doesBucketExistV2(property.s3.bucketPhotos)) {
+            amazonS3.createBucket(CreateBucketRequest(property.s3.bucketPhotos))
             val expirationRule = BucketLifecycleConfiguration.Rule()
                     .withId("Regra de expiração de arquivos temporários")
                     .withFilter(LifecycleFilter(LifecycleTagPredicate(Tag("expirar", "true"))))
@@ -40,11 +40,11 @@ class S3Config {
             val configuration = BucketLifecycleConfiguration()
                     .withRules(expirationRule)
 
-            amazonS3.setBucketLifecycleConfiguration(property.s3.bucketFotos, configuration)
+            amazonS3.setBucketLifecycleConfiguration(property.s3.bucketPhotos, configuration)
         }
 
-        if (!amazonS3.doesBucketExistV2(property.s3.bucketDocumentos)) {
-            amazonS3.createBucket(CreateBucketRequest(property.s3.bucketDocumentos))
+        if (!amazonS3.doesBucketExistV2(property.s3.bucketDocuments)) {
+            amazonS3.createBucket(CreateBucketRequest(property.s3.bucketDocuments))
             val expirationRule = BucketLifecycleConfiguration.Rule()
                     .withId("Regra de expiração de arquivos temporários")
                     .withFilter(LifecycleFilter(LifecycleTagPredicate(Tag("expirar", "true"))))
@@ -54,7 +54,7 @@ class S3Config {
             val configuration = BucketLifecycleConfiguration()
                     .withRules(expirationRule)
 
-            amazonS3.setBucketLifecycleConfiguration(property.s3.bucketDocumentos, configuration)
+            amazonS3.setBucketLifecycleConfiguration(property.s3.bucketDocuments, configuration)
         }
 
         return amazonS3
