@@ -7,8 +7,8 @@ spring:
 thebutler:
   s3:
     profile: development
-      access-key-id: ${S3_ACCESSKEYID}
-      secret-access-key: ${S3_SECRETACCESSKEY}
-    bucket-fotos: development/butler-fotos
-    bucket-documentos: development/butler-documentos
+    access-key-id: ${S3_ACCESSKEYID}
+    secret-access-key: ${S3_SECRETACCESSKEY}
+    bucket-photos: thebutler-photos-dev
+    bucket-documents: thebutler-documents-dev
   originsPermitidas: http://localhost:4200,http://localhost:3000,http://localhost:8100,http://localhost:8101,https://thebutler-web.herokuapp.com,file://,http://localhost
