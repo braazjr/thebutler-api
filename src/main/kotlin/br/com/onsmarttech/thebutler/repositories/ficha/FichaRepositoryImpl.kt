@@ -39,8 +39,8 @@ class FichaRepositoryImpl : FichaRepositoryQuery {
         } else if (!filter.idCondominio.isNullOrBlank() && filter.idCondominio != "0") {
             query.addCriteria(Criteria.where("apartamento.bloco.condominio.id").`is`(filter.idCondominio))
         }
-        if (!filter.idEmpresa.isNullOrBlank() && filter.idEmpresa != "0") {
-            query.addCriteria(Criteria.where("apartamento.bloco.condominio.empresa.id").`is`(filter.idEmpresa))
+        if (!filter.empresaId.isNullOrBlank() && filter.empresaId != "0") {
+            query.addCriteria(Criteria.where("apartamento.bloco.condominio.empresa.id").`is`(filter.empresaId))
         }
         if (!filter.dataInicioDe.isNullOrBlank() && !filter.dataInicioPara.isNullOrBlank()) {
             query.addCriteria(

@@ -54,8 +54,8 @@ class EmpresaService {
         empresaRepository.deleteById(id)
     }
 
-    fun getById(idEmpresa: String): Empresa? {
-        var empresa = empresaRepository.findById(idEmpresa)
+    fun getById(empresaId: String): Empresa? {
+        var empresa = empresaRepository.findById(empresaId)
                 .orElseThrow { BadRequestException("Empresa não encontrada") }
 
         val countApartamentos = apartamentoRepository.count()

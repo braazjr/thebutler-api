@@ -34,7 +34,7 @@ class ApartamentoService {
     fun list(filter: ApartamentoFilter, pageable: Pageable): PageImpl<Apartamento> {
         val usuarioLogado = usuarioService.getUsuarioLogado()
         if (!usuarioLogado.isAdmin()) {
-            filter.idEmpresa = usuarioLogado.empresa!!.id!!
+            filter.empresaId = usuarioLogado.empresa!!.id!!
         }
 
         return apartamentoRepository.find(filter, pageable)

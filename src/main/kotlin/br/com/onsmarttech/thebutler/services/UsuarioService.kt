@@ -35,7 +35,7 @@ class UsuarioService {
 
         preencheEmpresa(principal, usuarioDto, usuario)
 
-        if (!StringUtils.hasText(usuario.senha)) {
+        if (!usuario.senha.isNullOrBlank()) {
             val encoder = BCryptPasswordEncoder()
             usuario.senha = encoder.encode(usuario.email)
         }
@@ -48,7 +48,7 @@ class UsuarioService {
             val usuarioLogado: Optional<Usuario> = usuarioRepository.findByEmail(principal.name)
 
             if (usuarioLogado.get().isAdmin()) {
-                val empresa = empresaService.getById(usuarioDto.idEmpresa!!)
+                val empresa = empresaService.getById(usuarioDto.empresaId!!)
                 usuario.empresa = empresa?.let { convertEmpresaToSub(it) }
             } else {
                 usuario.empresa = usuarioLogado.get().empresa

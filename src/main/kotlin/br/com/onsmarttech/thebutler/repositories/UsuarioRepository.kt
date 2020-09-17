@@ -15,7 +15,7 @@ interface UsuarioRepository : MongoRepository<Usuario, String> {
     fun findByEmail(username: String): Optional<Usuario>
 
     @Query(value = "{'empresa._id': ?0}", sort = "{'nome': 1}")
-    fun findByEmpresaAndOrderByNomeAsc(idEmpresa: String, pageable: Pageable): Page<Usuario>
+    fun findByEmpresaAndOrderByNomeAsc(empresaId: String, pageable: Pageable): Page<Usuario>
 
     @Query(sort = "{'nome': 1}")
     fun findAllByOrderByNomeAsc(pageable: Pageable): Page<Usuario>

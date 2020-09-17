@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository
 interface BlocoRepository : MongoRepository<Bloco, String> {
 
     @Query("{'condominio.empresa.id': ?0}")
-    fun findByEmpresa(idEmpresa: String?): List<Bloco>
+    fun findByEmpresa(empresaId: String?): List<Bloco>
 
 }

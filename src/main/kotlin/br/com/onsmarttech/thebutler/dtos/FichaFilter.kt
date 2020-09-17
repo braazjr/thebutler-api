@@ -3,7 +3,7 @@ package br.com.onsmarttech.thebutler.dtos
 import com.fasterxml.jackson.annotation.JsonFormat
 
 data class FichaFilter(
-        var idEmpresa: String?,
+        var empresaId: String?,
         val idCondominio: String?,
         val idBloco: String?,
         val numeroApartamento: String,

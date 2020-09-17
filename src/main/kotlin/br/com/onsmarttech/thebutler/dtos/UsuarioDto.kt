@@ -13,7 +13,7 @@ data class UsuarioDto(
         @JsonIgnore var senha: String?,
         val ativo: Boolean? = true,
         @get:NotEmpty val permissoes: List<Permissao>? = listOf(Permissao.OPERADOR),
-        var idEmpresa: String?
+        var empresaId: String?
 )
 
 fun convertDtoToUsuario(dto: UsuarioDto) = Usuario(dto.id, dto.email, dto.nome, dto.senha,

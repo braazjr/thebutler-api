@@ -18,7 +18,8 @@ data class CondominioDto(
         @get:NotNull val estado: String?,
         val numero: Int?,
         @get:NotNull val rua: String?,
-        @get:NotNull val telefone: String?
+        @get:NotNull val telefone: String?,
+        @get:NotNull val empresaId: String?
 )
 
 fun convertDtoToCondominio(dto: CondominioDto, usuario: Usuario) = Condominio(dto.id?: null, dto.nome, dto.ativo,
