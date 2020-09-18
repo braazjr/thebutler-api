@@ -93,7 +93,7 @@ class FichaService {
 
     fun getAll(filter: FichaFilter, pageable: Pageable): Page<Ficha> {
         val userLogged = usuarioService.getUsuarioLogado()
-        filter.empresaId = userLogged.empresa!!.id!!
+        filter.empresaId = if (userLogged.isAdmin()) null else userLogged.empresa!!.id!!
 
         return fichaRepository.find(filter, pageable)
     }
