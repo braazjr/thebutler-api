@@ -32,6 +32,13 @@ class AuthorizationServerConfig(
                 .authorizedGrantTypes("password", "refresh_token")
                 .accessTokenValiditySeconds(36000)
                 .refreshTokenValiditySeconds(3600 * 24)
+                .and()
+                .withClient("thebutler_rasp")
+                .secret("\$2a\$10\$VQT4ndGhN9tEK5J57WSThOUJgyckIGtuPARbmKN7Sud4xqnU3D5yS")
+                .scopes("read", "write")
+                .authorizedGrantTypes("password", "refresh_token")
+                .accessTokenValiditySeconds(36000)
+                .refreshTokenValiditySeconds(3600 * 24)
     }
 
     override fun configure(endpoints: AuthorizationServerEndpointsConfigurer?) {
