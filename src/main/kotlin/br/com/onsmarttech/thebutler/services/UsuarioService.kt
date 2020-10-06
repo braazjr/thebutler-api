@@ -35,7 +35,7 @@ class UsuarioService {
 
         preencheEmpresa(principal, usuarioDto, usuario)
 
-        if (!usuario.senha.isNullOrBlank()) {
+        if (usuario.senha.isNullOrBlank()) {
             val encoder = BCryptPasswordEncoder()
             usuario.senha = encoder.encode(usuario.email)
         }
@@ -84,7 +84,9 @@ class UsuarioService {
     }
 
     fun atualizar(principal: Principal?, id: String, usuarioDto: UsuarioDto): Any {
-        getById(id)
+        val usuarioSalvo = getById(id)
+        usuarioDto.id = id
+        usuarioDto.senha = usuarioSalvo.senha
         val usuario: Usuario = convertDtoToUsuario(usuarioDto)
         preencheEmpresa(principal, usuarioDto, usuario)
         return usuarioRepository.save(usuario)
