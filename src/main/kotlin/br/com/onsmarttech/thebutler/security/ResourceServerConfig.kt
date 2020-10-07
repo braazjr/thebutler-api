@@ -32,7 +32,7 @@ class ResourceServerConfig : ResourceServerConfigurerAdapter() {
                 .antMatchers(HttpMethod.POST, "/usuarios").permitAll()
 //                .antMatchers(HttpMethod.GET, "/v2/api-docs").permitAll()
                 .antMatchers(HttpMethod.GET, "/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html",
-                        "/webjars/**").permitAll()
+                        "/webjars/**", "/actuator/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
