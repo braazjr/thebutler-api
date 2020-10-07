@@ -1,6 +1,7 @@
 package br.com.onsmarttech.thebutler.repositories
 
 import br.com.onsmarttech.thebutler.documents.Morador
+import br.com.onsmarttech.thebutler.dtos.MoradorSimple
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.data.mongodb.repository.Query
 import org.springframework.stereotype.Repository
@@ -21,4 +22,7 @@ interface MoradorRepository : MongoRepository<Morador, String> {
 
     @Query("{'apartamento.bloco.condominio.empresa.id': ?0}")
     fun findAll(empresaId: String?): List<Morador>
+
+    @Query("{'apartamento.bloco.condominio.empresa.id': ?0}")
+    fun findSimpleByEmpresaId(empresaId: String?): List<MoradorSimple>
 }

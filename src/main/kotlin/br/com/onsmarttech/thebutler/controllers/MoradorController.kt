@@ -6,11 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
-
 @RestController
-@RequestMapping("rasp")
-class RaspController(val moradorService: MoradorService) {
+@RequestMapping("/moradores")
+class MoradorController(val moradorService: MoradorService) {
 
-    @GetMapping("/moradores")
-    fun buscarUsuarios() = ResponseEntity.ok(moradorService.find())
+    @GetMapping
+    fun simpleList() = ResponseEntity.ok(moradorService.simpleList())
 }

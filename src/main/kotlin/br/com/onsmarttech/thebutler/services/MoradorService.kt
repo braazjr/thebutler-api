@@ -3,6 +3,7 @@ package br.com.onsmarttech.thebutler.services
 import br.com.onsmarttech.thebutler.documents.Apartamento
 import br.com.onsmarttech.thebutler.documents.Morador
 import br.com.onsmarttech.thebutler.documents.convertApartamentoToSub
+import br.com.onsmarttech.thebutler.dtos.MoradorSimple
 import br.com.onsmarttech.thebutler.exception.BadRequestException
 import br.com.onsmarttech.thebutler.repositories.MoradorRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -45,6 +46,11 @@ class MoradorService {
     fun find(): List<Morador> {
         val usuarioLogado = usuarioService.getUsuarioLogado()
         return moradorRepository.findAll(usuarioLogado.empresa!!.id)
+    }
+
+    fun simpleList(): List<MoradorSimple> {
+        val usuarioLogado = usuarioService.getUsuarioLogado()
+        return moradorRepository.findSimpleByEmpresaId(usuarioLogado.empresa!!.id)
     }
 
 }
