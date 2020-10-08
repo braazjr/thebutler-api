@@ -3,10 +3,13 @@ package br.com.onsmarttech.thebutler.services
 import br.com.onsmarttech.thebutler.documents.Apartamento
 import br.com.onsmarttech.thebutler.documents.Morador
 import br.com.onsmarttech.thebutler.documents.convertApartamentoToSub
+import br.com.onsmarttech.thebutler.dtos.MoradorFilter
 import br.com.onsmarttech.thebutler.dtos.MoradorSimple
 import br.com.onsmarttech.thebutler.exception.BadRequestException
 import br.com.onsmarttech.thebutler.repositories.MoradorRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 
@@ -43,14 +46,26 @@ class MoradorService {
 
     fun removeMoradores(ids: List<String?>) = moradorRepository.deleteByIdIn(ids)
 
-    fun find(): List<Morador> {
+    fun find(pageable: Pageable, filter: MoradorFilter): Page<Morador> {
         val usuarioLogado = usuarioService.getUsuarioLogado()
-        return moradorRepository.findAll(usuarioLogado.empresa!!.id)
+
+        if (usuarioLogado.isAdmin()) {
+            return moradorRepository.find(MoradorFilter(), pageable)
+        }
+
+        filter.empresaId = usuarioLogado.empresa!!.id
+        return moradorRepository.find(filter, pageable)
     }
 
     fun simpleList(): List<MoradorSimple> {
         val usuarioLogado = usuarioService.getUsuarioLogado()
         return moradorRepository.findSimpleByEmpresaId(usuarioLogado.empresa!!.id)
+    }
+
+    fun addFichaInMoradores(fichaId: String?, moradoresIds: List<String?>) {
+        val moradores = moradorRepository.findInIds(moradoresIds)
+        moradores.forEach { it.fichaId = fichaId!! }
+        moradorRepository.saveAll(moradores)
     }
 
 }
