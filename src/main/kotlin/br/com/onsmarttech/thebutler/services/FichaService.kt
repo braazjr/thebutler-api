@@ -42,11 +42,19 @@ class FichaService {
 
     fun save(dto: FichaDto): Ficha {
         if (!dto.id.isNullOrBlank()) {
-            val ficha = getById(dto.id)
-            return fichaRepository.save(fillFicha(dto, ficha.dataCriacao!!, LocalDate.now()))
+            var ficha = getById(dto.id)
+            ficha =  fichaRepository.save(fillFicha(dto, ficha.dataCriacao!!, LocalDate.now()))
+            addFichaInMoradores(ficha.id, ficha.moradores)
+            return ficha
         }
 
-        return fichaRepository.save(fillFicha(dto, LocalDate.now(), LocalDate.now()))
+        val ficha = fichaRepository.save(fillFicha(dto, LocalDate.now(), LocalDate.now()))
+        addFichaInMoradores(ficha.id, ficha.moradores)
+        return ficha
+    }
+
+    private fun addFichaInMoradores(fichaId: String?, moradores: MutableList<MoradorSub>?) {
+        moradorService.addFichaInMoradores(fichaId, moradores!!.map { it.id })
     }
 
     private fun addRegistrador(moradores: List<Morador>) {
