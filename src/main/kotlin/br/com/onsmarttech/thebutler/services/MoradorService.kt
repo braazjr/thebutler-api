@@ -68,4 +68,8 @@ class MoradorService {
         moradorRepository.saveAll(moradores)
     }
 
+    fun save(morador: Morador): Morador {
+        return moradorRepository.save(morador)
+    }
+
 }

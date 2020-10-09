@@ -1,5 +1,6 @@
 package br.com.onsmarttech.thebutler.controllers
 
+import br.com.onsmarttech.thebutler.documents.Morador
 import br.com.onsmarttech.thebutler.dtos.FichaDto
 import br.com.onsmarttech.thebutler.dtos.FichaFilter
 import br.com.onsmarttech.thebutler.services.FichaService
@@ -68,4 +69,8 @@ class FichaController(val fichaService: FichaService) {
 
     @GetMapping("/morador/{id}/full")
     fun getFullByMoradorId(@PathVariable("id") id: String) = ResponseEntity.ok(fichaService.getFullByMoradorId(id))
+
+    @PatchMapping("/{id}/add-morador")
+    fun addMoradorOnFicha(@PathVariable("id") fichaId: String, @RequestBody morador: Morador) =
+            ResponseEntity.ok(fichaService.addMorador(fichaId, morador))
 }

@@ -174,5 +174,23 @@ class FichaService {
                     FichaFullResponseDto(it.id!!, it.apartamento, moradores, it.dataInicio, it.dataFim, it.documentos)
                 }
     }
+
+    fun addMorador(fichaId: String, moradorDto: Morador): Morador {
+        val ficha = getById(fichaId)
+        var morador = moradorDto
+
+        if (morador.id.isNullOrBlank()) {
+            morador.fichaId = ficha.id
+            morador = moradorService.save(morador)
+        } else {
+            morador = moradorService.save(morador)
+            ficha.moradores!!.removeIf { it.id == morador.id }
+        }
+
+        ficha.moradores!!.add(convertMoradorToSub(morador))
+        fichaRepository.save(ficha)
+
+        return morador
+    }
 }
 
