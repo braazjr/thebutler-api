@@ -14,7 +14,9 @@ class JasperReportsService {
 
     fun fichaGenerate(ficha: FichaJasperDto): ByteArray {
         val inputStream = this.javaClass.getResourceAsStream("/reports/FichaApartamento.jasper")
-        val subReportPath = javaClass.getResource("/reports/Ficha_Moradores.jasper").path
+        val subReportPath = this.javaClass.getResource("/reports/FichaMoradores.jasper").path
+        println(this.javaClass.getResource("/reports/FichaApartamento.jasper").path)
+        println(subReportPath)
 
         val json = Gson().toJson(ficha)
         val dataSource = JsonDataSource(ByteArrayInputStream(json.toByteArray()))
