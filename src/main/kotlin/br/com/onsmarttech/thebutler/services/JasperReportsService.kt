@@ -15,13 +15,11 @@ class JasperReportsService {
     fun fichaGenerate(ficha: FichaJasperDto): ByteArray {
         val inputStream = this.javaClass.getResourceAsStream("/reports/FichaApartamento.jasper")
         val subReportPath = this.javaClass.getResource("/reports/FichaMoradores.jasper").path
-        println(this.javaClass.getResource("/reports/FichaApartamento.jasper").path)
-        println(subReportPath)
 
         val json = Gson().toJson(ficha)
         val dataSource = JsonDataSource(ByteArrayInputStream(json.toByteArray()))
 
-        val paramters = mutableMapOf("SUBREPORT_PATH" to subReportPath)
+        val paramters = mutableMapOf("SUBREPORT_PATH" to "./FichaMoradores.jasper")
 
         val print = JasperFillManager.fillReport(inputStream, paramters as Map<String, Any>?, dataSource)
         val bos = ByteArrayOutputStream()
