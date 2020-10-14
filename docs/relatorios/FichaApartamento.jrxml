@@ -40,7 +40,7 @@
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<parameter name="SUBREPORT_PATH" class="java.lang.String">
+	<parameter name="SUBREPORT_PATH" class="net.sf.jasperreports.engine.JasperReport">
 		<defaultValueExpression><![CDATA["./FichaMoradores.jasper"]]></defaultValueExpression>
 	</parameter>
 	<queryString language="JSON">
