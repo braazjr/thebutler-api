@@ -43,7 +43,7 @@ class FichaService {
     fun save(dto: FichaDto): Ficha {
         if (!dto.id.isNullOrBlank()) {
             var ficha = getById(dto.id)
-            ficha =  fichaRepository.save(fillFicha(dto, ficha.dataCriacao!!, LocalDate.now()))
+            ficha = fichaRepository.save(fillFicha(dto, ficha.dataCriacao!!, LocalDate.now()))
             addFichaInMoradores(ficha.id, ficha.moradores)
             return ficha
         }
@@ -66,7 +66,8 @@ class FichaService {
         val apartamento = apartamentoService.findById(dto.idApartamento)
         addRegistrador(dto.moradores)
         val moradoresSalvos = moradorService.saveAll(apartamento, dto.moradores)
-        return Ficha(dto.id, apartamento, convertMoradoresToSub(moradoresSalvos), dto.dataInicio, null, null, dataCriacao, dataAlteracao)
+        return Ficha(dto.id, apartamento, convertMoradoresToSub(moradoresSalvos), dto.dataInicio, dto.dataFim,
+                null, dataCriacao, dataAlteracao)
     }
 
     fun getByApartamentoId(apartamentoId: String): List<Ficha> {
