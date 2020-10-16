@@ -1,6 +1,7 @@
 package br.com.onsmarttech.thebutler.services
 
 import br.com.onsmarttech.thebutler.documents.Condominio
+import br.com.onsmarttech.thebutler.documents.convertEmpresaToSub
 import br.com.onsmarttech.thebutler.dtos.CondominioDto
 import br.com.onsmarttech.thebutler.dtos.convertDtoToCondominio
 import br.com.onsmarttech.thebutler.exception.BadRequestException
@@ -17,9 +18,16 @@ class CondominioService {
     @Autowired
     private lateinit var condominioRepository: CondominioRepository
 
+    @Autowired
+    private lateinit var empresaService: EmpresaService
+
     fun save(condominioDto: CondominioDto): Condominio {
         val usuarioLogado = usuarioService.getUsuarioLogado()
         val condominio = convertDtoToCondominio(condominioDto, usuarioLogado)
+
+        if (usuarioService.getUsuarioLogado().isAdmin() && !condominioDto.empresaId.isNullOrBlank()) {
+            condominio.empresa = convertEmpresaToSub(empresaService.getById(condominioDto.empresaId)!!)
+        }
 
         return condominioRepository.save(condominio)
     }

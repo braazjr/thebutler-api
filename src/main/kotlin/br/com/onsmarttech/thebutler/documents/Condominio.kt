@@ -18,6 +18,6 @@ data class Condominio(
         val numero: Int?,
         @get:NotNull val rua: String?,
         @get:NotNull val telefone: String?,
-        val empresa: EmpresaSub?,
+        var empresa: EmpresaSub?,
         @get:NotNull val registradoPor: UsuarioSub?
 )
