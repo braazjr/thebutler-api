@@ -19,4 +19,8 @@ class RotaController(val rotaService: RotaService) {
 
     @GetMapping("/{id}")
     fun getById(@PathVariable("id") id: String) = rotaService.findById(id)
+
+    @PutMapping("/{id}")
+    fun update(@PathVariable("id") id: String, @Valid @RequestBody rota: Rota) =
+            ResponseEntity.status(HttpStatus.CREATED).body(rotaService.save(rota))
 }
