@@ -21,7 +21,12 @@ class RotaService {
         return rotaRepository.save(rota)
     }
 
-    fun list() = rotaRepository.findByEmpresaId(usuarioService.getUsuarioLogado().empresa!!.id)
+    fun list() =
+        if (usuarioService.getUsuarioLogado().isAdmin()) {
+            rotaRepository.findAll()
+        } else {
+            rotaRepository.findByEmpresaId(usuarioService.getUsuarioLogado().empresa!!.id)
+        }
 
     fun findById(id: String) = rotaRepository.findById(id)
             .orElseThrow { BadRequestException("Rota não encontrada") }
