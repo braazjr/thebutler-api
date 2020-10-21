@@ -13,5 +13,5 @@ data class FichaDto(
         @get:NotBlank val idApartamento: String,
         @get:Valid @get:NotEmpty val moradores: List<Morador>,
         val dataInicio: LocalDate = LocalDate.now(),
-        val dataFim: LocalDate
+        val dataFim: LocalDate?
 )
