@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/viagens")
+@RequestMapping("/api/viagens")
 class ViagemController(val viagemService: ViagemService) {
 
     @PostMapping

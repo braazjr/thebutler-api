@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/relatorios")
+@RequestMapping("/api/relatorios")
 class RelatoriosController(val relatorioService: RelatorioService) {
 
     @GetMapping("/moradores-sem-foto")

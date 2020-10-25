@@ -1,3 +1,6 @@
+server:
+  host: https://thebutler-api.herokuapp.com
+
 spring:
   data:
     mongodb:

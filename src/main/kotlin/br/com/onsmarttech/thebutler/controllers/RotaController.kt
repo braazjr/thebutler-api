@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/rotas")
+@RequestMapping("/api/rotas")
 class RotaController(val rotaService: RotaService) {
 
     @PostMapping

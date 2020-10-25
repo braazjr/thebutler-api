@@ -43,6 +43,7 @@ dependencies {
 	implementation("com.google.code.gson:gson:$gsonVersion")
 	implementation("io.springfox:springfox-swagger-ui:$springSwaggerVersion")
 	implementation("io.springfox:springfox-swagger2:$springSwaggerVersion")
+	implementation("io.springfox:springfox-bean-validators:$springSwaggerVersion")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")

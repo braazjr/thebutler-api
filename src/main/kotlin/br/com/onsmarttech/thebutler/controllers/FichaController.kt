@@ -15,7 +15,7 @@ import javax.validation.Valid
 import javax.validation.constraints.NotNull
 
 @RestController
-@RequestMapping("/fichas")
+@RequestMapping("/api/fichas")
 class FichaController(val fichaService: FichaService) {
 
     @PostMapping

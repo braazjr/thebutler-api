@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/moradores")
+@RequestMapping("/api/moradores")
 class MoradorController(val moradorService: MoradorService) {
 
     @GetMapping("/simple")

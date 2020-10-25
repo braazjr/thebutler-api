@@ -10,7 +10,7 @@ import java.security.Principal
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/api/usuarios")
 class UsuarioController(val usuarioService: UsuarioService) {
 
     @PostMapping
