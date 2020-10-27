@@ -35,10 +35,10 @@ class MoradorRepositoryImpl : MoradorRepositoryQuery {
             query.addCriteria(Criteria.where("apartamento.bloco.condominio.empresa.id").`is`(filter.empresaId))
         }
         if (!filter.nome.isNullOrBlank()) {
-            query.addCriteria(Criteria.where("nome").`is`(filter.nome))
+            query.addCriteria(Criteria.where("nome").regex(".*${filter.nome}*.", "i"))
         }
         if (!filter.documento.isNullOrBlank()) {
-            query.addCriteria(Criteria.where("documento").`is`(filter.documento))
+            query.addCriteria(Criteria.where("documento").regex(".*${filter.documento}*.", "i"))
         }
         if (!filter.apartamentoNumero.isNullOrBlank()) {
             query.addCriteria(Criteria.where("apartamento.numero").`is`(filter.apartamentoNumero))
