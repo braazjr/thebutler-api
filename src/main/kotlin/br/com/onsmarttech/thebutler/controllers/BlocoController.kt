@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/blocos")
+@RequestMapping("/api/blocos")
 class BlocoController(val blocoService: BlocoService) {
 
     @PostMapping
