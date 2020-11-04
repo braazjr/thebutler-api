@@ -27,6 +27,7 @@ val jasperReportsVersion = "6.12.2"
 val gsonVersion = "2.7"
 val springSwaggerVersion = "2.9.2"
 val awsSdkVersion = "1.11.762"
+val hibernateCore = "5.2.15.Final"
 
 dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -44,6 +45,7 @@ dependencies {
 	implementation("io.springfox:springfox-swagger-ui:$springSwaggerVersion")
 	implementation("io.springfox:springfox-swagger2:$springSwaggerVersion")
 	implementation("io.springfox:springfox-bean-validators:$springSwaggerVersion")
+	implementation("org.hibernate:hibernate-core:$hibernateCore")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")

@@ -181,7 +181,10 @@ class FichaService {
         var morador = moradorDto
 
         if (morador.id.isNullOrBlank()) {
-            morador.fichaId = ficha.id
+            val usuarioLogado = usuarioService.getUsuarioLogado()
+            morador.registradoPor = convertUsuarioToSub(usuarioLogado)
+            morador.apartamento = convertApartamentoToSub(apartamentoService.findById(ficha.apartamento!!.id!!))
+            morador.fichaId = ficha.id!!
             morador = moradorService.save(morador)
         } else {
             morador = moradorService.save(morador)

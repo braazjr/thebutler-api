@@ -1,17 +1,20 @@
 package br.com.onsmarttech.thebutler.services
 
-import br.com.onsmarttech.thebutler.documents.Apartamento
-import br.com.onsmarttech.thebutler.documents.Morador
-import br.com.onsmarttech.thebutler.documents.convertApartamentoToSub
+import br.com.onsmarttech.thebutler.documents.*
+import br.com.onsmarttech.thebutler.dtos.MoradorDto
 import br.com.onsmarttech.thebutler.dtos.MoradorFilter
 import br.com.onsmarttech.thebutler.dtos.MoradorSimple
+import br.com.onsmarttech.thebutler.dtos.convertDtoToMorador
 import br.com.onsmarttech.thebutler.exception.BadRequestException
+import br.com.onsmarttech.thebutler.repositories.DocumentRepository
 import br.com.onsmarttech.thebutler.repositories.MoradorRepository
+import br.com.onsmarttech.thebutler.util.S3Util
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
-import java.time.LocalDate
+import org.springframework.web.multipart.MultipartFile
+import java.util.*
 
 @Service
 class MoradorService {
@@ -22,6 +25,15 @@ class MoradorService {
     @Autowired
     private lateinit var usuarioService: UsuarioService
 
+    @Autowired
+    private lateinit var apartamentoService: ApartamentoService
+
+    @Autowired
+    private lateinit var s3Util: S3Util
+
+    @Autowired
+    private lateinit var documentRepository: DocumentRepository
+
     fun saveAll(apartamento: Apartamento, moradores: List<Morador>): MutableList<Morador> =
             moradores
                     .forEach {
@@ -29,8 +41,8 @@ class MoradorService {
                             it.id = null
                         }
                         it.apartamento = convertApartamentoToSub(apartamento)
-                        it.dataCriacao = LocalDate.now()
-                        it.dataAlteracao = LocalDate.now()
+//                        it.dataCriacao = LocalDate.now()
+//                        it.dataAlteracao = LocalDate.now()
 
                         if (!it.id.isNullOrBlank()) {
                             val morador = findById(it.id!!)
@@ -70,6 +82,47 @@ class MoradorService {
 
     fun save(morador: Morador): Morador {
         return moradorRepository.save(morador)
+    }
+
+    fun save(moradorDto: MoradorDto): Morador {
+        return save(convertDtoToMorador(moradorDto, apartamentoService.findById(moradorDto.apartamentoId!!)))
+    }
+
+    fun update(id: String, moradorDto: MoradorDto): Morador {
+        val morador = findById(id)
+        moradorDto.id = id
+        return save(moradorDto)
+    }
+
+    fun delete(id: String) {
+        findById(id)
+        moradorRepository.deleteById(id)
+    }
+
+    fun uploadDocumento(id: String, file: MultipartFile): String {
+        val userLogged = usuarioService.getUsuarioLogado()
+        val morador = findById(id)
+        val uuid = UUID.randomUUID().toString()
+
+        val url: String = s3Util.saveDocument("${morador.apartamento!!.bloco!!.condominio.empresa!!.id}/moradores/$id/documents/$uuid", file)
+        val documentoSaved = documentRepository.save(Documento(null, uuid, url, file.originalFilename, convertUsuarioToSub(userLogged)))
+
+        if (morador.documentos.isNullOrEmpty()) {
+            morador.documentos = mutableListOf()
+        }
+        morador.documentos!!.add(documentoSaved)
+
+        moradorRepository.save(morador)
+
+        return url
+    }
+
+    fun deleteDocumento(id: String, documentoId: String) {
+        val morador = moradorRepository.findByIdAndDocumentoId(id, documentoId)
+                .orElseThrow { BadRequestException("Documento não encontrado") }
+
+        morador.documentos!!.removeIf { it.id == documentoId }
+        moradorRepository.save(morador)
     }
 
 }

@@ -12,6 +12,6 @@ thebutler:
     profile: development
     access-key-id: ${S3_ACCESSKEYID}
     secret-access-key: ${S3_SECRETACCESSKEY}
-    bucket-photos: thebutler-photos-dev
-    bucket-documents: thebutler-documents-dev
+    bucket-photos: thebutler-photos-development
+    bucket-documents: thebutler-documents-development
   originsPermitidas: http://localhost:4200,http://localhost:3000,http://localhost:8100,http://localhost:8101,https://thebutler-web.herokuapp.com,file://,http://localhost
