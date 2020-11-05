@@ -14,4 +14,4 @@ thebutler:
     secret-access-key: ${S3_SECRETACCESSKEY}
     bucket-photos: thebutler-photos-prod
     bucket-documents: thebutler-documents-prod
-  originsPermitidas: http://localhost:4200,http://localhost:3000,http://localhost:8100,http://localhost:8101,https://thebutler-web.herokuapp.com,file://,http://localhost
+  originsPermitidas: http://localhost:4200,http://localhost:3000,http://localhost:8100,http://localhost:8101,https://thebutler-web.herokuapp.com,file://,http://localhost,https://www.thebutler.com.br
