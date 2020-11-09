@@ -1,5 +1,6 @@
 package br.com.onsmarttech.thebutler.documents
 
+import br.com.onsmarttech.thebutler.enums.TheButlerPerfis
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import javax.validation.constraints.NotNull
@@ -23,7 +24,9 @@ data class Empresa(
         @get:NotNull val telefone: String?,
         @get:NotNull var registradoPor: UsuarioSub?,
         val empresaConfig: EmpresaConfig?
-)
+) {
+    var perfis: MutableList<TheButlerPerfis> = mutableListOf()
+}
 
 data class EmpresaConfig(
         @get:NotNull val qtyApartamentos: Int?,

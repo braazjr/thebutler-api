@@ -1,5 +1,7 @@
 package br.com.onsmarttech.thebutler.security
 
+import br.com.onsmarttech.thebutler.exception.BadRequestException
+import br.com.onsmarttech.thebutler.repositories.EmpresaRepository
 import br.com.onsmarttech.thebutler.repositories.UsuarioRepository
 import br.com.onsmarttech.thebutler.services.UsuarioService
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,12 +17,23 @@ class CustomTokenEnhancer : TokenEnhancer {
     @Autowired
     private lateinit var usuarioRepository: UsuarioRepository
 
+    @Autowired
+    private lateinit var empresaRepository: EmpresaRepository
+
     override fun enhance(accessToken: OAuth2AccessToken?, authentication: OAuth2Authentication?): OAuth2AccessToken {
         val username = authentication!!.name
         val usuario = usuarioRepository.findByEmail(username)
+                .orElseThrow { BadRequestException("Usuário não encontrado") }
+
+        if (usuario.empresa != null) {
+            val empresa = empresaRepository.findById(usuario.empresa!!.id!!)
+                    .orElseThrow { BadRequestException("Empresa não encontrada") }
+
+            empresa.perfis.forEach { usuario.permissoes!!.add(it) }
+        }
 
         val additionalInfo = HashMap<String, Any>()
-        additionalInfo.put("usuario", usuario.get())
+        additionalInfo["usuario"] = usuario
         (accessToken as DefaultOAuth2AccessToken).additionalInformation = additionalInfo
 
         return accessToken

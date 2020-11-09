@@ -12,9 +12,9 @@ data class UsuarioDto(
         @get:NotBlank val nome: String?,
         @JsonIgnore var senha: String?,
         val ativo: Boolean? = true,
-        @get:NotEmpty val permissoes: List<Permissao>? = listOf(Permissao.OPERADOR),
+        @get:NotEmpty val permissoes: MutableList<Permissao>? = mutableListOf(Permissao.OPERADOR),
         var empresaId: String?
 )
 
 fun convertDtoToUsuario(dto: UsuarioDto) = Usuario(dto.id, dto.email, dto.nome, dto.senha,
-        dto.ativo, dto.permissoes, null)
+        dto.ativo, dto.permissoes as MutableList<Any>, null)

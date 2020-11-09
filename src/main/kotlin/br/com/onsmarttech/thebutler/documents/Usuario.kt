@@ -15,11 +15,11 @@ data class Usuario(
         @get:NotBlank val nome: String?,
         @JsonIgnore var senha: String?,
         val ativo: Boolean? = true,
-        @get:NotEmpty val permissoes: List<Permissao>? = listOf(Permissao.OPERADOR),
+        @get:NotEmpty var permissoes: MutableList<Any>? = mutableListOf(Permissao.OPERADOR),
         var empresa: EmpresaSub?
 ) {
     constructor(id: String?) : this(id, null, null, null, null, null, null)
     constructor() : this(null, null, null, null, null, null, null)
 
-    fun isAdmin() = permissoes!!.stream().filter { it == Permissao.ADMIN }.count() > 0
+    fun isAdmin() = permissoes!!.stream().filter { it.toString() == Permissao.ADMIN.toString() }.count() > 0
 }
