@@ -19,6 +19,7 @@ deploy-dev:
     - master
 
 deploy-prod:
+  image: mjsarfatti/gitlab-ci-pipeline-php-aws:latest
   stage: deploy
   script:
     - mkdir ~/.aws/
