@@ -1,11 +1,11 @@
 stages:
   - deploy
 
-deploy-develop:
+deploy-dev:
   stage: deploy
   variables:
     HEROKU_API_KEY: $HEROKU_PRODUCTION_API_KEY
-    HEROKU_APP: $HEROKU_APP
+    HEROKU_APP: thebutler-api-dev
   before_script:
     - echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
     - wget -O- https://toolbelt.heroku.com/apt/release.key | apt-key add -
@@ -16,4 +16,20 @@ deploy-develop:
     - dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_API_KEY
   only:
     - develop
+    - master
+
+deploy-prod:
+  stage: deploy
+  variables:
+    HEROKU_API_KEY: $HEROKU_PRODUCTION_API_KEY
+      HEROKU_APP: thebutler-api
+  before_script:
+    - echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
+    - wget -O- https://toolbelt.heroku.com/apt/release.key | apt-key add -
+    - apt-get update
+    - apt-get install -y heroku-toolbelt
+    - gem install dpl
+  script:
+    - dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_API_KEY
+  only:
     - master
