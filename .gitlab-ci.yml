@@ -20,6 +20,7 @@ deploy-dev:
     - master
 
 build-prod:
+  image: java:8-jdk
   stage: build
   allow_failure: false
   script:
