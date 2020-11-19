@@ -1,4 +1,5 @@
 server:
+  port: ${PORT}
   host: https://thebutler-api.herokuapp.com
 
 spring:

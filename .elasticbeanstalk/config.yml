@@ -1,0 +1,21 @@
+branch-defaults:
+  master:
+    environment: thebutler-api-prod-java
+environment-defaults:
+  thebutler-api-prod-java:
+    branch: null
+    repository: null
+global:
+  application_name: thebutler-api
+  default_ec2_keyname: null
+  default_platform: Java 8 running on 64bit Amazon Linux
+  default_region: us-east-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: eb-cli
+  sc: git
+  workspace_type: Application
+deploy:
+  artifact: build/libs/thebutler.jar

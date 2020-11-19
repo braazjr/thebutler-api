@@ -18,15 +18,27 @@ deploy-dev:
     - develop
     - master
 
+build-prod:
+  stage: build
+  allow_failure: false
+  script:
+    - ./gradlew build -x test
+  artifacts:
+    paths:
+      - build/libs/thebutler.jar
+
 deploy-prod:
-  image: mjsarfatti/gitlab-ci-pipeline-php-aws:latest
+  image: python:latest
   stage: deploy
   script:
-    - mkdir ~/.aws/
-    - touch ~/.aws/credentials
-    - printf "[eb-cli]\naws_access_key_id = %s\naws_secret_access_key = %s\n" "$AWS_ACCESS_KEY_ID" "$AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
-#    - touch ~/.aws/config
-#    - printf "[profile eb-cli]\nregion=us-east-1\noutput=json" >> ~/.aws/config
-    - eb deploy thebutler-api-prod
+    - pip install awscli
+    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+    - aws configure set region us-east-1
+    - pip install awsebcli --upgrade --user
+    - ~/.local/bin/eb use thebutler-api-prod
+    - ~/.local/bin/eb deploy
+  dependencies:
+    - build
   only:
     - master

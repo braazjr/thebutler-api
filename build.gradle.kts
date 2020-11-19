@@ -59,6 +59,12 @@ dependencyManagement {
 	}
 }
 
+tasks {
+	bootJar {
+		archiveFileName.set("thebutler.jar")
+	}
+}
+
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
