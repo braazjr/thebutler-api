@@ -40,6 +40,6 @@ deploy-prod:
     - ~/.local/bin/eb use thebutler-api-prod
     - ~/.local/bin/eb deploy
   dependencies:
-    - build
+    - build-prod
   only:
     - master
