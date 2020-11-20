@@ -6,7 +6,7 @@ spring:
   data:
     mongodb:
       database: ${MONGODB_DATABASE}
-      uri: ${MONGODB_URI}?retryWrites=false
+      uri: ${MONGODB_URI}
 
 thebutler:
   s3:
