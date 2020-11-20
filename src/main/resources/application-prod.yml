@@ -1,6 +1,6 @@
 server:
   port: ${PORT}
-  host: http://thebutler-api-prod.us-east-1.elasticbeanstalk.com
+  host: ${HOST}
 
 spring:
   data:
