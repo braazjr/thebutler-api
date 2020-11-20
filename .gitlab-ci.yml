@@ -34,7 +34,7 @@ deploy-prod:
   stage: deploy
   before_script:
     - pip install awsebcli --upgrade --user
-    - chmod +x ./.eb-config.sh
+    - chmod +x ./.elasticbeanstalk/eb-config.sh
     - ./.elasticbeanstalk/eb-config.sh
   script:
     - /root/.local/bin/eb deploy thebutler-api-prod
