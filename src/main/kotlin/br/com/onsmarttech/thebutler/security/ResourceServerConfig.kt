@@ -29,7 +29,7 @@ class ResourceServerConfig : ResourceServerConfigurerAdapter() {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/fichas/**/for-jasper").permitAll()
-                .antMatchers(HttpMethod.POST, "/usuarios").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
 //                .antMatchers(HttpMethod.GET, "/v2/api-docs").permitAll()
                 .antMatchers(HttpMethod.GET, "/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html",
                         "/webjars/**", "/actuator/**").permitAll()
