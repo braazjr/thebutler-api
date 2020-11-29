@@ -38,6 +38,7 @@ data class Morador(
     var dataCriacao: LocalDateTime? = null
     var dataAlteracao: LocalDateTime? = null
     var documentos: MutableList<Documento> = mutableListOf()
+    var qrCodeId: Int? = null
 
     @PrePersist
     fun onCreate() {
