@@ -2,24 +2,24 @@ stages:
   - build
   - deploy
 
-deploy-dev:
-  stage: deploy
-  variables:
-    HEROKU_API_KEY: $HEROKU_PRODUCTION_API_KEY
-    HEROKU_APP: thebutler-api
-  before_script:
-    - echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
-    - wget -O- https://toolbelt.heroku.com/apt/release.key | apt-key add -
-    - apt-get update
-    - apt-get install -y heroku-toolbelt
-    - gem install dpl
-  script:
-    - dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_API_KEY
-  only:
-    - develop
-    - master
+#deploy-dev:
+#  stage: deploy
+#  variables:
+#    HEROKU_API_KEY: $HEROKU_PRODUCTION_API_KEY
+#    HEROKU_APP: thebutler-api
+#  before_script:
+#    - echo "deb http://toolbelt.heroku.com/ubuntu ./" > /etc/apt/sources.list.d/heroku.list
+#    - wget -O- https://toolbelt.heroku.com/apt/release.key | apt-key add -
+#    - apt-get update
+#    - apt-get install -y heroku-toolbelt
+#    - gem install dpl
+#  script:
+#    - dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_API_KEY
+#  only:
+#    - develop
+#    - master
 
-build-prod:
+build-aws:
   image: java:8-jdk
   stage: build
   allow_failure: false
@@ -28,6 +28,21 @@ build-prod:
   artifacts:
     paths:
       - build/libs/thebutler.jar
+
+deploy-dev:
+  image: python:latest
+  stage: deploy
+  before_script:
+    - pip install awsebcli --upgrade --user
+    - chmod +x ./.elasticbeanstalk/eb-config.sh
+    - ./.elasticbeanstalk/eb-config.sh
+  script:
+    - /root/.local/bin/eb deploy thebutler-api-dev
+  dependencies:
+    - build-aws
+  only:
+    - develop
+    - master
 
 deploy-prod:
   image: python:latest
@@ -39,6 +54,6 @@ deploy-prod:
   script:
     - /root/.local/bin/eb deploy thebutler-api-prod
   dependencies:
-    - build-prod
+    - build-aws
   only:
     - master
