@@ -19,7 +19,8 @@ import javax.validation.constraints.NotNull
 class FichaController(val fichaService: FichaService) {
 
     @PostMapping
-    fun save(@Valid @RequestBody ficha: FichaDto) = ResponseEntity.status(HttpStatus.CREATED).body(fichaService.save(ficha))
+    fun save(@Valid @RequestBody ficha: FichaDto) =
+        ResponseEntity.status(HttpStatus.CREATED).body(fichaService.save(ficha))
 
     @GetMapping("/apartamento/{id}")
     fun getByApartamentoId(@PathVariable("id") id: String) = ResponseEntity.ok(fichaService.getByApartamentoId(id))
@@ -41,11 +42,11 @@ class FichaController(val fichaService: FichaService) {
 
     @DeleteMapping("/{id}/documento/{documentoId}")
     fun deleteDocumento(@PathVariable("id") id: String, @PathVariable("documentoId") documentoId: String) =
-            fichaService.deleteDocumento(id, documentoId)
+        fichaService.deleteDocumento(id, documentoId)
 
     @PostMapping("/{id}/documento/upload-documento")
     fun uploadDocumento(@PathVariable("id") id: String, @Valid @NotNull @RequestParam("file") file: MultipartFile) =
-            ResponseEntity.ok(fichaService.uploadDocumento(id, file))
+        ResponseEntity.ok(fichaService.uploadDocumento(id, file))
 
     @GetMapping("/{id}/download-pdf")
     fun downloadPdf(@PathVariable("id") id: String, response: HttpServletResponse) {
@@ -61,19 +62,20 @@ class FichaController(val fichaService: FichaService) {
 
     @PatchMapping("/{id}/remove-morador/{moradorId}")
     fun removeMorador(@PathVariable("id") id: String, @PathVariable("moradorId") moradorId: String) =
-            fichaService.removeMorador(id, moradorId)
+        fichaService.removeMorador(id, moradorId)
 
     @GetMapping("/{id}/documentos")
     fun getDocumentosByFichaId(@PathVariable("id") fichaId: String) =
-            ResponseEntity.ok(fichaService.getDocumentosByFichaId(fichaId))
+        ResponseEntity.ok(fichaService.getDocumentosByFichaId(fichaId))
 
     @GetMapping("/morador/{id}/full")
     fun getFullByMoradorId(@PathVariable("id") id: String) = ResponseEntity.ok(fichaService.getFullByMoradorId(id))
 
     @PatchMapping("/{id}/add-morador")
     fun addMoradorOnFicha(@PathVariable("id") fichaId: String, @RequestBody morador: Morador) =
-            ResponseEntity.ok(fichaService.addMorador(fichaId, morador))
+        ResponseEntity.ok(fichaService.addMorador(fichaId, morador))
 
     @PutMapping("/processa-ficha-por-apartamentos")
-    fun processaFichaPorApartamentos() = ResponseEntity.ok(fichaService.processaFichaPorApartamentos())
+    fun processaFichaPorApartamentos(@RequestHeader("empresaId") empresaId: String) =
+        ResponseEntity.ok(fichaService.processaFichaPorApartamentos(empresaId))
 }
