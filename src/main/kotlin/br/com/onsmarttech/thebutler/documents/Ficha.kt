@@ -16,7 +16,12 @@ data class Ficha(
         var documentos: MutableList<Documento>?,
         val dataCriacao: LocalDate?,
         val dataAlteracao: LocalDate?
-)
+) {
+        constructor(
+                apartamento: Apartamento?,
+                moradores: MutableList<MoradorSub>
+        ) : this(null, apartamento, moradores, null, null, null, null, null)
+}
 
 data class MoradorSub(
         val id: String?,

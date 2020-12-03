@@ -73,4 +73,7 @@ class FichaController(val fichaService: FichaService) {
     @PatchMapping("/{id}/add-morador")
     fun addMoradorOnFicha(@PathVariable("id") fichaId: String, @RequestBody morador: Morador) =
             ResponseEntity.ok(fichaService.addMorador(fichaId, morador))
+
+    @PutMapping("/processa-ficha-por-apartamentos")
+    fun processaFichaPorApartamentos() = ResponseEntity.ok(fichaService.processaFichaPorApartamentos())
 }

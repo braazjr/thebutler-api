@@ -125,4 +125,8 @@ class MoradorService {
         moradorRepository.save(morador)
     }
 
+    fun findMoradoresSemFicha(empresaId: String): List<Morador> {
+        return moradorRepository.findMoradoresSemFicha(empresaId)
+    }
+
 }

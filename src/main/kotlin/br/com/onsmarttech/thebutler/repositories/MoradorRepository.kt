@@ -27,4 +27,7 @@ interface MoradorRepository : MongoRepository<Morador, String>, MoradorRepositor
 
     @Query("{'id': ?0, 'documentos': {'\$elemMatch': {'id': ?1} } }")
     fun findByIdAndDocumentoId(id: String, documentoId: String): Optional<Morador>
+
+    @Query("{\$or: [{'fichaId': {\$exists: false}}, {'fichaId': ''}], 'apartamento.bloco.condominio.empresa.id': ?0}")
+    fun findMoradoresSemFicha(empresaId: String): List<Morador>
 }
