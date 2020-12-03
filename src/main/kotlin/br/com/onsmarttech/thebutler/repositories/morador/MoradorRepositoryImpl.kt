@@ -17,11 +17,13 @@ class MoradorRepositoryImpl : MoradorRepositoryQuery {
     override fun find(filter: MoradorFilter, pageable: Pageable): PageImpl<Morador> {
         val query = Query()
         query.with(pageable)
+        val queryCount = Query()
 
         filterCheck(query, filter)
+        filterCheck(queryCount, filter)
 
         val moradores = mongoTemplate.find(query, Morador::class.java)
-        val count = mongoTemplate.count(query, Morador::class.java)
+        val count = mongoTemplate.count(queryCount, Morador::class.java)
 
         return PageImpl<Morador>(moradores, pageable, count)
     }

@@ -18,11 +18,13 @@ class FichaRepositoryImpl : FichaRepositoryQuery {
     override fun find(filter: FichaFilter, pageable: Pageable): PageImpl<Ficha> {
         val query = Query()
         query.with(pageable)
+        val queryCount = Query()
 
         filterCheck(query, filter)
+        filterCheck(queryCount, filter)
 
         val fichas = mongoTemplate.find(query, Ficha::class.java)
-        val count = mongoTemplate.count(query, Ficha::class.java)
+        val count = mongoTemplate.count(queryCount, Ficha::class.java)
 
         return PageImpl<Ficha>(fichas, pageable, count)
     }

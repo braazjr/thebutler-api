@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.data.mongodb.core.query.Criteria
 import org.springframework.data.mongodb.core.query.Query
 
+
 class ApartamentoRepositoryImpl : ApartamentoRepositoryQuery {
 
     @Autowired
@@ -17,11 +18,13 @@ class ApartamentoRepositoryImpl : ApartamentoRepositoryQuery {
     override fun find(filter: ApartamentoFilter, pageable: Pageable): PageImpl<Apartamento> {
         val query = Query()
         query.with(pageable)
+        val queryCount = Query()
 
         filterCheck(query, filter)
+        filterCheck(queryCount, filter)
 
         val apartamentos = mongoTemplate.find(query, Apartamento::class.java)
-        val count = mongoTemplate.count(query, Apartamento::class.java)
+        val count = mongoTemplate.count(queryCount, Apartamento::class.java)
 
         return PageImpl<Apartamento>(apartamentos, pageable, count)
     }
