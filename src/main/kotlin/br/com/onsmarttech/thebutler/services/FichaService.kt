@@ -224,6 +224,8 @@ class FichaService {
                         mutableListOf(convertMoradorToSub(morador))
                     )
                 )
+
+                moradorService.setProprietario(morador.id)
             } else {
                 ficha.moradores!!.add(convertMoradorToSub(morador))
             }

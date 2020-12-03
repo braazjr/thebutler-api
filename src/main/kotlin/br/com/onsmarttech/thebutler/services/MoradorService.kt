@@ -129,4 +129,10 @@ class MoradorService {
         return moradorRepository.findMoradoresSemFicha(empresaId)
     }
 
+    fun setProprietario(id: String?) {
+        val morador = findById(id!!)
+        morador.tipoMorador = TipoMorador.PROPRIETARIO
+        save(morador)
+    }
+
 }
