@@ -224,7 +224,6 @@ class FichaService {
                         mutableListOf(convertMoradorToSub(morador))
                     )
                 )
-                return@forEach
             } else {
                 ficha.moradores!!.add(convertMoradorToSub(morador))
             }
