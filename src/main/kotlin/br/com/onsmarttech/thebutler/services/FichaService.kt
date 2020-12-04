@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.io.ByteArrayInputStream
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 import java.util.stream.Collectors
 
@@ -44,12 +45,12 @@ class FichaService {
     fun save(dto: FichaDto): Ficha {
         if (!dto.id.isNullOrBlank()) {
             var ficha = getById(dto.id)
-            ficha = fichaRepository.save(fillFicha(dto, ficha.dataCriacao!!, LocalDate.now()))
+            ficha = fichaRepository.save(fillFicha(dto, ficha.dataCriacao!!, LocalDateTime.now()))
             addFichaInMoradores(ficha.id, ficha.moradores)
             return ficha
         }
 
-        val ficha = fichaRepository.save(fillFicha(dto, LocalDate.now(), LocalDate.now()))
+        val ficha = fichaRepository.save(fillFicha(dto, LocalDateTime.now(), LocalDateTime.now()))
         addFichaInMoradores(ficha.id, ficha.moradores)
         return ficha
     }
@@ -63,7 +64,7 @@ class FichaService {
         moradores.forEach { it.registradoPor = convertUsuarioToSub(usuarioLogado) }
     }
 
-    private fun fillFicha(dto: FichaDto, dataCriacao: LocalDate, dataAlteracao: LocalDate): Ficha {
+    private fun fillFicha(dto: FichaDto, dataCriacao: LocalDateTime, dataAlteracao: LocalDateTime): Ficha {
         val apartamento = apartamentoService.findById(dto.idApartamento)
         addRegistrador(dto.moradores)
         val moradoresSalvos = moradorService.saveAll(apartamento, dto.moradores)

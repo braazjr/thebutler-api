@@ -3,6 +3,7 @@ package br.com.onsmarttech.thebutler.documents
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.stream.Collectors
 import javax.validation.constraints.NotBlank
 
@@ -14,8 +15,8 @@ data class Ficha(
         val dataInicio: LocalDate? = LocalDate.now(),
         val dataFim: LocalDate?,
         var documentos: MutableList<Documento>?,
-        val dataCriacao: LocalDate?,
-        val dataAlteracao: LocalDate?
+        val dataCriacao: LocalDateTime?,
+        val dataAlteracao: LocalDateTime?
 ) {
         constructor(
                 apartamento: Apartamento?,
