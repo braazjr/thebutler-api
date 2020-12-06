@@ -16,8 +16,6 @@ data class Morador(
         @get:NotNull
         val documento: String?,
         @get:NotBlank
-        val celular: String?,
-        @get:NotBlank
         val nome: String?,
         @get:NotNull
         val tipoDocumento: TipoDocumento?
@@ -39,6 +37,7 @@ data class Morador(
     var dataAlteracao: LocalDateTime? = null
     var documentos: MutableList<Documento> = mutableListOf()
     var qrCodeId: Int? = null
+    val celular: String? = null
 
     @PrePersist
     fun onCreate() {
