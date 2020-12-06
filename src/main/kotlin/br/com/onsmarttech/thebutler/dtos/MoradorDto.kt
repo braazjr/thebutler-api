@@ -27,7 +27,7 @@ data class MoradorDto(
 )
 
 fun convertDtoToMorador(dto: MoradorDto, apartamento: Apartamento): Morador {
-    val morador = Morador(dto.id, dto.documento, dto.celular, dto.nome, dto.tipoDocumento)
+    val morador = Morador(dto.id, dto.documento, dto.nome, dto.tipoDocumento)
     morador.ativo = dto.ativo!!
     morador.email = dto.email!!
     morador.telefone = dto.telefone!!
@@ -37,6 +37,7 @@ fun convertDtoToMorador(dto: MoradorDto, apartamento: Apartamento): Morador {
     morador.apartamento = convertApartamentoToSub(apartamento)
     morador.dataInicio = dto.dataInicio
     morador.dataFim = dto.dataFim
+    morador.celular = dto.celular
 
     return morador
 }
