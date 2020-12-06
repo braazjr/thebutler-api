@@ -1,5 +1,6 @@
 package br.com.onsmarttech.thebutler.controllers
 
+import br.com.onsmarttech.thebutler.dtos.RedefinirSenhaRequest
 import br.com.onsmarttech.thebutler.dtos.UsuarioDto
 import br.com.onsmarttech.thebutler.services.UsuarioService
 import org.springframework.data.domain.Pageable
@@ -36,4 +37,8 @@ class UsuarioController(val usuarioService: UsuarioService) {
     @PutMapping("/{id}")
     fun atualizar(principal: Principal?, @PathVariable("id") id: String, @RequestBody @Valid usuarioDto: UsuarioDto) =
             ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.atualizar(principal, id, usuarioDto))
+
+    @PatchMapping("/{id}/redefinir-senha")
+    fun redefinirSenha(@PathVariable("id") id: String, @RequestBody redefinirSenhaRequest: RedefinirSenhaRequest) =
+        ResponseEntity.ok(usuarioService.redefinirSenha(id, redefinirSenhaRequest))
 }

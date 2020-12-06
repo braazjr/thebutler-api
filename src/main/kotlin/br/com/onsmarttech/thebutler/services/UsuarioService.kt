@@ -2,6 +2,7 @@ package br.com.onsmarttech.thebutler.services
 
 import br.com.onsmarttech.thebutler.documents.Usuario
 import br.com.onsmarttech.thebutler.documents.convertEmpresaToSub
+import br.com.onsmarttech.thebutler.dtos.RedefinirSenhaRequest
 import br.com.onsmarttech.thebutler.dtos.UsuarioDto
 import br.com.onsmarttech.thebutler.dtos.convertDtoToUsuario
 import br.com.onsmarttech.thebutler.exception.BadRequestException
@@ -65,7 +66,7 @@ class UsuarioService {
     }
 
     fun getUsuarioLogado() = usuarioRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().name)
-            .orElseThrow { NotFoundException("Usuário não encontrado") }
+        .orElseThrow { NotFoundException("Usuário não encontrado") }
 
     fun deletar(id: String) {
         getById(id)
@@ -73,10 +74,10 @@ class UsuarioService {
     }
 
     fun getById(id: String) = usuarioRepository.findById(id)
-            .orElseThrow { BadRequestException("Usuário não encontrado") }
+        .orElseThrow { BadRequestException("Usuário não encontrado") }
 
     fun getMotoristaById(motoristaId: String?) = usuarioRepository.findMotoristaById(motoristaId)
-            .orElseThrow { BadRequestException("Motorista não encontrado") }
+        .orElseThrow { BadRequestException("Motorista não encontrado") }
 
     fun getMotoristas(): Any {
         val usuarioLogado = getUsuarioLogado()
@@ -89,6 +90,17 @@ class UsuarioService {
         usuarioDto.senha = usuarioSalvo.senha
         val usuario: Usuario = convertDtoToUsuario(usuarioDto)
         preencheEmpresa(principal, usuarioDto, usuario)
+        return usuarioRepository.save(usuario)
+    }
+
+    fun redefinirSenha(id: String, redefinirSenhaRequest: RedefinirSenhaRequest): Usuario {
+        val usuario = getById(id)
+
+        if (getUsuarioLogado().id != id) {
+            throw BadRequestException("Somente o próprio usuário pode alterar a senha")
+        }
+
+        usuario.senha = BCryptPasswordEncoder().encode(redefinirSenhaRequest.senhaNova)
         return usuarioRepository.save(usuario)
     }
 
