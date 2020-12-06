@@ -9,7 +9,6 @@ data class MoradorDto(
         var id: String?,
         @get:NotNull
         val documento: String?,
-        @get:NotBlank
         val celular: String?,
         @get:NotBlank
         val nome: String?,

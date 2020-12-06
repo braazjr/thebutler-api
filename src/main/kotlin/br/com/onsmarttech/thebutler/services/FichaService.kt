@@ -45,7 +45,7 @@ class FichaService {
     fun save(dto: FichaDto): Ficha {
         if (!dto.id.isNullOrBlank()) {
             var ficha = getById(dto.id)
-            ficha = fichaRepository.save(fillFicha(dto, ficha.dataCriacao!!, LocalDateTime.now()))
+            ficha = fichaRepository.save(fillFicha(dto, ficha.dataCriacao ?: LocalDateTime.now(), LocalDateTime.now()))
             addFichaInMoradores(ficha.id, ficha.moradores)
             return ficha
         }
