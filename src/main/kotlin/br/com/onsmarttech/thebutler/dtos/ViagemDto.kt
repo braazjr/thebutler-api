@@ -18,7 +18,8 @@ data class ViagemDto(
 
 data class ViagemUsuarioDto(
         @get:NotBlank val passageiroId: String?,
-        @get:NotNull val horario: LocalTime?
+        @get:NotNull val horario: LocalTime?,
+        val fraude: Boolean?
 )
 
 fun convertDtoToViagem(dto: ViagemDto, rota: Rota, motorista: Usuario, passageiros: List<ViagemMorador>) =
