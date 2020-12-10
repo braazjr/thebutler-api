@@ -135,4 +135,9 @@ class MoradorService {
         save(morador)
     }
 
+    fun findByQrCodeId(passageiroId: Int): Morador {
+        return moradorRepository.findByQrCodeId(passageiroId)
+            .orElseThrow { BadRequestException("Morador não encontrado") }
+    }
+
 }

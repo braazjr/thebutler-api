@@ -49,7 +49,7 @@ class ViagemService {
     private fun getPassageiros(passageiros: MutableList<ViagemUsuarioDto>) =
             passageiros
                     .map {
-                        val morador = moradorService.findById(it.passageiroId!!)
+                        val morador = moradorService.findByQrCodeId(it.passageiroId!!)
                         ViagemMorador(convertMoradorToSub(morador), it.horario!!)
                     }
 

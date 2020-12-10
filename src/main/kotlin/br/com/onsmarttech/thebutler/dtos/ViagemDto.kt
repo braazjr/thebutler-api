@@ -2,8 +2,8 @@ package br.com.onsmarttech.thebutler.dtos
 
 import br.com.onsmarttech.thebutler.documents.*
 import org.springframework.data.annotation.Id
+import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDateTime
-import java.time.LocalTime
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 
@@ -17,8 +17,8 @@ data class ViagemDto(
 )
 
 data class ViagemUsuarioDto(
-        @get:NotBlank val passageiroId: String?,
-        @get:NotNull val horario: LocalTime?,
+        @get:NotBlank val passageiroId: Int?,
+        @get:NotNull @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") val horario: LocalDateTime?,
         val fraude: Boolean?
 )
 

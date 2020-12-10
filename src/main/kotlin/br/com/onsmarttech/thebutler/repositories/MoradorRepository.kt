@@ -30,4 +30,7 @@ interface MoradorRepository : MongoRepository<Morador, String>, MoradorRepositor
 
     @Query("{\$or: [{'fichaId': {\$exists: false}}, {'fichaId': ''}], 'apartamento.bloco.condominio.empresa.id': ?0}")
     fun findMoradoresSemFicha(empresaId: String): List<Morador>
+
+    @Query("{'qrCodeId': ?0}")
+    fun findByQrCodeId(passageiroId: Int): Optional<Morador>
 }
