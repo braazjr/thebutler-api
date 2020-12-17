@@ -1,5 +1,6 @@
 package br.com.onsmarttech.thebutler.services
 
+import br.com.onsmarttech.thebutler.documents.BravaSoftConfiguration
 import br.com.onsmarttech.thebutler.documents.Empresa
 import br.com.onsmarttech.thebutler.dtos.EmpresaDto
 import br.com.onsmarttech.thebutler.dtos.convertDtoToEmpresa
@@ -71,6 +72,13 @@ class EmpresaService {
         getById(id)
 
         return save(empresaDto)
+    }
+
+    fun saveBravaSoftConfiguration(id: String, bravaSoftConfiguration: BravaSoftConfiguration): Empresa {
+        val empresa = getById(id)
+        empresa!!.empresaConfig!!.bravaSoftConfiguration = bravaSoftConfiguration
+
+        return empresaRepository.save(empresa)
     }
 
 }

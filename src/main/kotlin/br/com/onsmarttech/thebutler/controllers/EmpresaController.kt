@@ -1,5 +1,6 @@
 package br.com.onsmarttech.thebutler.controllers
 
+import br.com.onsmarttech.thebutler.documents.BravaSoftConfiguration
 import br.com.onsmarttech.thebutler.dtos.EmpresaDto
 import br.com.onsmarttech.thebutler.services.EmpresaService
 import org.springframework.http.HttpStatus
@@ -27,4 +28,8 @@ class EmpresaController(val empresaService: EmpresaService) {
     @PutMapping("/{id}")
     fun update(@PathVariable("id") id: String, @Valid @RequestBody empresaDto: EmpresaDto) =
             ResponseEntity.ok(empresaService.update(id, empresaDto))
+
+    @PatchMapping("/{id}/save-bravasoft-configuration")
+    fun saveBravaSoftConfiguration(@PathVariable("id") id: String, @Valid @RequestBody bravaSoftConfiguration: BravaSoftConfiguration) =
+        ResponseEntity.ok(empresaService.saveBravaSoftConfiguration(id, bravaSoftConfiguration))
 }

@@ -18,7 +18,7 @@ class ViagemController(val viagemService: ViagemService) {
             ResponseEntity.status(HttpStatus.CREATED).body(viagemService.save(viagemDto))
 
     @PostMapping("/multiple")
-    fun saveMultiple(@Valid @RequestBody viagensDto: List<ViagemDto>) =
+    fun saveMultiple(@Valid @RequestBody viagensDto: MutableList<ViagemDto>) =
             ResponseEntity.status(HttpStatus.CREATED).body(viagemService.saveMultiples(viagensDto))
 
     @GetMapping

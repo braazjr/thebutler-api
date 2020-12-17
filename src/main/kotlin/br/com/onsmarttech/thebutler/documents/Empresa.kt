@@ -31,5 +31,11 @@ data class Empresa(
 data class EmpresaConfig(
         @get:NotNull val qtyApartamentos: Int?,
         val bravaSoftIntegration: Boolean = false,
-        var apartamentosCadastrados: Long?
+        var apartamentosCadastrados: Long?,
+        var bravaSoftConfiguration: BravaSoftConfiguration?
+)
+
+data class BravaSoftConfiguration(
+        val bsPrintPath: String?,
+        val projectPath: String?
 )
