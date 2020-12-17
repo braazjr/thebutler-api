@@ -52,7 +52,7 @@ deploy-prod:
     - chmod +x ./.elasticbeanstalk/eb-config.sh
     - ./.elasticbeanstalk/eb-config.sh
   script:
-    - /root/.local/bin/eb deploy thebutler-api-prod
+    - /root/.local/bin/eb deploy thebutler-api
   dependencies:
     - build-aws
   only:
