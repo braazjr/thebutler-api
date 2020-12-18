@@ -22,7 +22,7 @@ class CustomTokenEnhancer : TokenEnhancer {
 
     override fun enhance(accessToken: OAuth2AccessToken?, authentication: OAuth2Authentication?): OAuth2AccessToken {
         val username = authentication!!.name
-        val usuario = usuarioRepository.findByEmail(username)
+        val usuario = usuarioRepository.findByUsername(username)
                 .orElseThrow { BadRequestException("Usuário não encontrado") }
 
         if (usuario.empresa != null) {

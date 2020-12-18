@@ -30,15 +30,15 @@ class UsuarioService {
     fun salvar(principal: Principal?, usuarioDto: UsuarioDto): Any {
         var usuario: Usuario = convertDtoToUsuario(usuarioDto)
 
-        if (usuarioRepository.findByEmail(usuario.email!!).isPresent) {
-            throw BadRequestException("O login já existe em um usuário")
+        if (usuarioRepository.findByUsername(usuario.username!!).isPresent) {
+            throw BadRequestException("O username já existe em um usuário")
         }
 
         preencheEmpresa(principal, usuarioDto, usuario)
 
         if (usuario.senha.isNullOrBlank()) {
             val encoder = BCryptPasswordEncoder()
-            usuario.senha = encoder.encode(usuario.email)
+            usuario.senha = encoder.encode(usuario.username)
         }
 
         return usuarioRepository.save(usuario)
@@ -46,7 +46,7 @@ class UsuarioService {
 
     private fun preencheEmpresa(principal: Principal?, usuarioDto: UsuarioDto, usuario: Usuario) {
         if (principal != null) {
-            val usuarioLogado: Optional<Usuario> = usuarioRepository.findByEmail(principal.name)
+            val usuarioLogado: Optional<Usuario> = usuarioRepository.findByUsername(principal.name)
 
             if (usuarioLogado.get().isAdmin()) {
                 val empresa = empresaService.getById(usuarioDto.empresaId!!)
@@ -58,14 +58,14 @@ class UsuarioService {
     }
 
     fun list(pageable: Pageable): Page<Usuario> {
-        val usuarioOptional: Optional<Usuario> = usuarioRepository.findByEmail(getUsuarioLogado().email!!)
+        val usuarioOptional: Optional<Usuario> = usuarioRepository.findByUsername(getUsuarioLogado().username!!)
 
         return if (!usuarioOptional.get().isAdmin()) {
             usuarioRepository.findByEmpresaAndOrderByNomeAsc(usuarioOptional.get().empresa!!.id!!, pageable)
         } else usuarioRepository.findAllByOrderByNomeAsc(pageable)
     }
 
-    fun getUsuarioLogado() = usuarioRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().name)
+    fun getUsuarioLogado() = usuarioRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().name)
         .orElseThrow { NotFoundException("Usuário não encontrado") }
 
     fun deletar(id: String) {

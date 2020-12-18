@@ -11,7 +11,7 @@ import javax.validation.constraints.NotEmpty
 data class Usuario(
         @Id
         val id: String?,
-        @get:NotBlank val email: String?,
+        @get:NotBlank val username: String?,
         @get:NotBlank val nome: String?,
         @JsonIgnore var senha: String?,
         val ativo: Boolean? = true,

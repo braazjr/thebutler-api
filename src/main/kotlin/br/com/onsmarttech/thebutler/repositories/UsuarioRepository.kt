@@ -11,8 +11,8 @@ import java.util.*
 @Repository
 interface UsuarioRepository : MongoRepository<Usuario, String> {
 
-    @Query("{'email': ?0}")
-    fun findByEmail(username: String): Optional<Usuario>
+    @Query("{'username': ?0}")
+    fun findByUsername(username: String): Optional<Usuario>
 
     @Query(value = "{'empresa._id': ?0}", sort = "{'nome': 1}")
     fun findByEmpresaAndOrderByNomeAsc(empresaId: String, pageable: Pageable): Page<Usuario>

@@ -16,7 +16,7 @@ class UserDetailsServiceImpl(
 ) : UserDetailsService {
 
     override fun loadUserByUsername(username: String?): UserDetails {
-        val usuario = usuarioRepository.findByEmail(username!!)
+        val usuario = usuarioRepository.findByUsername(username!!)
                 .orElseThrow { UsernameNotFoundException("Usuário e/ou senha incorretos") }
 
         logger.info("---> Usuário $username acabou de logar")

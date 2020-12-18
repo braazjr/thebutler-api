@@ -42,7 +42,7 @@ deploy-dev:
     - build-aws
   only:
     - develop
-    - master
+#    - master
 
 deploy-prod:
   image: python:latest
