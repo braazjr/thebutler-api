@@ -61,11 +61,11 @@ class MoradorService {
     fun find(pageable: Pageable, filter: MoradorFilter): Page<Morador> {
         val usuarioLogado = usuarioService.getUsuarioLogado()
 
-        if (usuarioLogado.isAdmin()) {
-            return moradorRepository.find(MoradorFilter(), pageable)
+        if (!usuarioLogado.isAdmin()) {
+            filter.empresaId = usuarioLogado.empresa!!.id
+            return moradorRepository.find(filter, pageable)
         }
 
-        filter.empresaId = usuarioLogado.empresa!!.id
         return moradorRepository.find(filter, pageable)
     }
 

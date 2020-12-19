@@ -9,5 +9,8 @@ data class MoradorFilter(
         val apartamentoNumero: String?
 ) {
     constructor() : this(null, null, null, null, null, null)
-    constructor(empresaId: String?) : this(empresaId, null, null, null, null, null)
+
+    fun isNull() = this.empresaId.isNullOrBlank() && this.condominioId.isNullOrBlank() && this.blocoId.isNullOrBlank()
+            && this.blocoId.isNullOrBlank() && this.nome.isNullOrBlank() && this.documento.isNullOrBlank()
+            && this.apartamentoNumero.isNullOrBlank()
 }
