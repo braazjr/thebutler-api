@@ -17,5 +17,6 @@ data class Viagem(
 
 data class ViagemMorador(
         @get:NotNull val morador: MoradorSub,
-        @get:NotNull val horario: LocalDateTime
+        @get:NotNull val horario: LocalDateTime,
+        val fraude: Boolean
 )

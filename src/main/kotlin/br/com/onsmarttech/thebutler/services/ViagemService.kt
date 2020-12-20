@@ -50,7 +50,7 @@ class ViagemService {
             passageiros
                     .map {
                         val morador = moradorService.findByQrCodeId(it.passageiroId!!)
-                        ViagemMorador(convertMoradorToSub(morador), it.horario!!)
+                        ViagemMorador(convertMoradorToSub(morador), it.horario!!, it.fraude == true)
                     }
 
     fun getAll(filter: ViagemFilter, pageable: Pageable): Any {
