@@ -41,8 +41,8 @@ deploy-dev:
   dependencies:
     - build-aws
   only:
-    - develop
-#    - master
+#    - develop
+    - master
 
 deploy-prod:
   image: python:latest
