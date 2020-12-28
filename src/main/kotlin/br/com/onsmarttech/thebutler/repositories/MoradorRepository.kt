@@ -32,5 +32,5 @@ interface MoradorRepository : MongoRepository<Morador, String>, MoradorRepositor
     fun findMoradoresSemFicha(empresaId: String): List<Morador>
 
     @Query("{'qrCodeId': ?0}")
-    fun findByQrCodeId(passageiroId: Int): Optional<Morador>
+    fun findByQrCodeId(passageiroId: String): Optional<Morador>
 }

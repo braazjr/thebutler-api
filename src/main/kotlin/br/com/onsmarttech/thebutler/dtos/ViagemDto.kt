@@ -17,7 +17,7 @@ data class ViagemDto(
 )
 
 data class ViagemUsuarioDto(
-        @get:NotBlank val passageiroId: Int?,
+        @get:NotBlank val passageiroId: String?,
         @get:NotNull @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") val horario: LocalDateTime?,
         val fraude: Boolean?
 )
