@@ -36,7 +36,7 @@ data class Morador(
     var dataCriacao: LocalDateTime? = null
     var dataAlteracao: LocalDateTime? = null
     var documentos: MutableList<Documento> = mutableListOf()
-    var qrCodeId: Int? = null
+    var qrCodeId: String? = null
     var celular: String? = null
 
     @PrePersist

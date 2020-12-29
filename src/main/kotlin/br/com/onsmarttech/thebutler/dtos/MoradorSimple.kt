@@ -12,5 +12,5 @@ class MoradorSimple(
         @get:NotBlank val nome: String?,
         val foto64: String?,
         var apartamento: ApartamentoSub?,
-        var qrCodeId: Int? = null
+        var qrCodeId: String? = null
 ) {}
