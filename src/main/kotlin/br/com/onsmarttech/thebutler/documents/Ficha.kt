@@ -26,7 +26,7 @@ data class Ficha(
 
 data class MoradorSub(
         val id: String?,
-        @get:NotBlank val email: String?,
+        val email: String?,
         @get:NotBlank val nome: String?
 )
 
