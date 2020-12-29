@@ -34,7 +34,7 @@ class MoradorService {
     @Autowired
     private lateinit var documentRepository: DocumentRepository
 
-    fun saveAll(apartamento: Apartamento, moradores: List<Morador>): MutableList<Morador> =
+    fun saveAll(apartamento: Apartamento, moradores: List<Morador>, fichaAtiva: Boolean): MutableList<Morador> =
             moradores
                     .forEach {
                         if (it.id != null && it.id!!.isBlank()) {
@@ -47,6 +47,10 @@ class MoradorService {
                         if (!it.id.isNullOrBlank()) {
                             val morador = findById(it.id!!)
                             it.dataCriacao = morador.dataCriacao
+                        }
+
+                        if (!fichaAtiva) {
+                            it.ativo = false
                         }
                     }
                     .run { return moradorRepository.saveAll(moradores) }

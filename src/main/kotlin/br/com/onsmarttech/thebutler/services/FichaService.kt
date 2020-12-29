@@ -7,13 +7,11 @@ import br.com.onsmarttech.thebutler.repositories.DocumentRepository
 import br.com.onsmarttech.thebutler.repositories.FichaRepository
 import br.com.onsmarttech.thebutler.util.S3Util
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.annotation.Id
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.io.ByteArrayInputStream
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
 import java.util.stream.Collectors
@@ -67,7 +65,7 @@ class FichaService {
     private fun fillFicha(dto: FichaDto, dataCriacao: LocalDateTime, dataAlteracao: LocalDateTime): Ficha {
         val apartamento = apartamentoService.findById(dto.idApartamento)
         addRegistrador(dto.moradores)
-        val moradoresSalvos = moradorService.saveAll(apartamento, dto.moradores)
+        val moradoresSalvos = moradorService.saveAll(apartamento, dto.moradores, dto.dataFim != null)
         return Ficha(
             dto.id, apartamento, convertMoradoresToSub(moradoresSalvos), dto.dataInicio, dto.dataFim,
             null, dataCriacao, dataAlteracao
