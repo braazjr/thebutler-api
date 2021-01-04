@@ -31,7 +31,7 @@ class FichaRepositoryImpl : FichaRepositoryQuery {
 
     private fun filterCheck(query: Query, filter: FichaFilter) {
         if (!filter.codigo.isNullOrBlank()) {
-            query.addCriteria(Criteria.where("id").`is`(filter.codigo))
+            query.addCriteria(Criteria.where("_id").`is`(filter.codigo))
         }
         if (!filter.numeroApartamento.isNullOrBlank()) {
             query.addCriteria(Criteria.where("apartamento.numero").`is`(filter.numeroApartamento))
