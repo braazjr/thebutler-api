@@ -13,8 +13,9 @@ data class UsuarioDto(
         @JsonIgnore var senha: String?,
         val ativo: Boolean? = true,
         @get:NotEmpty val permissoes: MutableList<Permissao>? = mutableListOf(Permissao.OPERADOR),
-        var empresaId: String?
+        var empresaId: String?,
+        val foto64: String?
 )
 
 fun convertDtoToUsuario(dto: UsuarioDto) = Usuario(dto.id, dto.username, dto.nome, dto.senha,
-        dto.ativo, dto.permissoes as MutableList<Any>, null)
+        dto.ativo, dto.permissoes as MutableList<Any>, null, dto.foto64)
