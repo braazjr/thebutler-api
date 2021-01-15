@@ -56,7 +56,8 @@ class ResourceServerConfig : ResourceServerConfigurerAdapter() {
         configuration.addAllowedHeader("*")
         configuration.addAllowedMethod("*")
         configuration.maxAge = 3600L
-        configuration.allowedOrigins = theButlerProperties.originsPermitidas
+        configuration.allowedOrigins = listOf("*")
+        configuration.addAllowedOrigin("*")
         val source = UrlBasedCorsConfigurationSource()
         source.registerCorsConfiguration("/**", configuration)
         return CorsFilter(source)
