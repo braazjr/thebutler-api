@@ -10,7 +10,7 @@ data class Bloco(
         val ativo: Boolean = true,
         @get:NotNull val nome: String?,
         val numero: Int?,
-        @get:NotNull val condominio: CondominioSub?,
+        @get:NotNull var condominio: CondominioSub?,
         @get:NotNull val registradoPor: UsuarioSub?
 )
 
@@ -20,3 +20,5 @@ data class CondominioSub(
         val email: String?,
         val empresa: EmpresaSub?
 )
+
+fun convertBlocoToSub(bloco: Bloco) = BlocoSub(bloco.id, bloco.nome, bloco.numero, bloco.condominio!!)

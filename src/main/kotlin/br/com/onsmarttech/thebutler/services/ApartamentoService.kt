@@ -1,6 +1,8 @@
 package br.com.onsmarttech.thebutler.services
 
 import br.com.onsmarttech.thebutler.documents.Apartamento
+import br.com.onsmarttech.thebutler.documents.ApartamentoSub
+import br.com.onsmarttech.thebutler.documents.convertApartamentoToSub
 import br.com.onsmarttech.thebutler.dtos.ApartamentoDto
 import br.com.onsmarttech.thebutler.dtos.ApartamentoFilter
 import br.com.onsmarttech.thebutler.dtos.convertDtoToApartamento
@@ -57,5 +59,11 @@ class ApartamentoService {
         findById(id)
 
         return save(apartamentoDto)
+    }
+
+    fun findByIdAndUpdated(id: String?): ApartamentoSub? {
+        val apartamento = findById(id!!)
+        apartamento.bloco = blocoService.findByIdAndUpdated(apartamento.bloco!!.id)
+        return convertApartamentoToSub(apartamento)
     }
 }

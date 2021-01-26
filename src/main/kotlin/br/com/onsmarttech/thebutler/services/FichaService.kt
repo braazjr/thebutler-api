@@ -67,8 +67,8 @@ class FichaService {
         addRegistrador(dto.moradores)
         val moradoresSalvos = moradorService.saveAll(apartamento, dto.moradores, dto.dataFim == null)
         return Ficha(
-            dto.id, apartamento, convertMoradoresToSub(moradoresSalvos), dto.dataInicio, dto.dataFim,
-            null, dataCriacao, dataAlteracao
+                dto.id, apartamento, convertMoradoresToSub(moradoresSalvos), dto.dataInicio, dto.dataFim,
+                null, dataCriacao, dataAlteracao
         )
     }
 
@@ -90,22 +90,26 @@ class FichaService {
     }
 
     fun getById(id: String) = fichaRepository.findById(id)
-        .orElseThrow { BadRequestException("Ficha não encontrada") }!!
+            .orElseThrow { BadRequestException("Ficha não encontrada") }!!
 
     fun getFullById(id: String): FichaFullResponseDto {
         val ficha = getById(id)
         val moradores = ficha.moradores
-            ?.stream()
-            ?.map { moradorService.findById(it.id!!) }
-            ?.collect(Collectors.toList()) as List<Morador>
+                ?.stream()
+                ?.map {
+                    val morador = moradorService.findById(it.id!!)
+                    morador.apartamento = apartamentoService.findByIdAndUpdated(morador.apartamento!!.id)
+                    morador
+                }
+                ?.collect(Collectors.toList()) as List<Morador>
 
         return FichaFullResponseDto(
-            ficha.id!!,
-            ficha.apartamento,
-            moradores,
-            ficha.dataInicio,
-            ficha.dataFim,
-            ficha.documentos
+                ficha.id!!,
+                ficha.apartamento,
+                moradores,
+                ficha.dataInicio,
+                ficha.dataFim,
+                ficha.documentos
         )
     }
 
@@ -118,7 +122,7 @@ class FichaService {
 
     fun deleteDocumento(id: String, documentoId: String) {
         val ficha = fichaRepository.findByIdAndDocumentoId(id, documentoId)
-            .orElseThrow { BadRequestException("Documento não encontrado") }
+                .orElseThrow { BadRequestException("Documento não encontrado") }
 
         ficha.documentos!!.removeIf { it.id == documentoId }
         fichaRepository.save(ficha)
@@ -127,17 +131,17 @@ class FichaService {
     fun uploadDocumento(fichaId: String, file: MultipartFile): String {
         val userLogged = usuarioService.getUsuarioLogado()
         val ficha = fichaRepository.findById(fichaId)
-            .orElseThrow { BadRequestException("Ficha não encontrada") }
+                .orElseThrow { BadRequestException("Ficha não encontrada") }
 
         val uuid = UUID.randomUUID().toString()
 
         val url: String = s3Util.saveDocument(
-            "${ficha.apartamento!!.bloco!!.condominio.empresa!!.id}/fichas/$fichaId/documents/$uuid",
-            file
+                "${ficha.apartamento!!.bloco!!.condominio.empresa!!.id}/fichas/$fichaId/documents/$uuid",
+                file
         )
 
         val documentoSaved =
-            documentoRepository.save(Documento(null, uuid, url, file.originalFilename, convertUsuarioToSub(userLogged)))
+                documentoRepository.save(Documento(null, uuid, url, file.originalFilename, convertUsuarioToSub(userLogged)))
 
         if (ficha.documentos.isNullOrEmpty()) {
             ficha.documentos = mutableListOf()
@@ -156,15 +160,15 @@ class FichaService {
 
     fun getForJasper(id: String): FichaJasperDto {
         val ficha = fichaRepository.findById(id)
-            .orElseThrow { BadRequestException("Ficha não encontrada") }
+                .orElseThrow { BadRequestException("Ficha não encontrada") }
 
         val moradores = moradorService.findInIds(ficha.moradores!!.map { it.id })
         val responsavel = moradores.firstOrNull { it.tipoMorador != null }
 
         return FichaJasperDto(
-            convertApartamentoToApartamentoJasperDto(ficha.apartamento!!),
-            convertMoradorToResponsavelJasperDto(responsavel!!),
-            convertMoradorToMoradorJasperDto(moradores.filter { it.id != responsavel.id })
+                convertApartamentoToApartamentoJasperDto(ficha.apartamento!!),
+                convertMoradorToResponsavelJasperDto(responsavel!!),
+                convertMoradorToMoradorJasperDto(moradores.filter { it.id != responsavel.id })
         )
     }
 
@@ -181,12 +185,12 @@ class FichaService {
     fun getFullByMoradorId(moradorId: String): List<FichaFullResponseDto> {
         moradorService.findById(moradorId)
         return fichaRepository.findByMoradorId(moradorId)
-            .map { it: Ficha ->
-                val moradores = it.moradores
-                    ?.map { morador -> moradorService.findById(morador.id!!) }
+                .map {
+                    val moradores = it.moradores
+                            ?.map { morador -> moradorService.findById(morador.id!!) }
 
-                FichaFullResponseDto(it.id!!, it.apartamento, moradores, it.dataInicio, it.dataFim, it.documentos)
-            }
+                    FichaFullResponseDto(it.id!!, it.apartamento, moradores, it.dataInicio, it.dataFim, it.documentos)
+                }
     }
 
     fun addMorador(fichaId: String, moradorDto: Morador): Morador {
@@ -218,10 +222,10 @@ class FichaService {
             val ficha = fichas.find { ficha -> ficha.apartamento!!.id == morador.apartamento!!.id }
             if (ficha == null) {
                 fichas.add(
-                    Ficha(
-                        apartamentoService.findById(morador.apartamento!!.id!!),
-                        mutableListOf(convertMoradorToSub(morador))
-                    )
+                        Ficha(
+                                apartamentoService.findById(morador.apartamento!!.id!!),
+                                mutableListOf(convertMoradorToSub(morador))
+                        )
                 )
 
                 moradorService.setProprietario(morador.id)

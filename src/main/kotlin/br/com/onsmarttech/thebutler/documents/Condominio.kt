@@ -21,3 +21,5 @@ data class Condominio(
         var empresa: EmpresaSub?,
         @get:NotNull val registradoPor: UsuarioSub?
 )
+
+fun convertCondominioToSub(condominio: Condominio) = CondominioSub(condominio.id, condominio.nome, condominio.email, condominio.empresa)

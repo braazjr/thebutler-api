@@ -1,6 +1,9 @@
 package br.com.onsmarttech.thebutler.services
 
 import br.com.onsmarttech.thebutler.documents.Bloco
+import br.com.onsmarttech.thebutler.documents.BlocoSub
+import br.com.onsmarttech.thebutler.documents.convertBlocoToSub
+import br.com.onsmarttech.thebutler.documents.convertCondominioToSub
 import br.com.onsmarttech.thebutler.dtos.BlocoDto
 import br.com.onsmarttech.thebutler.dtos.convertDtoToBloco
 import br.com.onsmarttech.thebutler.exception.BadRequestException
@@ -54,6 +57,12 @@ class BlocoService {
         findById(id)
 
         return save(blocoDto)
+    }
+
+    fun findByIdAndUpdated(id: String?): BlocoSub? {
+        val bloco = findById(id)
+        bloco.condominio = convertCondominioToSub(condominioService.getById(bloco.condominio!!.id))
+        return convertBlocoToSub(bloco)
     }
 
 }

@@ -9,7 +9,7 @@ data class Apartamento(
         val numero: String?,
         val ativo: Boolean = false,
         val numeroQuartos: Int?,
-        val bloco: BlocoSub?,
+        var bloco: BlocoSub?,
         val observacao: String?,
         val registradoPor: UsuarioSub?
 )
