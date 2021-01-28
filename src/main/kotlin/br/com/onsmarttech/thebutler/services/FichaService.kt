@@ -98,7 +98,9 @@ class FichaService {
                 ?.stream()
                 ?.map {
                     val morador = moradorService.findById(it.id!!)
-                    morador.apartamento = apartamentoService.findByIdAndUpdated(morador.apartamento!!.id)
+                    morador.apartamento = apartamentoService.findByIdAndUpdated(
+                            if (morador.apartamento == null) ficha.apartamento!!.id else morador.apartamento!!.id
+                    )
                     morador
                 }
                 ?.collect(Collectors.toList()) as List<Morador>
